@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products | Shreyas Fire Protection Engineers LLP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind configuration for theme consistency (Copied from service.html)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#1f2937', // Dark corporate color
+                        'accent-red': '#cc3333',   // Fire safety accent color
+                        'light-bg': '#f7f7f7',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            color: #46576e;
+        }
+
+        /* --- Global Title Animation (Existing) --- */
+        @keyframes slideInFromTop {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .animated-title {
+            animation: slideInFromTop 1s ease-out forwards;
+        }
+
+        /* --- Scroll Fade-In/Slide-Up Animation (From contact.html) --- */
+        .animate-item {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(30px); /* Default slide up */
+        }
+        .is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Card Hover Effect (Existing) --- */
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15); 
+        }
+
+        /* --- New: Flip Card Effect for Signboards (Optional Fancy effect) --- */
+        .flip-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .flip-card-front {
+            background-color: white;
+            z-index: 2;
+        }
+        .flip-card-back {
+            background-color: #1f2937;
+            color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Hover-grow (for images) */
+        .hover-grow {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .hover-grow:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* NEW: consistent image ratio / visibility */
+        .system-image-wrapper {
+            max-height: 22rem;        /* keeps images from becoming too tall */
+        }
+        .system-image {
+            width: 100%;
+            height: auto;            /* keep natural aspect ratio */
+            object-fit: cover;       /* fill wrapper nicely */
+        }
+
+        /* For icons/vertical images where you want everything visible */
+        .system-image-contain {
+            width: 100%;
+            height: auto;
+            max-height: 22rem;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- HEADER (unchanged) -->
+    <header class="bg-white shadow-lg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            
+            <a href="index.html" class="flex items-center space-x-2 group transform transition duration-300 hover:scale-[1.02]">
+                <img src="ShreyasLogoUpd.png" 
+                alt="Shreyas Fire Protection Engineers LLP Logo" 
+                class="h-10 w-auto"> 
+                <span class="text-xl font-bold text-gray-900 group-hover:text-accent-red transition duration-300">Shreyas Fire Protection Engineers LLP</span>
+            </a>
+
+            <nav class="space-x-4">
+                <a href="index.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Home</a>
+                <a href="about.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">About</a>
+                <a href="service.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Services</a>
+                <a href="system.html" class="text-accent-red bg-gray-100 font-medium transition duration-300 rounded-lg p-2 shadow-inner">System</a>
+                <a href="projects.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Projects</a>
+                <a href="contact.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN (updated as per your request) -->
+    <main class="flex-grow">
+        <!-- HERO SECTION (same heading, updated sentence) -->
+        <section class="bg-black py-16 sm:py-24 border-b-4 border-accent-red">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-5xl sm:text-6xl font-extrabold text-white mb-4 animated-title">
+                    Our System
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    We specialise in installing BIS-approved and globally certified fire protection equipment to ensure maximum reliability and compliance for your assets.
+                </p>
+            </div>
+        </section>
+
+        <!-- FIRE SAFETY SYSTEMS WE INSTALL (2-column rows, image ratios fixed) -->
+        <section class="py-16 bg-light-bg">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-primary-blue text-center mb-4 animate-item" data-delay="0">
+                    Fire Safety Systems We Install
+                </h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12 animate-item" data-delay="100">
+                    Whatever your system needs, we design and install complete fire safety solutions tailored to your building – from detection and alarms to suppression, hydrants and sprinklers.
+                </p>
+
+                <div class="space-y-16">
+                    <!-- Row 1: Fire Hydrant & Sprinkler Systems -->
+                    <div class="grid lg:grid-cols-2 gap-8 items-center animate-item" data-delay="150">
+                        <div class="rounded-xl shadow-2xl overflow-hidden hover-grow bg-gray-100 flex items-center justify-center system-image-wrapper">
+                            <img src="https://totalsafeuk.com/wp-content/uploads/2024/05/Fire-Sprinkler-System.webp" alt="Fire Hydrant and Sprinkler Piping" class="system-image">
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-3xl font-bold text-primary-blue">
+                                Fire Hydrant & Sprinkler Systems
+                            </h3>
+                            <p class="text-gray-700 text-lg">
+                                We design and install complete fire hydrant lines, wet risers and sprinkler networks to protect large industrial, commercial and residential complexes.
+                            </p>
+                            <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
+                                <li>Hydrant mains, landing valves, hose reels and hose boxes</li>
+                                <li>Automatic sprinkler networks for coverage of critical areas</li>
+                                <li>Design as per local fire norms and relevant standards</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Intelligent Fire Detection & Alarm -->
+                    <div class="grid lg:grid-cols-2 gap-8 items-center animate-item" data-delay="250">
+                        <div class="order-2 lg:order-1 space-y-3">
+                            <h3 class="text-3xl font-bold text-primary-blue">
+                                Intelligent Fire Detection & Alarm Systems
+                            </h3>
+                            <p class="text-gray-700 text-lg">
+                                Early and reliable detection is the core of any fire safety strategy. We install intelligent addressable and conventional systems for rapid warning and response.
+                            </p>
+                            <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
+                                <li>Addressable / conventional fire alarm panels</li>
+                                <li>Smoke, heat and multi-sensor detectors</li>
+                                <li>Manual call points, hooters and sounders</li>
+                            </ul>
+                        </div>
+                        <div class="order-1 lg:order-2 rounded-xl shadow-2xl overflow-hidden hover-grow bg-gray-100 flex items-center justify-center system-image-wrapper">
+                            <img src="https://3.imimg.com/data3/JC/JL/MY-16563708/smoke-and-fire-detector-system.jpg" alt="Fire alarm panel with detectors" class="system-image">
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Fire Pump Sets & Water Storage -->
+                    <div class="grid lg:grid-cols-2 gap-8 items-center animate-item" data-delay="350">
+                        <div class="rounded-xl shadow-2xl overflow-hidden hover-grow bg-gray-100 flex items-center justify-center system-image-wrapper">
+                            <img src="https://image.made-in-china.com/2f0j00YQARFmwMQIcJ/Diesel-Engine-Fire-Pump-for-Water-Supply-System.webp" alt="Fire pump set and controls" class="system-image">
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-3xl font-bold text-primary-blue">
+                                Fire Pump Sets & Water Storage
+                            </h3>
+                            <p class="text-gray-700 text-lg">
+                                For hydrant and sprinkler systems to perform, reliable water supply and pressure are essential. We install complete fire pump rooms and associated piping.
+                            </p>
+                            <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
+                                <li>Main, standby and jockey pumps with controllers</li>
+                                <li>Connection to underground / overhead fire tanks</li>
+                                <li>Testing, commissioning and performance checks</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Gas & Special Hazard Suppression -->
+                    <div class="grid lg:grid-cols-2 gap-8 items-center animate-item" data-delay="450">
+                        <div class="order-2 lg:order-1 space-y-3">
+                            <h3 class="text-3xl font-bold text-primary-blue">
+                                Gas & Special Hazard Suppression Systems
+                            </h3>
+                            <p class="text-gray-700 text-lg">
+                                For electrical rooms, server areas and critical assets, we provide clean agent and other special suppression systems that control fire without damaging equipment.
+                            </p>
+                            <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
+                                <li>Clean agent systems (FM-200 / inert gas)</li>
+                                <li>CO<sub>2</sub> systems for specific hazards</li>
+                                <li>Integration with detection and alarm controls</li>
+                            </ul>
+                        </div>
+                        <div class="order-1 lg:order-2 rounded-xl shadow-2xl overflow-hidden hover-grow bg-gray-100 flex items-center justify-center system-image-wrapper">
+                            <img src="supression.webp" alt="Gas and fire extinguishing cylinders" class="system-image-contain">
+                        </div>
+                    </div>
+
+                    <!-- Row 5: Foam & High-Risk Area Protection -->
+                    <div class="grid lg:grid-cols-2 gap-8 items-center animate-item" data-delay="550">
+                        <div class="rounded-xl shadow-2xl overflow-hidden hover-grow bg-gray-100 flex items-center justify-center system-image-wrapper">
+                            <img src="https://cdn.cpdonline.co.uk/wp-content/uploads/2019/07/28163846/Types-of-fire-extinguishers.jpg" alt="Foam or sprinkler discharge in protected area" class="system-image">
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-3xl font-bold text-primary-blue">
+                                Foam & High-Risk Area Protection
+                            </h3>
+                            <p class="text-gray-700 text-lg">
+                                For fuel storage, loading bays and other high-risk zones, foam systems offer fast coverage and control over flammable liquid fires.
+                            </p>
+                            <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
+                                <li>Foam pourers, generators and proportioning systems</li>
+                                <li>Protection for tanks, bays and process areas</li>
+                                <li>Design tuned to risk category and standards</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER (unchanged) -->
+    <footer class="bg-gray-900 text-white pt-10 pb-6">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-6">
+                
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="text-xl font-bold mb-4 text-accent-red">SHREYAS FIRE ENGINEERS</h3>
+                    <p class="text-sm text-gray-400 mb-2">ISO 9001:2015 Certified</p>
+                    <p class="text-sm text-gray-400">35+ Years in Fire Protection & Safety.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-white">Explore</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="text-gray-400 hover:text-accent-red transition duration-300">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-accent-red transition duration-300">About</a></li>
+                        <li><a href="service.html" class="text-gray-400 hover:text-accent-red transition duration-300">Services</a></li>
+                        <li><a href="system.html" class="text-gray-400 hover:text-accent-red transition duration-300">System</a></li>
+                        <li><a href="projects.html" class="text-gray-400 hover:text-accent-red transition duration-300">Projects</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-accent-red transition duration-300">Contact</a></li>
+                         </ul>
+                </div>
+
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Get in Touch</h3>
+                    <p class="text-sm text-gray-400 mb-2">
+                        <span class="font-bold text-accent-red">Phone:</span> 022-40121537 / 9987439445
+                    </p>
+                    <p class="text-sm text-gray-400 mb-2">
+                        <span class="font-bold text-accent-red">Email:</span> shreyas_enterprises2005@yahoo.com
+                    </p>
+                    <p class="text-sm text-gray-400">
+                        <span class="font-bold text-accent-red">Web:</span> www.shreyasenterprise.in
+                    </p>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Registered Address</h3>
+                    <p class="text-sm text-gray-400">
+                        212, Diamond Industrial Estate No.2, Co-operative premises society Ltd, Ketkipada road, Dahisar (E), Mumbai - 400068
+                    </p>
+                </div>
+
+            </div>
+            
+            <div class="text-center text-sm text-gray-500">
+                &copy; <span id="year"></span> Shreyas Fire Protection Engineers LLP. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <!-- CHAT WIDGET (unchanged) -->
+    <button id="chat-float-button" class="fixed bottom-8 right-8 bg-red-600 p-4 rounded-full shadow-2xl hover:bg-red-700 transition duration-300 transform hover:scale-110" aria-label="Open chat assistant">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 4v-4z"></path></svg>
+    </button>
+
+    <div id="chat-window" class="fixed bottom-24 right-8 bg-white flex flex-col rounded-xl overflow-hidden shadow-2xl w-80 h-96" style="display: none;">
+        <div class="bg-red-600 text-white p-4 font-bold flex justify-between items-center flex-shrink-0">
+            <span>Shreyas Fire Assistant</span>
+            <button id="close-chat-button" class="text-white hover:text-red-200 transition duration-300" aria-label="Close chat window">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div id="chat-messages" class="flex-grow overflow-y-auto p-4 space-y-4 flex flex-col">
+            <div class="max-w-[80%] p-3 text-sm rounded-xl bg-gray-200 text-gray-800 self-start">
+                Welcome! I'm your Fire Safety Assistant. How can I help you with your fire protection needs today?
+            </div>
+        </div>
+        <form id="chat-form" class="p-4 border-t border-gray-200 flex-shrink-0">
+            <div class="flex space-x-2">
+                <input type="text" id="chat-input" placeholder="Type your message..." class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-300" required>
+                <button type="submit" class="bg-red-600 text-white p-3 rounded-lg hover:bg-red-700 transition duration-300" aria-label="Send message">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // Update the current year in the footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Custom alert function (Copied from source)
+        function alert(message) {
+            const modalId = 'customAlertModal';
+            let modal = document.getElementById(modalId);
+
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = modalId;
+                modal.className = 'fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-300 opacity-0 pointer-events-none';
+                modal.innerHTML = `
+                    <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full transform scale-90 transition-transform duration-300">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">Information</h3>
+                        <p class="text-gray-700 mb-4">${message}</p>
+                        <button id="closeAlert" class="w-full bg-accent-red text-white py-2 rounded-lg hover:bg-red-700 transition duration-300">
+                            Close
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+
+                document.getElementById('closeAlert').addEventListener('click', () => {
+                    modal.classList.add('opacity-0', 'pointer-events-none');
+                    modal.classList.remove('opacity-100');
+                });
+            } else {
+                modal.querySelector('p').textContent = message;
+            }
+
+            setTimeout(() => {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modal.classList.add('opacity-100');
+                modal.querySelector('div').classList.remove('scale-90');
+                modal.querySelector('div').classList.add('scale-100');
+            }, 50);
+        }
+        
+        // --- Enhanced Scroll-Based Fade-In Animation Logic (From contact.html) ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% of the item is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const delay = parseInt(target.getAttribute('data-delay') || '0');
+                    
+                    // Apply delay for staggered effect
+                    setTimeout(() => {
+                        target.classList.add('is-visible');
+                    }, delay);
+                    
+                    // Stop observing once visible
+                    observer.unobserve(target); 
+                }
+            });
+        }, observerOptions);
+
+        // Target all elements for animation
+        document.querySelectorAll('.animate-item').forEach(element => {
+            observer.observe(element);
+        });
+
+        // --- Floating Chat Window Logic (Fixed) ---
+        const chatFloatButton = document.getElementById('chat-float-button');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChatButton = document.getElementById('close-chat-button');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+
+        if (chatFloatButton) {
+            chatFloatButton.addEventListener('click', () => {
+                chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+                if (chatWindow.style.display === 'flex') {
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            });
+        }
+
+        if (closeChatButton) {
+            closeChatButton.addEventListener('click', () => {
+                chatWindow.style.display = 'none';
+            });
+        }
+
+        const createMessageElement = (text, type) => {
+            const div = document.createElement('div');
+            let classes = "max-w-[80%] p-3 text-sm rounded-xl shadow-sm";
+            if (type === 'sent') {
+                classes += " ml-auto bg-accent-red text-white";
+            } else {
+                classes += " mr-auto bg-gray-200 text-gray-800";
+            }
+            div.className = classes;
+            div.textContent = text;
+            return div;
+        };
+
+        const sendAutoResponse = () => {
+            const responses = [
+                "Thank you for your inquiry! Can you tell me more about your location and the type of building?",
+                "We specialize in that. Would you like to schedule a free site assessment?",
+                "I've noted your question. A human expert will follow up with you shortly!"
+            ];
+            const response = responses[Math.floor(Math.random() * responses.length)];
+
+            setTimeout(() => {
+                const responseElement = createMessageElement(response, 'received');
+                chatMessages.appendChild(responseElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000); 
+        };
+
+        if (chatForm) {
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const messageText = chatInput.value.trim();
+
+                if (messageText !== "") {
+                    const messageElement = createMessageElement(messageText, 'sent');
+                    chatMessages.appendChild(messageElement);
+                    chatInput.value = '';
+                    chatInput.focus();
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    sendAutoResponse();
+                }
+            });
+        }
+    </script>
+</body>
+</html>

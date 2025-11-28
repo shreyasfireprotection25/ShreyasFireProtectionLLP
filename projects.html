@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Shreyas Fire Protection Engineers LLP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            color: #46576e;
+        }
+
+        /* fade-in-up animation */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.8s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Clean NAFFCO project cards */
+        .project-card {
+            border-radius: 14px;
+            overflow: hidden;
+            background: #ffffff;
+            border: 1px solid #e6e6e6;
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.16);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.06);
+        }
+
+        .project-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            padding: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="bg-white shadow-lg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            
+            <a href="index.html" class="flex items-center space-x-2 group transform transition duration-300 hover:scale-[1.02]">
+                <img src="ShreyasLogoUpd.png" alt="Shreyas Fire Protection Engineers LLP Logo" class="h-10 w-auto"> 
+                <span class="text-xl font-bold text-gray-900 group-hover:text-red-600 transition duration-300">
+                    Shreyas Fire Protection Engineers LLP
+                </span>
+            </a>
+
+            <nav class="space-x-4">
+                <a href="index.html" class="text-gray-600 hover:text-red-600 p-2">Home</a>
+                <a href="about.html" class="text-gray-600 hover:text-red-600 p-2">About</a>
+                <a href="service.html" class="text-gray-600 hover:text-red-600 p-2">Services</a>
+                <a href="system.html" class="text-gray-600 hover:text-red-600 p-2">System</a>
+                <a href="projects.html" class="text-red-600 bg-gray-100 p-2 rounded-lg shadow-inner">Projects</a>
+                <a href="contact.html" class="text-gray-600 hover:text-red-600 p-2">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="bg-black py-20 border-b-4 border-red-600">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl font-extrabold text-white mb-4 fade-up">Our Projects</h1>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto fade-up">
+                A showcase of the fire protection systems and safety solutions we have successfully executed.
+            </p>
+        </div>
+    </section>
+
+    <!-- PROJECT GALLERY  -->
+    <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+
+        <h2 class="text-3xl font-bold text-gray-900 text-center mb-12 fade-up">
+            Featured Projects
+        </h2>
+
+        <!-- 3-column -->
+        <div class="grid md:grid-cols-3 gap-10">
+
+            <!-- Item -->
+            <div class="project-card fade-up">
+                <img src="https://srishtinamaah-miraroad.com/assets/img/deskban1.webp" class="project-image" alt="">
+                <div class="flex flex-col items-center justify-center py-4 text-center">
+                    <p class="project-title !text-center">Kalpataru Shrishti Namah</p>
+                    <h4 class="text-gray-600 text-sm mt-1 text-center">Mira Road</h4>
+                </div>
+            </div>
+
+            <div class="project-card fade-up">
+                <img src="https://is1-3.housingcdn.com/4f2250e8/c963065c67d67d7d655468d07de62ac3/v0/fs/runwal_25_hour_life-manpada-thane-runwal_realty.jpeg" class="project-image" alt="">
+                <div class="flex flex-col items-center justify-center py-4 text-center">
+                    <p class="project-title !text-center">Runwal 25 Hour Life</p>
+                    <h4 class="text-gray-600 text-sm mt-1 text-center">Thane</h4>
+                </div>
+            </div>
+
+            <div class="project-card fade-up">
+                <img src="https://jll-global-gdim-res.cloudinary.com/image/upload/v1656404372/IN_ML20220628/Rupa-Renaissance_92700_20220628_001.jpg" class="project-image" alt="">
+                <div class="flex flex-col items-center justify-center py-4 text-center">
+                    <p class="project-title !text-center">Rupa Renaissance</p>
+                    <h4 class="text-gray-600 text-sm mt-1 text-center">Turbhe</h4>
+                </div>
+            </div>
+
+            <div class="project-card fade-up">
+                <img src="https://www.sunteckindia.com/images/maxx-world/outdoor/Maxxworld-Clubhouse.webp" class="project-image" alt="">
+                <div class="flex flex-col items-center justify-center py-4 text-center">
+                    <p class="project-title !text-center">Sunteck Maxx World</p>
+                    <h4 class="text-gray-600 text-sm mt-1 text-center">Naigoan</h4>
+                </div>
+            </div>
+
+            <div class="project-card fade-up">
+                <img src="https://propertyok-prod-images.s3.ap-south-1.amazonaws.com/resizeImages/propertyImages/property-image-500x500/918774206795386image" class="project-image" alt="">
+                <div class="flex flex-col items-center justify-center py-4 text-center">
+                    <p class="project-title !text-center">Kalpataru Vivant</p>
+                    <h4 class="text-gray-600 text-sm mt-1 text-center">Jogeshwari</h4>
+                </div>
+            </div>
+
+            <div class="project-card fade-up">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6G2eCmTjwfs1IncJDJiw_Z5UYcQo8A5WLvg&s" class="project-image" alt="">
+                <div class="flex flex-col items-center justify-center py-4 text-center">
+                    <p class="project-title !text-center">Rustomjee Stella</p>
+                    <h4 class="text-gray-600 text-sm mt-1 text-center">Bandra</h4>
+                </div>
+            </div>
+
+            <div class="project-card fade-up">
+                <img src="https://propertycloud.in/assets/images/gallery/1697284040.png" class="project-image" alt="">
+                <div class="flex flex-col items-center justify-center py-4 text-center">
+                    <p class="project-title !text-center">DreamApex 24 High</p>
+                    <h4 class="text-gray-600 text-sm mt-1 text-center">Nerul</h4>
+                </div>
+            </div>
+
+            <div class="project-card fade-up">
+                <img src="https://cdn.blox.xyz/projects-2x/kalpataru-limited-kalpataru-advay-elevation-1756100829.jpg" class="project-image" alt="">
+                <div class="flex flex-col items-center justify-center py-4 text-center">
+                    <p class="project-title !text-center">Kalpataru Advay</p>
+                    <h4 class="text-gray-600 text-sm mt-1 text-center">Borivali</h4>
+                </div>
+            </div>
+
+            <div class="project-card fade-up">
+                <img src="https://is1-3.housingcdn.com/4f2250e8/6f3c80845d2797f259ca81c3ec161756/v0/fs/runwal_codename_enchanted-kolshet-thane-runwal_realty.jpeg" class="project-image" alt="">
+                <div class="flex flex-col items-center justify-center py-4 text-center">
+                    <p class="project-title !text-center">Runwal Enchanted</p>
+                    <h4 class="text-gray-600 text-sm mt-1 text-center">Thane</h4>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-white pt-10 pb-6">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-6">
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-red-600">SHREYAS FIRE ENGINEERS</h3>
+                    <p class="text-sm text-gray-400">ISO 9001:2015 Certified</p>
+                    <p class="text-sm text-gray-400">35+ Years in Fire Protection & Safety.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-white">Explore</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="text-gray-400 hover:text-red-600">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-red-600">About</a></li>
+                        <li><a href="service.html" class="text-gray-400 hover:text-red-600">Services</a></li>
+                        <li><a href="system.html" class="text-gray-400 hover:text-red-600">System</a></li>
+                        <li><a href="projects.html" class="text-gray-400 hover:text-red-600">Projects</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-red-600">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-white">Get in Touch</h3>
+                    <p class="text-sm text-gray-400"><strong class="text-red-600">Phone:</strong> 022-40121537 / 9987439445</p>
+                    <p class="text-sm text-gray-400"><strong class="text-red-600">Email:</strong> shreyas_enterprises2005@yahoo.com</p>
+                    <p class="text-sm text-gray-400"><strong class="text-red-600">Web:</strong> www.shreyasenterprise.in</p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-white">Registered Address</h3>
+                    <p class="text-sm text-gray-400">
+                        212, Diamond Industrial Estate No.2, Co-operative premises society Ltd,  
+                        Ketkipada road, Dahisar (E), Mumbai - 400068
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center text-sm text-gray-500">
+                © <span id="year"></span> Shreyas Fire Protection Engineers LLP. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+     <!-- Floating Chat Button -->
+    <button id="chat-float-button" class="fixed bottom-8 right-8 bg-red-600 p-4 rounded-full shadow-2xl hover:bg-red-700 transition duration-300 transform hover:scale-110" aria-label="Open chat assistant">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 4v-4z"></path></svg>
+    </button>
+
+    <!-- Chat Window -->
+    <div id="chat-window" class="fixed bottom-24 right-8 bg-white flex flex-col rounded-xl overflow-hidden shadow-2xl w-80 h-96 hidden">
+        <div class="bg-red-600 text-white p-4 font-bold flex justify-between items-center">
+            <span>Shreyas Fire Assistant</span>
+            <button id="close-chat-button" class="text-white hover:text-red-200 transition duration-300" aria-label="Close chat window">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div id="chat-messages" class="flex-grow space-y-4">
+            <!-- Initial welcome message -->
+            <div class="message-received max-w-[80%] p-3 text-sm">
+                Welcome! I'm your Fire Safety Assistant. How can I help you with your fire protection needs today?
+            </div>
+        </div>
+        <form id="chat-form" class="p-4 border-t border-gray-200">
+            <div class="flex space-x-2">
+                <input type="text" id="chat-input" placeholder="Type your message..." class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-300" required>
+                <button type="submit" class="bg-red-600 text-white p-3 rounded-lg hover:bg-red-700 transition duration-300" aria-label="Send message">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+        // Footer year update
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Fade-up observer
+        const elements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.15 });
+        elements.forEach(el => observer.observe(el));
+
+        // --- Floating Chat Window Logic (Existing) ---
+        const chatFloatButton = document.getElementById('chat-float-button');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChatButton = document.getElementById('close-chat-button');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+
+        // Toggle chat window visibility
+        if (chatFloatButton) {
+            chatFloatButton.addEventListener('click', () => {
+                chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+            });
+        }
+
+        if (closeChatButton) {
+            closeChatButton.addEventListener('click', () => {
+                chatWindow.style.display = 'none';
+            });
+        }
+
+        // Helper function to create a message element
+        const createMessageElement = (text, type) => {
+            const div = document.createElement('div');
+            div.className = `max-w-[80%] p-3 text-sm shadow-md ${type === 'sent' ? 'message-sent' : 'message-received'}`;
+            div.textContent = text;
+            return div;
+        };
+
+        // Simulate a response from the "AI"
+        const sendAutoResponse = () => {
+            // Simple placeholder responses
+            const responses = [
+                "Thank you for your inquiry! Can you tell me more about your location and the type of building?",
+                "We specialize in that. Would you like to schedule a free site assessment?",
+                "I've noted your question. A human expert will follow up with you shortly!"
+            ];
+            const response = responses[Math.floor(Math.random() * responses.length)];
+
+            // Simulate typing delay
+            setTimeout(() => {
+                const responseElement = createMessageElement(response, 'received');
+                chatMessages.appendChild(responseElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000); // 1 second delay for simulation
+        };
+
+        // Handle form submission (sending a message)
+        if (chatForm) {
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const messageText = chatInput.value.trim();
+
+                if (messageText !== "") {
+                    // 1. Save user response & display (Frontend Simulation)
+                    const messageElement = createMessageElement(messageText, 'sent');
+                    chatMessages.appendChild(messageElement);
+
+                    // 2. Clear input
+                    chatInput.value = '';
+                    chatInput.focus();
+
+                    // 3. Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                    // 4. Provide a response from our side (Frontend Simulation)
+                    sendAutoResponse();
+                }
+            });
+        }
+
+        // Initialize carousel on window load
+        window.onload = () => {
+            updateSlide();
+            slideInterval = setInterval(nextSlide, intervalTime);
+            // NOTE: Client Logo Carousel is now purely CSS, no JS initialization needed here.
+        };
+    </script>
+
+</body>
+</html>

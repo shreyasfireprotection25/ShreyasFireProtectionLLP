@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Shreyas Fire Protection Engineers LLP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind configuration for theme consistency
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#1f2937', // Dark corporate color
+                        'accent-red': '#cc3333',   // Fire safety accent color
+                        'light-bg': '#f7f7f7',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            color: #46576e;
+        }
+
+        /* --- Animation for Main Title --- */
+        @keyframes slideInFromTop {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .animated-title {
+            animation: slideInFromTop 1s ease-out forwards;
+        }
+
+        /* --- Scroll Fade-In Animation for Sections --- */
+        .fade-in-section {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(30px);
+        }
+        .is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Service Card Hover Effect --- */
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- Animate Items (PRODUCT CARDS / IMAGES) ---
+           IMPORTANT CHANGE: opacity is now 1 by default
+           so content is always visible even if JS fails.
+        */
+        .animate-item {
+            opacity: 1; /* was 0 before – this hid your products if JS failed */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(30px);
+        }
+
+        /* --- Product Card Hover Effect --- */
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- Flip Card Effect (if you use flip-card somewhere) --- */
+        .flip-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .flip-card-front {
+            background-color: white;
+            z-index: 2;
+        }
+        .flip-card-back {
+            background-color: #1f2937;
+            color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* --- Hover-grow (used in Products sections) --- */
+        .hover-grow {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .hover-grow:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- SINGLE HEADER -->
+    <header class="bg-white shadow-lg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2 group transform transition duration-300 hover:scale-[1.02]">
+                <img src="ShreyasLogoUpd.png" 
+                     alt="Shreyas Fire Protection Engineers LLP Logo" 
+                     class="h-10 w-auto"> 
+                <span class="text-xl font-bold text-gray-900 group-hover:text-accent-red transition duration-300">
+                    Shreyas Fire Protection Engineers LLP
+                </span>
+            </a>
+
+            <nav class="space-x-4">
+                <a href="index.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Home</a>
+                <a href="about.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">About</a>
+                <a href="service.html" class="text-accent-red bg-gray-100 font-medium transition duration-300 rounded-lg p-2 shadow-inner">Services</a>
+                <a href="system.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">System</a>
+                 <a href="projects.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Projects</a>
+                <a href="contact.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- SINGLE MAIN -->
+    <main class="flex-grow">
+
+        <!-- SERVICES HERO -->
+        <section class="bg-black py-16 sm:py-24 border-b-4 border-accent-red">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-5xl sm:text-6xl font-extrabold text-white mb-4 animated-title">
+                    Total Fire Protection Solutions
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                    Leveraging 35+ years of expertise, we provide comprehensive, reliable, and compliant fire safety engineering from concept to commission and beyond.
+                </p>
+                <div class="inline-flex space-x-4">
+                    <a href="#core-systems" class="bg-accent-red text-white py-3 px-8 rounded-full font-semibold shadow-xl hover:bg-red-700 transition duration-300 transform hover:scale-105">
+                        Explore Our Systems
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- TURNKEY SERVICES -->
+        <section id="turnkey-services" class="py-16 bg-light-bg fade-in-section">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-primary-blue text-center mb-12">
+                    End-to-End Turnkey Project Management
+                </h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg transition duration-300 text-center col-span-1 service-card">
+                        <svg class="w-12 h-12 text-accent-red mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v15m-3.337-12h6.674c1.48 0 2.709 1.156 2.91 2.625L18 19H6l-.323-2.375c.201-1.469 1.43-2.625 2.91-2.625z"></path>
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Design & Planning</h3>
+                        <p class="text-gray-600 text-sm">
+                            Expert consultation and detailed system design for optimal protection and compliance.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg transition duration-300 text-center col-span-1 service-card">
+                        <svg class="w-12 h-12 text-accent-red mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Supply & Procurement</h3>
+                        <p class="text-gray-600 text-sm">
+                            Sourcing high-quality, certified fire protection equipment and components.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg transition duration-300 text-center col-span-1 service-card">
+                        <svg class="w-12 h-12 text-accent-red mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c-.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37h.003zM12 15a3 3 0 100-6 3 3 0 000 6z"></path>
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Professional Installation</h3>
+                        <p class="text-gray-600 text-sm">
+                            Flawless, non-intrusive installation by our experienced and certified technicians.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg transition duration-300 text-center col-span-1 service-card">
+                        <svg class="w-12 h-12 text-accent-red mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.002 12.002 0 0012 21a12.002 12.002 0 008.618-3.04z"></path>
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Testing & Commissioning</h3>
+                        <p class="text-gray-600 text-sm">
+                            Rigorous testing to ensure all systems meet safety standards and operational readiness.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg transition duration-300 text-center col-span-1 service-card">
+                        <svg class="w-12 h-12 text-accent-red mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Final Handover</h3>
+                        <p class="text-gray-600 text-sm">
+                            Complete documentation and essential training for your team on system operation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPECIALIZED SYSTEMS -->
+        <section class="py-16 sm:py-24 bg-white fade-in-section">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-gray-900 text-center mb-16">
+                    Specialized Fire Safety Systems
+                </h2>
+                <div class="grid lg:grid-cols-3 gap-10">
+                    <div class="p-8 bg-light-bg rounded-2xl shadow-xl border-t-8 border-accent-red service-card">
+                        <h3 class="text-2xl font-bold text-primary-blue mb-4">Fire Detection & Alarm</h3>
+                        <p class="text-gray-700 mb-4">
+                            Immediate and reliable threat identification is crucial. We install state-of-the-art systems to alert occupants and trigger response protocols instantly.
+                        </p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600 text-sm pl-4">
+                            <li>Addressable Fire Alarm Panels</li>
+                            <li>Smoke, Heat, and Gas Detectors</li>
+                            <li>Manual Call Points & Hooters</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-8 bg-light-bg rounded-2xl shadow-xl border-t-8 border-accent-red service-card">
+                        <h3 class="text-2xl font-bold text-primary-blue mb-4">Fire Suppression Systems</h3>
+                        <p class="text-gray-700 mb-4">
+                            Protecting critical assets and infrastructure requires fast, automated suppression tailored to the hazard.
+                        </p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600 text-sm pl-4">
+                            <li>CO2 and FM200 Gas Flooding Systems</li>
+                            <li>Modular and Standalone Suppressors</li>
+                            <li>Kitchen Fire Suppression Solutions</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-8 bg-light-bg rounded-2xl shadow-xl border-t-8 border-8 border-accent-red service-card">
+                        <h3 class="text-2xl font-bold text-primary-blue mb-4">Fire Fighting Systems</h3>
+                        <p class="text-gray-700 mb-4">
+                            Robust, reliable, and compliant water-based systems form the backbone of any large-scale protection strategy.
+                        </p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600 text-sm pl-4">
+                            <li>Fire Hydrant and Sprinkler Systems</li>
+                            <li>Wet Riser / Dry Riser Installations</li>
+                            <li>Fire Pumps and Water Storage Tanks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTEGRATED FIRE COMBAT EQUIPMENT (PRODUCTS START) -->
+        <section id="core-systems" class="py-16 bg-light-bg">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-primary-blue text-center mb-12 animate-item" data-delay="0">
+                    Integrated Fire Combat Equipment
+                </h2>
+                <div class="grid lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg product-card animate-item" data-delay="100">
+                        <div class="h-40 bg-gray-100 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                            <img src="https://drownfire.in/wp-content/uploads/2023/10/fire-hydrant-systems2.jpg" alt="Illustration of a Fire Hydrant System" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Fire Hydrant System</h3>
+                        <p class="text-gray-600 text-sm">
+                            A robust network of pipes, risers, and hydrants/hose reels providing pressurized water for manual fire fighting. Essential for large industrial and commercial complexes.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg product-card animate-item" data-delay="200">
+                        <div class="h-40 bg-gray-100 rounded-lg mb-4 flex items_center justify-center overflow-hidden">
+                            <img src="https://v2fire.com/wp-content/uploads/2018/01/fire-sprinkler-systems-1-600x600.jpg" alt="Close-up of an Automatic Fire Sprinkler Head" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Fire Sprinkler System</h3>
+                        <p class="text-gray-600 text-sm">
+                            Automatic detection and suppression via temperature-sensitive sprinkler heads. Our systems are compliant with NFPA and local standards for rapid fire control.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg product-card animate-item" data-delay="300">
+                        <div class="h-40 bg-gray-100 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                            <img src="https://image.made-in-china.com/2f0j00YQARFmwMQIcJ/Diesel-Engine-Fire-Pump-for-Water-Supply-System.webp" alt="Industrial Fire Pump Set with Controls" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Fire Pump Sets</h3>
+                        <p class="text-gray-600 text-sm">
+                            Diesel and Electric Pump sets designed to maintain high pressure and water flow for sprinkler and hydrant systems. Includes main, standby, and jockey pumps.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg product-card animate-item" data-delay="400">
+                        <div class="h-40 bg-gray-100 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                            <img src="https://www.ameyafire.com/assets/images/services/alarm%20system%20and%20detection%20system.jpg" alt="Fire Alarm Control Panel and Detectors" class="w_full h-full object-cover">
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Fire Alarm System</h3>
+                        <p class="text-gray-600 text_sm">
+                            Addressable and conventional fire alarm panels connected to smoke, heat detectors, and manual call points for early warning and rapid response protocol initiation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- AUXILIARY SAFETY & EVACUATION -->
+        <section id="auxiliary-systems" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-gray-900 text-center mb-12 animate-item" data-delay="0">
+                    Auxiliary Safety & Evacuation
+                </h2>
+                
+                <div class="grid lg:grid-cols-2 gap-10 items-center">
+                    
+                    <div class="space-y-4 animate-item" data-delay="100">
+                        <h3 class="text-3xl font-bold text-accent-red mb-2">Portable Fire Extinguishers</h3>
+                        <p class="text-gray-700 text-lg">
+                            The first line of defense against minor fires. We provide a full range of high-quality portable units certified for various fire classes (A, B, C, D, K).
+                        </p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600 text-sm pl-4">
+                            <li>Dry Powder (ABC) and Water-based</li>
+                            <li>CO2 for electrical and liquid fires</li>
+                            <li>Foam and Wet Chemical extinguishers</li>
+                            <li>Annual refilling and maintenance services</li>
+                        </ul>
+                    </div>
+                    <div class="rounded-xl shadow-2xl overflow-hidden animate-item h-72 flex items-center justify-center hover-grow" data-delay="200">
+                        <img src="https://cdn.cpdonline.co.uk/wp-content/uploads/2019/07/28163846/Types-of-fire-extinguishers.jpg" alt="A rack of portable fire extinguishers for different fire classes" class="w-full h-full object-contain">
+                    </div>
+
+                    <div class="rounded-xl shadow-2xl overflow-hidden lg:order-last animate-item h-72 flex items-center justify-center hover-grow" data-delay="300">
+                        <img src="https://5.imimg.com/data5/OO/VD/RM/SELLER-4763945/public-address-system.jpg" alt="Public Address and Voice Alarm System Control Panel" class="w-full h-full object-contain">
+                    </div>
+                    <div class="space-y-4 lg:order-first animate-item" data-delay="400">
+                        <h3 class="text-3xl font-bold text-accent-red mb-2">Public Address & Voice Alarm</h3>
+                        <p class="text-gray-700 text-lg">
+                            Critical for mass evacuation. Our integrated Public Address (PA) and Voice Alarm (VA) systems ensure clear, timely, and unambiguous communication during emergencies.
+                        </p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600 text-sm pl-4">
+                            <li>Automatic and manual message broadcasting</li>
+                            <li>Zoning and clear intelligibility standards</li>
+                            <li>Battery backup for continuous operation</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- FIRE & SAFETY SIGNBOARDS -->
+        <section id="signboards" class="py-16 bg-light-bg">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-primary-blue text-center mb-12 animate-item" data-delay="0">
+                    Fire & Safety Signboards
+                </h2>
+                <p class="text-center max-w-2xl mx-auto mb-10 text-lg text-gray-600 animate-item" data-delay="100">
+                    Ensure personnel safety and regulatory compliance with clear, durable, and visible signage.
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="h-64 rounded-xl shadow-xl overflow-hidden animate-item hover-grow" data-delay="200">
+                        <img src="https://www.businesswatchgroup.co.uk/wp-content/uploads/2024/08/12.png" alt="Set of various Fire Safety Signboards" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="md:col-span-2 space-y-4 p-6 bg-white rounded-xl shadow-lg product-card animate-item" data-delay="300">
+                        <h4 class="text-xl font-bold text-gray-900">Types of Signage Available:</h4>
+                        <ul class="grid grid-cols-2 gap-4 text-gray-700 text-sm">
+                            <li class="flex items-center space-x-2">
+                                <svg class="w-4 h-4 text-accent-red" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="font-semibold">Exit/Egress Signs</span> (Photoluminescent)
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <svg class="w-4 h-4 text-accent-red" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="font-semibold">Fire Extinguisher Location</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <svg class="w-4 h-4 text-accent-red" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="font-semibold">Mandatory/Prohibition Signs</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <svg class="w-4 h-4 text-accent-red" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="font-semibold">Assembly Point Markers</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+       
+    <!-- SINGLE FOOTER -->
+    <footer class="bg-gray-900 text-white pt-10 pb-6">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-6">
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="text-xl font-bold mb-4 text-accent-red">SHREYAS FIRE ENGINEERS</h3>
+                    <p class="text-sm text-gray-400 mb-2">ISO 9001:2015 Certified</p>
+                    <p class="text-sm text-gray-400">35+ Years in Fire Protection & Safety.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-white">Explore</h3>
+                    <ul class="space-y-2 text-sm">
+                       <li><a href="index.html" class="text-gray-400 hover:text-accent-red transition duration-300">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-accent-red transition duration-300">About</a></li>
+                        <li><a href="service.html" class="text-gray-400 hover:text-accent-red transition duration-300">Services</a></li>
+                        <li><a href="system.html" class="text-gray-400 hover:text-accent-red transition duration-300">System</a></li>
+                        <li><a href="projects.html" class="text-gray-400 hover:text-accent-red transition duration-300">Projects</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-accent-red transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Get in Touch</h3>
+                    <p class="text-sm text-gray-400 mb-2">
+                        <span class="font-bold text-accent-red">Phone:</span> 022-40121537 / 9987439445
+                    </p>
+                    <p class="text-sm text-gray-400 mb-2">
+                        <span class="font-bold text-accent-red">Email:</span> shreyas_enterprises2005@yahoo.com
+                    </p>
+                    <p class="text-sm text-gray-400">
+                        <span class="font-bold text-accent-red">Web:</span> www.shreyasenterprise.in
+                    </p>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Registered Address</h3>
+                    <p class="text-sm text-gray-400">
+                        212, Diamond Industrial Estate No.2, Co-operative premises society Ltd,
+                        Ketkipada road, Dahisar (E), Mumbai - 400068
+                    </p>
+                </div>
+            </div>
+            
+            <div class="text-center text-sm text-gray-500">
+                &copy; <span id="year"></span> Shreyas Fire Protection Engineers LLP. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- CHAT BUTTON + WINDOW -->
+    <button id="chat-float-button" class="fixed bottom-8 right-8 bg-red-600 p-4 rounded-full shadow-2xl hover:bg-red-700 transition duration-300 transform hover:scale-110" aria-label="Open chat assistant">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 4v-4z">
+            </path>
+        </svg>
+    </button>
+
+    <div id="chat-window" class="fixed bottom-24 right-8 bg-white flex flex-col rounded-xl overflow-hidden shadow-2xl w-80 h-96" style="display: none;">
+        <div class="bg-red-600 text-white p-4 font-bold flex justify_between items-center flex-shrink-0">
+            <span>Shreyas Fire Assistant</span>
+            <button id="close-chat-button" class="text-white hover:text-red-200 transition duration-300" aria-label="Close chat window">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="chat-messages" class="flex-grow overflow-y-auto p-4 space-y-4 flex flex-col">
+            <div class="max-w-[80%] p-3 text-sm rounded-xl bg-gray-200 text-gray-800 self-start">
+                Welcome! I'm your Fire Safety Assistant. How can I help you with your fire protection needs today?
+            </div>
+        </div>
+        <form id="chat-form" class="p-4 border-t border-gray-200 flex-shrink-0">
+            <div class="flex space-x-2">
+                <input type="text" id="chat-input" placeholder="Type your message..." class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-300" required>
+                <button type="submit" class="bg-red-600 text-white p-3 rounded-lg hover:bg-red-700 transition duration-300" aria-label="Send message">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // Year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Custom alert modal (kept from original service page)
+        function alert(message) {
+            const modalId = 'customAlertModal';
+            let modal = document.getElementById(modalId);
+
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = modalId;
+                modal.className = 'fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-300 opacity-0 pointer-events-none';
+                modal.innerHTML = `
+                    <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full transform scale-90 transition-transform duration-300">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">Information</h3>
+                        <p class="text-gray-700 mb-4">${message}</p>
+                        <button id="closeAlert" class="w-full bg-accent-red text-white py-2 rounded-lg hover:bg-red-700 transition duration-300">
+                            Close
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+
+                document.getElementById('closeAlert').addEventListener('click', () => {
+                    modal.classList.add('opacity-0', 'pointer-events-none');
+                    modal.classList.remove('opacity-100');
+                });
+            } else {
+                modal.querySelector('p').textContent = message;
+            }
+
+            setTimeout(() => {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modal.classList.add('opacity-100');
+                modal.querySelector('div').classList.remove('scale-90');
+                modal.querySelector('div').classList.add('scale-100');
+            }, 50);
+        }
+        
+        // Fade-in for sections (.fade-in-section)
+        const fadeObserverOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2
+        };
+
+        const fadeObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, fadeObserverOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            fadeObserver.observe(section);
+        });
+
+        // Scroll-based animation for .animate-item with delays
+        const itemObserverOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const itemObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const delay = parseInt(target.getAttribute('data-delay') || '0', 10);
+                    setTimeout(() => {
+                        target.classList.add('is-visible');
+                    }, delay);
+                    observer.unobserve(target);
+                }
+            });
+        }, itemObserverOptions);
+
+        document.querySelectorAll('.animate-item').forEach(element => {
+            itemObserver.observe(element);
+        });
+
+        // Floating Chat Window Logic
+        const chatFloatButton = document.getElementById('chat-float-button');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChatButton = document.getElementById('close-chat-button');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+
+        if (chatFloatButton) {
+            chatFloatButton.addEventListener('click', () => {
+                chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+                if (chatWindow.style.display === 'flex') {
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            });
+        }
+
+        if (closeChatButton) {
+            closeChatButton.addEventListener('click', () => {
+                chatWindow.style.display = 'none';
+            });
+        }
+
+        const createMessageElement = (text, type) => {
+            const div = document.createElement('div');
+            let classes = "max-w-[80%] p-3 text-sm rounded-xl shadow-sm";
+            if (type === 'sent') {
+                classes += " ml-auto bg-accent-red text-white";
+            } else {
+                classes += " mr-auto bg-gray-200 text-gray-800";
+            }
+            div.className = classes;
+            div.textContent = text;
+            return div;
+        };
+
+        const sendAutoResponse = () => {
+            const responses = [
+                "Thank you for your inquiry! Can you tell me more about your location and the type of building?",
+                "We specialize in that. Would you like to schedule a free site assessment?",
+                "I've noted your question. A human expert will follow up with you shortly!"
+            ];
+            const response = responses[Math.floor(Math.random() * responses.length)];
+
+            setTimeout(() => {
+                const responseElement = createMessageElement(response, 'received');
+                chatMessages.appendChild(responseElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        };
+
+        if (chatForm) {
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const messageText = chatInput.value.trim();
+
+                if (messageText !== "") {
+                    const messageElement = createMessageElement(messageText, 'sent');
+                    chatMessages.appendChild(messageElement);
+                    chatInput.value = '';
+                    chatInput.focus();
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    sendAutoResponse();
+                }
+            });
+        }
+    </script>
+</body>
+</html>

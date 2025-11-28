@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shreyas Fire Protection Engineers LLP | Fire Safety & Compliance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            color: #46576e;
+        }
+
+        /* Custom CSS for Carousel Slide Transition */
+        .slide {
+            transition: opacity 0.7s ease-in-out;
+        }
+
+        /* New CSS for Clients Carousel Slide Transition */
+        .client-slide {
+            transition: transform 0.7s ease-in-out;
+        }
+
+        /* Ensure the logos container handles the overflow and positioning */
+        .logo-container {
+            display: flex;
+            transition: transform 0.7s ease-in-out;
+            /* FIX: Set container width to accommodate all 14 logos for smooth sliding calculation */
+            width: 280%; 
+        }
+
+        /* Hide overflow for the carousel effect */
+        .client-carousel-viewport {
+            overflow: hidden;
+        }
+
+        /* Styling for the client logo item */
+        .client-logo-item {
+            /* FIX: Calculate width based on 5 logos per view */
+            min-width: calc(100% / 5); 
+            width: calc(100% / 5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Adjust for smaller screens */
+        @media (max-width: 1024px) {
+            .client-logo-item {
+                 /* FIX: Calculate width based on 3 logos per view */
+                min-width: calc(100% / 3); 
+                width: calc(100% / 3);
+            }
+        }
+        @media (max-width: 768px) {
+            .client-logo-item {
+                 /* FIX: Calculate width based on 2 logos per view */
+                min-width: calc(100% / 2); 
+                width: calc(100% / 2);
+            }
+        }
+
+        /* --- New Chat Widget Styles --- */
+        /* Optional: Custom scrollbar for chat messages */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f7f7f7;
+        }
+
+        /* Styling for the received message bubble */
+        .received-message {
+            background-color: #e5e7eb; /* gray-200 */
+            color: #4b5563; /* gray-800 */
+            border-radius: 0.75rem; /* rounded-xl */
+            border-top-left-radius: 0; /* rounded-tl-none */
+            padding: 0.75rem; /* p-3 */
+            max-width: 80%;
+            font-size: 0.875rem; /* text-sm */
+        }
+
+        /* Styling for the sent message bubble */
+        .sent-message {
+            background-color: #dc2626; /* red-600 */
+            color: #ffffff; /* white */
+            border-radius: 0.75rem; /* rounded-xl */
+            border-top-right-radius: 0; /* rounded-tr-none */
+            padding: 0.75rem; /* p-3 */
+            max-width: 80%;
+            font-size: 0.875rem; /* text-sm */
+            margin-left: auto;
+        }
+
+        /* FIX: Define accent-red for the footer text color */
+        :root {
+            --accent-red: #dc2626; /* red-600 */
+        }
+        .text-accent-red {
+            color: var(--accent-red);
+        }
+        
+        /* --- Advanced Staggered Animation Styles --- */
+        /* Base scroll fade-in styles (copied from service.html) */
+        .fade-in-section {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(30px);
+        }
+        .is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Keyframe for staggered items */
+        @keyframes popInFromBottom {
+            0% {
+                transform: translateY(50px) scale(0.95);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Initial state for staggered items (will be overridden by JS animation style) */
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+        }
+
+        /* Floating CTA animation for hero buttons */
+        @keyframes floatCTA {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        .floating-cta {
+            animation: floatCTA 4s ease-in-out infinite;
+        }
+
+        /* Animated stat cards for company info */
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            inset: -40%;
+            background: radial-gradient(circle at 0 0, rgba(248,113,113,0.25), transparent 55%);
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .stat-card:hover::before {
+            opacity: 1;
+            transform: translate3d(10px, -10px, 0);
+        }
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 45px rgba(15, 23, 42, 0.18);
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+        }
+
+        /* Client logo hover motion */
+        .client-logo-item img {
+            transform: translateY(0) scale(1);
+            transition: transform 0.35s ease, filter 0.35s ease, opacity 0.35s ease;
+            opacity: 0.85;
+        }
+        .client-logo-item img:hover {
+            transform: translateY(-6px) scale(1.05);
+            opacity: 1;
+        }
+        
+        /* --- NEW: Full-Screen Menu Styling --- */
+        #full-screen-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none; /* Controlled by JavaScript */
+            overflow-y: auto;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .menu-link {
+            font-weight: 900; /* Black */
+            font-size: 2.25rem; /* text-4xl */
+            line-height: 2.5rem;
+            color: #333;
+            padding: 1rem 0;
+            display: block;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .menu-link:hover {
+            color: #dc2626; /* red-600 */
+            transform: translateX(10px);
+        }
+        
+        /* Smaller font for secondary links */
+        .menu-secondary-link {
+            font-weight: 700; /* Bold */
+            font-size: 1.5rem; /* text-2xl */
+            line-height: 2rem;
+            color: #666;
+            padding: 0.75rem 0;
+            display: block;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .menu-secondary-link:hover {
+            color: #f87171; /* red-400 */
+            transform: translateX(5px);
+        }
+
+        .menu-title {
+            color: #dc2626; /* red-600 */
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid #fecaca; /* red-200 */
+            padding-bottom: 0.25rem;
+        }
+
+    </style>
+</head>
+
+<body>
+    
+    <!-- NEW: Full-Screen Menu Overlay -->
+     
+    <div id="full-screen-menu" style="opacity: 0;">
+        <div class="max-w-7xl mx-auto px-6 py-8 h-full flex flex-col">
+
+            
+            <!-- Close Button -->
+            <div class="flex justify-between items-center mb-8">
+                <a class="text-3xl font-extrabold text-red-600 tracking-tight" href="#">
+                    Shreyas Fire Protection Engineers LLP
+                </a>
+                
+                <button id="menu-close-button" class="p-4 text-gray-700 hover:text-red-600 transition duration-150 rounded-full bg-gray-100 hover:bg-gray-200" aria-label="Close Menu">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            
+            <div class="flex-grow overflow-y-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Primary Links -->
+                    <div>
+                        <a href="#home" class="menu-link" onclick="closeMenu()">Home</a>
+                        <a href="about.html" class="menu-link" onclick="closeMenu()">About Us</a>
+                        <a href="service.html" class="menu-link" onclick="closeMenu()">Services</a>
+                        <a href="system.html" class="menu-link" onclick="closeMenu()">System</a>
+                        <a href="projects.html" class="menu-link" onclick="closeMenu()">Projects</a>
+                        <a href="contact.html" class="menu-link" onclick="closeMenu()">Contact</a>
+                    </div>
+
+                    <!-- Secondary & Utility Links -->
+                    <div>
+                        <h4 class="menu-title">Company Information</h4>
+                        <a href="careers.html" class="menu-secondary-link" onclick="closeMenu()">Careers</a>
+                        <a href="team.html" class="menu-secondary-link" onclick="closeMenu()">Our Team</a>
+                        <a href="trainings.html" class="menu-secondary-link" onclick="closeMenu()">Trainings</a>
+                        
+                       <h4 class="menu-title">Direct Contact</h4>
+                        <p class="mt-4 text-gray-700 font-semibold">
+                            Call us: <span class="text-red-600">022-40121537 / 9987439445</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header (KEPT AS IS) -->
+    <header id="top" class="sticky top-0 z-50 shadow-md bg-white">
+        <nav class="mx-auto max-w-8xl px-5 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a class="text-2xl font-extrabold text-red-600 tracking-tight flex items-center" href="#">
+                 <img src="ShreyasLogoUpd.png" onerror="this.onerror=null; this.src='https: //placehold.co/100x48/f8d7da/d9534f?text=Logo';" alt="Shreyas LLP Company Logo" 
+                class="h-14 w-auto filter drop-shadow-md">
+                  Shreyas Fire Protection Engineers LLP
+                </a>
+                
+                <nav class="space-x-3">
+                <a href="index.html" class="text-red-600 bg-gray-100 p-2 rounded-lg shadow-inner">Home</a>
+                <a href="about.html" class="text-gray-600 hover:text-red-600 p-2">About</a>
+                <a href="service.html" class="text-gray-600 hover:text-red-600 p-2">Services</a>
+                <a href="system.html" class="text-gray-600 hover:text-red-600 p-2">System</a>
+                <a href="projects.html" class="text-gray-600 hover:text-red-600 p-2">Projects</a>
+                <a href="contact.html" class="text-gray-600 hover:text-red-600 p-2">Contact Us</a>
+            </nav>
+
+                <!-- NEW: Hamburger Menu Button (Visible on all screens) -->
+                <button id="menu-open-button" class="p-2 text-gray-700 hover:text-red-600 transition duration-150 rounded-full bg-gray-100 hover:bg-gray-200" aria-label="Open Menu">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                
+            </div>
+        </nav>
+    </header>
+
+   <section id="hero" class="relative overflow-hidden h-[600px] bg-gray-900">
+    <div id="slides-container" class="relative h-full">
+
+        <!-- SLIDE 1 (Image or can be video if you want later) -->
+        <div id="slide-2" class="slide absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-700">
+
+            <!-- Background Video -->
+            <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline>
+                <source src="skyscrapper.mp4" type="video/mp4">
+            </video>
+
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <!-- TEXT -->
+            <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center h-full flex flex-col justify-center">
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-6">
+                    You Build, We Protect
+                </h1>
+                <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-300">
+                    Your reliable partner in comprehensive fire safety engineering, installation, and compliance.
+                </p>
+                <div class="mt-10 flex justify-center space-x-4">
+                    <a href="service.html" class="px-8 py-3 bg-red-600 text-white text-lg font-semibold rounded-xl shadow-xl hover:bg-red-700 transition duration-300 transform hover:scale-105">
+                        Explore Our Services
+                    </a>
+                    <a href="contact.html" class="px-8 py-3 bg-white text-red-600 text-lg font-semibold rounded-xl shadow-xl hover:bg-gray-100 transition duration-300 transform hover:scale-105">
+                        Speak to an Expert
+                    </a>
+                </div>
+            </div>
+        </div>
+
+       <!-- SLIDE 2 (VIDEO WORKING) -->
+        <div id="slide-2" class="slide absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-700">
+
+            <!-- Background Video -->
+            <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline>
+                <source src="safety.mp4" type="video/mp4">
+            </video>
+
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+
+    <!-- TEXT -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center h-full flex flex-col justify-center">
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-6">
+            Achieve 100% Fire Safety Compliance
+        </h1>
+        <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-200">
+            We handle all approvals, inspections, and documentation to keep your property compliant.
+        </p>
+        <div class="mt-10 flex justify-center">
+            <a href="service.html" class="px-8 py-3 bg-white text-red-600 text-lg font-semibold rounded-xl shadow-xl hover:bg-gray-100 transition duration-300 transform hover:scale-105">
+                View Compliance Services
+            </a>
+        </div>
+    </div>
+</div>
+
+
+        <!-- SLIDE 3 (Image or Optional Video) -->
+        <div id="slide-2" class="slide absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-700">
+
+            <!-- Background Video -->
+            <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline>
+                <source src="engineers.mp4" type="video/mp4">
+            </video>
+
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+
+            <!-- TEXT -->
+            <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center h-full flex flex-col justify-center">
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-6">
+                    Cutting-Edge Fire Protection Systems
+                </h1>
+                <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-300">
+                    We engineer, install, and maintain advanced fire protection infrastructure.
+                </p>
+                <div class="mt-10 flex justify-center">
+                    <a href="contact.html" class="px-8 py-3 bg-red-600 text-white text-lg font-semibold rounded-xl shadow-xl hover:bg-red-700 transition duration-300 transform hover:scale-105">
+                        Start Your Project
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+        <button id="prev-slide" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white p-3 rounded-full shadow-lg transition duration-300 z-10 hidden sm:block" aria-label="Previous slide">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <button id="next-slide" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white p-3 rounded-full shadow-lg transition duration-300 z-10 hidden sm:block" aria-label="Next slide">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+
+        <div id="slide-indicators" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+            <button data-slide="1" class="indicator w-3 h-3 bg-white rounded-full transition duration-300"></button>
+            <button data-slide="2" class="indicator w-3 h-3 bg-white/50 rounded-full transition duration-300"></button>
+            <button data-slide="3" class="indicator w-3 h-3 bg-white/50 rounded-full transition duration-300"></button>
+        </div>
+    </section>
+    
+    <section id="company-info" class="py-16 bg-white fade-in-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-6">Our Foundation and Expertise</h2>
+            <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-12">
+                Key statistics and defining qualities that make Shreyas Enterprises LLP a trusted leader in fire safety.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <div class="stat-card bg-red-50 p-6 rounded-xl shadow-lg border-t-4 border-red-600 transition hover:shadow-xl stagger-item">
+                    <div class="text-3xl font-extrabold text-red-600 mb-2">Designing</div>
+                    <p class="text-sm text-gray-600">This foundational phase involves understanding the client's needs, 
+                        defining the project scope, researching the target audience and competition, and establishing the core strategic goals that the final design must achieve.</p>
+                </div>
+
+                <div class="stat-card bg-gray-50 p-6 rounded-xl shadow-lg border-t-4 border-red-600 transition hover:shadow-xl stagger-item">
+                    <div class="text-3xl font-extrabold text-red-600 mb-2">Supply and Installation</div>
+                    <p class="text-sm text-gray-600">This covers the procurement (sourcing and purchasing) of all necessary equipment and components,
+                         followed by the professional physical setup and integration of the system at the client's location, ensuring proper connections and placement according to specifications.</p>
+                </div>
+
+                <div class="stat-card bg-red-50 p-6 rounded-xl shadow-lg border-t-4 border-red-600 transition hover:shadow-xl stagger-item">
+                    <div class="text-3xl font-extrabold text-red-600 mb-2">Maintenance</div>
+                    <p class="text-sm text-gray-600">Routine, scheduled activities designed to keep equipment running efficiently and prevent unexpected failures.
+                         This includes cleaning, lubrication, parts replacement based on wear, and general system tuning to maximize asset life and reliability</p>
+                </div>
+
+                <div class="stat-card bg-gray-50 p-6 rounded-xl shadow-lg border-t-4 border-red-600 transition hover:shadow-xl stagger-item">
+                    <div class="text-3xl font-extrabold text-red-600 mb-2">Testing and Commissioning</div>
+                    <p class="text-sm text-gray-600">A critical phase involving functional checks (Testing) to verify all components work correctly, 
+                        followed by final activation (Commissioning) where the complete, integrated system is proven to meet all contractual performance standards and is officially handed over to the client.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="clients" class="py-16 bg-gray-100 fade-in-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Trusted by Leading Developers & Corporates</h2>
+            
+            <div id="client-carousel" class="relative client-carousel-viewport">
+                <div id="logo-container" class="logo-container">
+                    
+                    <div class="client-logo-item">
+                        <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://www.ssll.in/downloads/96206110Logo-Kalpataru-1-1-1.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+A';" alt="Client Logo Kalpataru">
+                    </div>
+                    <div class="client-logo-item">
+                        <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://www.terraformrealty.com/wp-content/uploads/cropped-TERRAFORM-LOGO.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+B';" alt="Client Logo Rupa">
+                    </div>
+                    <div class="client-logo-item">
+                        <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://www.rustomjee.com/assets/front/img/logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+C';" alt="Client Logo C">
+                    </div>
+                     <div class="client-logo-item">
+                        <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://www.propmart.co/wp-content/uploads/2019/07/runwal-logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+C';" alt="Client Logo C">
+                    </div>
+                    <div class="client-logo-item">
+                        <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://www.ssll.in/downloads/96206110Logo-Kalpataru-1-1-1.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+F';" alt="Client Logo F">
+                    </div>
+                    <div class="client-logo-item">
+                        <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://i0.wp.com/rupagroup.co.in/wp-content/uploads/2023/09/Rupa-Logo.png?fit=5600%2C2800&ssl=1" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+G';" alt="Client Logo G">
+                    </div>
+                    <div class="client-logo-item">
+                        <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://www.rustomjee.com/assets/front/img/logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+H';" alt="Client Logo H">
+                    </div>
+                    <div class="client-logo-item">
+                        <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://shagunrealty.com/wp-content/uploads/2023/03/shagun-logo-02.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+J';" alt="Client Logo J">
+                    </div>
+                    <div class="client-logo-item">
+                        <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://companieslogo.com/img/orig/SUNTECK.NS_BIG-a7676778.png?t=1720244494" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+J';" alt="Client Logo J">
+                    </div>
+                    <div class="client-logo-item">
+                        <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://www.maithiligroup.in/wp-content/themes/maithiligroup/img/logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+J';" alt="Client Logo J">
+                    </div>
+                    <div class="client-logo-item">
+                        <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://startinup.up.gov.in/wp-content/uploads/2022/12/hdfc-logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+J';" alt="Client Logo J">
+                    </div>
+                    <div class="client-logo-item">
+                        <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://runwal-zenith.directbuilder.in/assets/img/logo/logo.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+J';" alt="Client Logo J">
+                    </div>
+                    
+                </div>
+            </div>
+
+            <button id="prev-client-slide" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-300/50 hover:bg-gray-400/70 text-gray-800 p-2 rounded-full shadow-lg transition duration-300 z-10" aria-label="Previous client slide">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <button id="next-client-slide" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-300/50 hover:bg-gray-400/70 text-gray-800 p-2 rounded-full shadow-lg transition duration-300 z-10" aria-label="Next client slide">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+            
+            <p class="text-center text-gray-500 mt-10">
+                In partnership with major developers, we provide reliable and modern fire safety solutions for safer communities.  </p>
+        </div>
+    </section>
+
+    <!-- Footer (KEPT AS IS) -->
+    <footer class="bg-gray-900 text-white pt-10 pb-6">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-6">
+                
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="text-xl font-bold mb-4 text-accent-red">SHREYAS FIRE ENGINEERS</h3>
+                    <p class="text-sm text-gray-400 mb-2">ISO 9001:2015 Certified</p>
+                    <p class="text-sm text-gray-400">35+ Years in Fire Protection & Safety.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-white">Explore</h3>
+                    <ul class="space-y-2 text-sm">
+                       <li><a href="index.html" class="text-gray-400 hover:text-accent-red transition duration-300">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-accent-red transition duration-300">About</a></li>
+                        <li><a href="service.html" class="text-gray-400 hover:text-accent-red transition duration-300">Services</a></li>
+                        <li><a href="system.html" class="text-gray-400 hover:text-accent-red transition duration-300">System</a></li>
+                        <li><a href="projects.html" class="text-gray-400 hover:text-accent-red transition duration-300">Projects</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-accent-red transition duration-300">Contact</a></li>
+                       </ul>
+                </div>
+
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Get in Touch</h3>
+                    <p class="text-sm text-gray-400 mb-2">
+                        <span class="font-bold text-accent-red">Phone:</span> 022-40121537 / 9987439445
+                    </p>
+                    <p class="text-sm text-gray-400 mb-2">
+                        <span class="font-bold text-accent-red">Email:</span> shreyas_enterprises2005@yahoo.com
+                    </p>
+                    <p class="text-sm text-gray-400">
+                        <span class="font-bold text-accent-red">Web:</span> www.shreyasenterprise.in
+                    </p>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Registered Address</h3>
+                    <p class="text-sm text-gray-400">
+                        212, Diamond Industrial Estate No.2, Co-operative premises society Ltd, Ketkipada road, Dahisar (E), Mumbai - 400068
+                    </p>
+                </div>
+
+            </div>
+            
+            <div class="text-center text-sm text-gray-500">
+                &copy; <span id="year"></span> Shreyas Fire Protection Engineers LLP. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <div id="chat-container" class="fixed bottom-6 right-6 z-[100]">
+        
+        <button id="chat-toggle-button" class="bg-red-600 text-white rounded-3xl px-6 py-3 text-lg shadow-xl hover:bg-red-700 transition duration-300 transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-red-300 flex items-center space-x-2">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+            <span>Let's Chat</span>
+        </button>
+
+        <div id="chat-window" class="hidden absolute bottom-0 right-0 mb-20 w-80 h-96 bg-white rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-200">
+            
+            <div class="bg-red-600 text-white p-3 flex justify-between items-center shadow-md">
+                <h5 class="font-semibold text-lg">Let's Chat 💬</h5>
+                <button id="chat-close-button" class="text-white hover:text-red-100 transition duration-150 p-1 rounded-full hover:bg-red-700">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <div id="chat-messages" class="flex-grow p-4 space-y-4 overflow-y-auto custom-scrollbar">
+                <div class="flex justify-start">
+                    <div class="received-message shadow-sm">
+                        Welcome! How can we assist you with your fire safety needs today?
+                    </div>
+                </div>
+                </div>
+
+            <div class="border-t border-gray-200 p-3 bg-gray-50">
+                <form id="chat-form" class="flex">
+                    <input type="text" id="chat-input" placeholder="Type a message..." class="w-full p-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-red-600 transition duration-150">
+                    <button type="submit" class="bg-red-600 text-white px-4 rounded-r-lg hover:bg-red-700 transition duration-150">
+                        Send
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Get the current year for the copyright
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- NEW: Full-Screen Menu Toggle Logic ---
+        const menuOpenButton = document.getElementById('menu-open-button');
+        const menuCloseButton = document.getElementById('menu-close-button');
+        const fullScreenMenu = document.getElementById('full-screen-menu');
+        const body = document.body;
+
+        const openMenu = () => {
+            fullScreenMenu.style.display = 'flex';
+            // Use setTimeout to allow the display:flex change to register before starting the opacity transition
+            setTimeout(() => {
+                fullScreenMenu.style.opacity = '1';
+                // Prevent scrolling the background content
+                body.style.overflow = 'hidden'; 
+            }, 10); 
+        };
+
+        const closeMenu = () => {
+            fullScreenMenu.style.opacity = '0';
+            body.style.overflow = 'auto'; // Restore scrolling
+            // Wait for the opacity transition to finish before hiding
+            setTimeout(() => {
+                fullScreenMenu.style.display = 'none';
+            }, 300); // Match CSS transition duration (0.3s)
+        };
+
+        menuOpenButton.addEventListener('click', openMenu);
+        menuCloseButton.addEventListener('click', closeMenu);
+        
+        // --- Hero Carousel Logic (Modified for Staggered Animation) ---
+        const slides = document.querySelectorAll('.slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const prevButton = document.getElementById('prev-slide');
+        const nextButton = document.getElementById('next-slide');
+        let currentSlide = 0;
+        let slideInterval;
+        const intervalTime = 5000; // 5 seconds
+
+        const updateSlide = () => {
+            slides.forEach((slide, index) => {
+                // 1. Reset/Remove animation on all slides
+                slide.querySelectorAll('.stagger-item').forEach(item => {
+                    item.style.animation = ''; // Reset animation
+                });
+
+                // Remove visibility classes and reset pointer events
+                slide.classList.remove('opacity-100', 'pointer-events-auto');
+                slide.classList.add('opacity-0', 'pointer-events-none');
+                
+                // Update indicator class
+                indicators[index].classList.remove('bg-white');
+                indicators[index].classList.add('bg-white/50');
+
+                if (index === currentSlide) {
+                    // Set current slide to visible and interactive
+                    slide.classList.add('opacity-100', 'pointer-events-auto');
+                    slide.classList.remove('opacity-0', 'pointer-events-none');
+                    // Set current indicator to solid white
+                    indicators[index].classList.add('bg-white');
+                    indicators[index].classList.remove('bg-white/50');
+                    
+                    // 2. Animate content on the current slide with a stagger effect
+                    const staggerItems = slide.querySelectorAll('.stagger-item');
+                    staggerItems.forEach((item, idx) => {
+                        // Start animation after the slide transition (0.7s) is mostly complete.
+                        // Base delay of 300ms + 150ms stagger per item.
+                        const delay = 300 + (idx * 150); 
+                        item.style.animation = `popInFromBottom 0.6s ease-out ${delay}ms forwards`;
+                    });
+                }
+            });
+        };
+
+        const nextSlide = () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlide();
+            resetInterval();
+        };
+
+        const prevSlide = () => {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateSlide();
+            resetInterval();
+        };
+
+        const resetInterval = () => {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, intervalTime);
+        };
+
+        // Event listeners for controls
+        nextButton.addEventListener('click', nextSlide);
+        prevButton.addEventListener('click', prevSlide);
+
+        // Event listeners for indicators
+        indicators.forEach(indicator => {
+            indicator.addEventListener('click', (e) => {
+                const slideIndex = parseInt(e.target.dataset.slide) - 1;
+                currentSlide = slideIndex;
+                updateSlide();
+                resetInterval();
+            });
+        });
+
+        // --- Client Logo Carousel Logic ---
+        const logoContainer = document.getElementById('logo-container');
+        const logoItems = document.querySelectorAll('.client-logo-item');
+        const prevClientButton = document.getElementById('prev-client-slide');
+        const nextClientButton = document.getElementById('next-client-slide');
+        
+        const totalLogos = logoItems.length; // Total number of logos in the HTML (14)
+        let currentLogoSlide = 0;
+        let logoSlideInterval;
+        const logoIntervalTime = 3000; // 3 seconds for faster logo slide
+
+        const getLogosPerView = () => {
+            // Determine how many logos are visible based on screen width
+            if (window.innerWidth >= 1024) return 5;
+            if (window.innerWidth >= 768) return 3;
+            return 2;
+        };
+
+        // FIX: Corrected the logic for continuous scrolling carousel
+        const updateLogoCarousel = () => {
+            const lpv = getLogosPerView();
+            // maxSlides is the number of individual logo steps we can take before reaching the last visible element
+            const maxSlides = totalLogos - lpv; 
+
+            // Handle looping logic
+            if (currentLogoSlide > maxSlides) {
+                currentLogoSlide = 0; // Loop back to the start
+            } else if (currentLogoSlide < 0) {
+                 currentLogoSlide = maxSlides; // Loop to the end
+            }
+            
+            // Calculate the width of one logo item as a percentage of the viewport width (100%)
+            const itemWidthPercentage = 100 / lpv; 
+            
+            // Calculate the total translation needed. (e.g., if lpv=5, itemWidthPercentage=20%. 
+            // If currentLogoSlide=1, translate by -20%)
+            const translatePercentage = -(currentLogoSlide * itemWidthPercentage); 
+
+            // Apply the transform
+            logoContainer.style.transform = `translateX(${translatePercentage}%)`;
+        };
+
+        const nextLogoSlide = () => {
+            currentLogoSlide++;
+            updateLogoCarousel();
+            resetLogoInterval();
+        };
+
+        const prevLogoSlide = () => {
+            currentLogoSlide--;
+            updateLogoCarousel();
+            resetLogoInterval();
+        };
+
+        const resetLogoInterval = () => {
+            clearInterval(logoSlideInterval);
+            logoSlideInterval = setInterval(nextLogoSlide, logoIntervalTime);
+        };
+
+        // Event listeners for client controls
+        nextClientButton.addEventListener('click', nextLogoSlide);
+        prevClientButton.addEventListener('click', prevLogoSlide);
+        
+        // Recalculate and update carousel on resize (for responsiveness)
+        window.addEventListener('resize', () => {
+            // Reset slide to 0 and re-calculate on resize
+            currentLogoSlide = 0; 
+            updateLogoCarousel();
+        });
+
+        // --- Scroll-Based Staggered Animation Logic ---
+        const observerOptions = {
+            root: null, // relative to the viewport
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% of the item is visible
+        };
+
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    
+                    // --- STAGGERED ANIMATION LOGIC ---
+                    const staggerItems = entry.target.querySelectorAll('.stagger-item');
+                    staggerItems.forEach((item, index) => {
+                        const delay = index * 100; // 100ms stagger
+                        
+                        // Apply the animation style directly to trigger the popInFromBottom effect
+                        item.style.animation = `popInFromBottom 0.6s ease-out ${delay}ms forwards`;
+                    });
+                    // --- END STAGGERED LOGIC ---
+
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        // Target all sections that should fade in
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            scrollObserver.observe(section);
+        });
+        
+        // --- New Chat Widget Logic ---
+        const chatToggleButton = document.getElementById('chat-toggle-button');
+        const chatCloseButton = document.getElementById('chat-close-button');
+        const chatWindow = document.getElementById('chat-window');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+
+        // Toggle chat window visibility
+        const toggleChat = () => {
+            chatWindow.classList.toggle('hidden');
+            // Toggle visibility of the button itself as well
+            chatToggleButton.classList.toggle('hidden'); 
+            if (!chatWindow.classList.contains('hidden')) {
+                chatInput.focus();
+                // Scroll to bottom on open
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        };
+
+        chatToggleButton.addEventListener('click', toggleChat);
+        chatCloseButton.addEventListener('click', toggleChat);
+
+        // Function to create a message bubble element
+        const createMessageElement = (message, type) => {
+            const messageWrapper = document.createElement('div');
+            // 'sent' type is right-aligned, 'received' is left-aligned
+            messageWrapper.className = type === 'sent' ? 'flex justify-end' : 'flex justify-start';
+
+            const messageBubble = document.createElement('div');
+            messageBubble.className = type === 'sent' ? 'sent-message shadow-md' : 'received-message shadow-sm';
+            messageBubble.textContent = message;
+
+            messageWrapper.appendChild(messageBubble);
+            return messageWrapper;
+        };
+
+        // Function to simulate a received response
+        const sendAutoResponse = () => {
+            setTimeout(() => {
+                const response = "Thank you for reaching out! A specialist will connect with you shortly. For immediate assistance, please call us at 022-28978809.";
+                const responseElement = createMessageElement(response, 'received');
+                chatMessages.appendChild(responseElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000); // 1 second delay for simulation
+        };
+
+        // Handle form submission (sending a message)
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const messageText = chatInput.value.trim();
+
+            if (messageText !== "") {
+                // 1. Save user response & display (Frontend Simulation)
+                const messageElement = createMessageElement(messageText, 'sent');
+                chatMessages.appendChild(messageElement);
+                
+                // 2. Clear input
+                chatInput.value = '';
+                chatInput.focus();
+
+                // 3. Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // 4. Provide a response from our side (Frontend Simulation)
+                sendAutoResponse();
+            }
+        });
+
+
+        // Initialize both carousels and start auto-advance
+        window.onload = () => {
+            updateSlide();
+            slideInterval = setInterval(nextSlide, intervalTime);
+            
+            // Initialize Client Carousel
+            updateLogoCarousel();
+            logoSlideInterval = setInterval(nextLogoSlide, logoIntervalTime);
+        };
+        
+    </script>
+</body>
+</html>
