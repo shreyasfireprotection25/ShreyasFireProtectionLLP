@@ -29,23 +29,22 @@
         }
 
         /* Ensure the logos container handles the overflow and positioning */
-       .client-carousel-viewport {
-        overflow: hidden;
-        width: 100%;
+       .logo-container {
+            display: flex;
+            gap: 40px;
+            width: max-content;
+            transition: transform 0.6s ease-in-out;
         }
 
-        .logo-container {
-        display: flex;
-        width: max-content;
-        gap: 40px;
-        transition: transform 0.6s ease-in-out;
+        .client-logo-item {
+            flex: 0 0 auto;  /* very important */
         }
 
-        /* Styling for the client logo item */
         .client-logo-item img {
-        max-height: 6rem;
-        width: auto;
+            max-height: 6rem;
+            width: auto;
         }
+
         /* Adjust for smaller screens */
         @media (max-width: 1024px) {
             .client-logo-item {
@@ -887,6 +886,7 @@
     </script>
 </body>
 </html>
+
 
 
 
