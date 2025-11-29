@@ -29,28 +29,23 @@
         }
 
         /* Ensure the logos container handles the overflow and positioning */
-        .logo-container {
-            display: flex;
-            transition: transform 0.7s ease-in-out;
-            /* FIX: Set container width to accommodate all 14 logos for smooth sliding calculation */
-            width: 280%; 
+       .client-carousel-viewport {
+        overflow: hidden;
+        width: 100%;
         }
 
-        /* Hide overflow for the carousel effect */
-        .client-carousel-viewport {
-            overflow: hidden;
+        .logo-container {
+        display: flex;
+        width: max-content;
+        gap: 40px;
+        transition: transform 0.6s ease-in-out;
         }
 
         /* Styling for the client logo item */
-        .client-logo-item {
-            /* FIX: Calculate width based on 5 logos per view */
-            min-width: calc(100% / 5); 
-            width: calc(100% / 5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .client-logo-item img {
+        max-height: 6rem;
+        width: auto;
         }
-
         /* Adjust for smaller screens */
         @media (max-width: 1024px) {
             .client-logo-item {
@@ -892,6 +887,7 @@
     </script>
 </body>
 </html>
+
 
 
 
