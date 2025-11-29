@@ -30,20 +30,30 @@
 
         /* Ensure the logos container handles the overflow and positioning */
        .logo-container {
-            display: flex;
-            gap: 20px;
-            width: max-content;
-            transition: transform 0.6s ease-in-out;
+        display: flex;
+        align-items: center;       /* keeps all logos aligned perfectly */
+        gap: 50px;                 /* increased spacing for clarity */
+        padding: 10px 20px;        /* extra breathing room */
+        width: max-content;
+        transition: transform 0.6s ease-in-out;
         }
 
-        .client-logo-item {
-            flex: 0 0 auto;  /* very important */
-        }
+    .client-logo-item {
+        flex: 0 0 auto;
+        padding: 10px;             /* adds internal spacing around each logo */
+    }
 
-        .client-logo-item img {
-            max-height: 4rem;
-            width: auto;
-        }
+    .client-logo-item img {
+    max-height: 5rem;          /* slightly bigger & clearer */
+    width: auto;
+    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+    }
+
+    .client-logo-item img:hover {
+    transform: scale(1.12);
+    opacity: 1;
+    filter: brightness(1.25) grayscale(0);
+    }
 
         /* Adjust for smaller screens */
         @media (max-width: 1024px) {
@@ -886,6 +896,7 @@
     </script>
 </body>
 </html>
+
 
 
 
