@@ -122,6 +122,136 @@
             max-height: 22rem;
             object-fit: contain;
         }
+        /* ==========================================================
+   MOBILE RESPONSIVE FIX — NO UI CHANGE
+   ========================================================== */
+
+/* Prevent horizontal scrolling on small screens */
+@media (max-width: 640px) {
+    html, body {
+        overflow-x: hidden !important;
+    }
+}
+
+/* ---------------- HEADER ---------------- */
+@media (max-width: 640px) {
+    header .container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    header img {
+        height: 42px !important;
+    }
+
+    header span {
+        font-size: 1rem !important;
+        line-height: 1.1rem !important;
+        max-width: 200px;
+        display: block;
+    }
+
+    header nav {
+        display: none !important;  /* hide desktop navbar */
+    }
+}
+
+/* ---------------- HERO ---------------- */
+@media (max-width: 640px) {
+    section.bg-black h1 {
+        font-size: 2.2rem !important;
+        line-height: 2.6rem !important;
+    }
+
+    section.bg-black p {
+        font-size: 1rem !important;
+        padding: 0 1rem;
+    }
+}
+
+/* ---------------- TWO-COLUMN SYSTEM ROWS ---------------- */
+@media (max-width: 640px) {
+    .grid.lg\:grid-cols-2 {
+        grid-template-columns: 1fr !important;
+        gap: 1.8rem !important;
+    }
+
+    .system-image-wrapper {
+        max-height: 15rem !important;
+    }
+
+    .system-image,
+    .system-image-contain {
+        max-height: 15rem !important;
+    }
+
+    h3.text-3xl {
+        font-size: 1.5rem !important;
+        line-height: 1.9rem !important;
+    }
+
+    p.text-lg {
+        font-size: 1rem !important;
+    }
+}
+
+/* ---------------- TEXT SECTIONS ---------------- */
+@media (max-width: 640px) {
+    h2.text-4xl {
+        font-size: 2rem !important;
+    }
+
+    p.text-gray-600 {
+        font-size: 0.95rem !important;
+    }
+
+    ul li {
+        font-size: 0.9rem !important;
+    }
+}
+
+/* ---------------- FOOTER ---------------- */
+@media (max-width: 640px) {
+    footer .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        text-align: left !important;
+    }
+
+    footer h3 {
+        font-size: 1.2rem !important;
+    }
+
+    footer p,
+    footer li {
+        font-size: 0.95rem !important;
+    }
+}
+
+/* ---------------- CHAT BUTTON ---------------- */
+@media (max-width: 640px) {
+    #chat-float-button {
+        bottom: 1.4rem !important;
+        right: 1.2rem !important;
+        padding: 0.9rem !important;
+    }
+
+    #chat-window {
+        width: 92% !important;
+        right: 4% !important;
+        bottom: 5.5rem !important;
+        height: 65% !important;
+    }
+}
+
+/* Extra spacing for long pages */
+@media (max-width: 640px) {
+    section {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
+
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col">
@@ -326,7 +456,7 @@
         </div>
     </footer>
     
-    <!-- CHAT WIDGET (unchanged) -->
+    <!-- CHAT WIDGET -->
     <button id="chat-float-button" class="fixed bottom-8 right-8 bg-red-600 p-4 rounded-full shadow-2xl hover:bg-red-700 transition duration-300 transform hover:scale-110" aria-label="Open chat assistant">
         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 4v-4z"></path></svg>
     </button>
@@ -491,7 +621,6 @@
     </script>
 </body>
 </html>
-
 
 
 
