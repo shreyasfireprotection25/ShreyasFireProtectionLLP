@@ -17,6 +17,76 @@
             background-color: #f7f7f7;
             color: #46576e;
         }
+        html, body {
+        overflow-x: hidden;
+        }
+
+/* Make navigation wrap instead of overflowing */
+    @media (max-width: 768px) {
+    nav.space-x-3 {
+        display: none !important; /* hide desktop menu on mobile */
+    }
+
+    #menu-open-button {
+        display: block !important;
+    }
+    }
+
+    /* Hero text responsive */
+    @media (max-width: 640px) {
+    #hero h1 {
+        font-size: 1.9rem !important;
+        line-height: 2.2rem !important;
+    }
+
+    #hero p {
+        font-size: 1rem !important;
+    }
+
+    #hero a {
+        padding: 10px 18px !important;
+        font-size: 0.95rem !important;
+    }
+}
+
+/* Fix client logo carousel on mobile — 1.5 logos visible */
+@media (max-width: 640px) {
+    .client-logo-item {
+        flex: 0 0 50% !important;
+        padding: 15px 10px !important;
+    }
+
+    .client-logo-item img {
+        max-height: 45px !important;
+    }
+}
+
+/* Fix grid sections */
+@media (max-width: 768px) {
+    .stat-card {
+        margin-bottom: 12px;
+    }
+}
+
+/* Footer responsive */
+@media (max-width: 640px) {
+    footer .grid {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+    }
+
+    footer p, footer li {
+        font-size: 0.9rem !important;
+    }
+}
+
+/* Chat button responsive */
+@media (max-width: 640px) {
+    #chat-toggle-button {
+        padding: 10px 16px !important;
+        font-size: 0.9rem;
+    }
+}
 
         /* Custom CSS for Carousel Slide Transition */
         .slide {
@@ -865,6 +935,7 @@ window.onload = () => {
     </script>
 </body>
 </html>
+
 
 
 
