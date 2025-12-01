@@ -359,6 +359,99 @@
         .footer-top-glow {
             box-shadow: 0 -12px 30px rgba(15, 23, 42, 0.8);
         }
+        /* ===============================
+   GLOBAL MOBILE RESPONSIVE FIXES
+   (Keeps Desktop UI 100% same)
+   =============================== */
+
+/* Remove horizontal scroll on phones */
+@media (max-width: 640px) {
+    html, body {
+        overflow-x: hidden !important;
+    }
+}
+
+/* HERO SECTION RESPONSIVE FIX */
+@media (max-width: 640px) {
+    .hero-inner-card {
+        padding: 20px 16px !important;
+    }
+    .hero-inner-card h1 {
+        font-size: 1.9rem !important;
+        line-height: 2.2rem !important;
+    }
+    .hero-inner-card p {
+        font-size: 0.95rem !important;
+    }
+}
+
+/* JOB LISTINGS RESPONSIVE FIX */
+@media (max-width: 640px) {
+    .job-card {
+        padding: 16px !important;
+    }
+    .job-card h4 {
+        font-size: 1.15rem !important;
+    }
+    .job-card p {
+        font-size: 0.85rem !important;
+    }
+    .job-card span {
+        font-size: 0.75rem !important;
+    }
+}
+
+/* FORM RESPONSIVE FIX */
+@media (max-width: 640px) {
+    .application-card {
+        padding: 18px !important;
+        border-radius: 1.25rem !important;
+    }
+
+    .application-card input,
+    .application-card select,
+    .application-card textarea {
+        padding: 10px 14px !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* FOOTER RESPONSIVE FIX */
+@media (max-width: 640px) {
+    footer .grid {
+        grid-template-columns: 1fr !important; /* stack vertically */
+        text-align: left !important;
+        gap: 20px !important;
+    }
+    footer h3 {
+        font-size: 1.1rem !important;
+    }
+    footer p, footer li, footer a {
+        font-size: 0.9rem !important;
+    }
+}
+
+/* SPACING FIXES FOR ALL SECTIONS */
+@media (max-width: 640px) {
+    section {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
+
+/* PREVENT BUTTON TEXT WRAP & ALIGN PROPERLY */
+@media (max-width: 640px) {
+    button, .btn-submit {
+        white-space: nowrap !important;
+        font-size: 0.95rem !important;
+        padding: 10px 14px !important;
+    }
+}
+
+/* MENU OVERLAY FIX ON SMALL DEVICES */
+
+
+
     </style>
 </head>
 
@@ -417,7 +510,10 @@
                 <a class="text-2xl font-extrabold text-red-600 tracking-tight flex items-center gap-3" href="index.html">
                     <img src="ShreyasLogoUpd.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/f8d7da/d9534f?text=Logo';" alt="Shreyas LLP Company Logo" 
                     class="h-14 w-auto filter drop-shadow-md">
-                    <span class="hidden sm:inline">Shreyas Fire Protection Engineers </span>
+                    <span class="text-base sm:text-lg font-semibold tracking-tight">
+                   Shreyas Fire Protection Engineers
+                    </span>
+
                 </a>
                 
                 <button id="menu-open-button" class="p-2 text-gray-700 hover:text-red-600 transition duration-150 rounded-full bg-gray-100 hover:bg-gray-200" aria-label="Open Menu">
@@ -773,7 +869,6 @@
     </script>
 </body>
 </html>
-
 
 
 
