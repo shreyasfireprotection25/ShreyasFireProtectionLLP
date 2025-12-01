@@ -1,793 +1,375 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Careers | Shreyas Fire Protection Engineers LLP</title>
+    <title>Contact Us | Shreyas Fire Protection Engineers LLP</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        
-        // Enable logging for debugging
-        setLogLevel('debug'); 
-
-        // --- GLOBAL FIREBASE VARIABLES ---
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-        
-        // --- FIREBASE INITIALIZATION ---
-        let db;
-        let auth;
-        let userId = null;
-        
-        const initFirebase = async () => {
-            try {
-                const app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-                
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
-                
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        userId = user.uid;
-                        console.log("Firebase Auth Ready. User ID:", userId);
-                    } else {
-                        userId = crypto.randomUUID(); // Fallback to a temporary ID
-                        console.log("Signed in anonymously or using fallback ID:", userId);
+    <script>
+        // Tailwind configuration for theme consistency
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#1f2937', // Dark corporate color
+                        'accent-red': '#cc3333',   // Fire safety accent color
+                        'light-bg': '#f7f7f7',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
                     }
-                });
-
-            } catch (error) {
-                console.error("Error initializing Firebase:", error);
-                // Removed showModal for initialization error
+                }
             }
-        };
-
-        // Function to save job application data
-        window.saveApplication = async (event) => {
-            event.preventDefault();
-            
-            const form = event.target;
-            const submitButton = form.querySelector('button[type="submit"]');
-
-            // Simple validation
-            if (!userId) {
-                console.error('Application service not ready. Please wait a moment and try again.');
-                return;
-            }
-            if (form.job_title.value.trim() === "") {
-                 console.error('Please select a job title.');
-                 return;
-            }
-            if (form.full_name.value.trim() === "" || form.email.value.trim() === "") {
-                 console.error('Please fill in your name and email.');
-                 return;
-            }
-
-            // Disable button and show loading state
-            submitButton.disabled = true;
-            submitButton.innerHTML = `
-                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Submitting...
-            `;
-            
-            try {
-                // Public collection for applications
-                const applicationsCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'job_applications');
-
-                const applicationData = {
-                    applicant_id: userId,
-                    job_title: form.job_title.value,
-                    full_name: form.full_name.value,
-                    email: form.email.value,
-                    phone: form.phone.value,
-                    experience_years: parseInt(form.experience.value) || 0,
-                    cover_letter: form.cover_letter.value,
-                    submitted_at: new Date().toISOString()
-                };
-
-                await addDoc(applicationsCollectionRef, applicationData);
-                
-                showModal('Thank you! Your application has been successfully submitted. We will be in touch soon.');
-                form.reset();
-
-            } catch (error) {
-                console.error("Error saving job application:", error);
-                showModal('An error occurred during submission. Please check the console for details and try again.');
-            } finally {
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Submit Application';
-            }
-        };
-
-        // --- MODAL (ALERT REPLACEMENT) LOGIC ---
-        window.showModal = (message) => {
-            const modal = document.getElementById('custom-modal');
-            const modalMessage = document.getElementById('modal-message');
-            modalMessage.textContent = message;
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.classList.add('opacity-100');
-        };
-
-        window.closeModal = () => {
-            const modal = document.getElementById('custom-modal');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            modal.classList.remove('opacity-100');
-        };
-
-        // --- INITIALIZATION CALL ---
-        document.addEventListener('DOMContentLoaded', initFirebase);
+        }
     </script>
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f7f7f7;
             color: #46576e;
         }
 
-        :root {
-            --accent-red: #dc2626; /* red-600 */
+        /* --- Global Title Animation (Existing) --- */
+        @keyframes slideInFromTop {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .animated-title {
+            animation: slideInFromTop 1s ease-out forwards;
         }
 
-        .text-accent-red {
-            color: var(--accent-red);
-        }
-
-        /* Fade-in / reveal for smooth scrolling UX */
-        .fade-in-section,
-        .reveal-on-scroll {
+        /* --- Scroll Fade-In/Slide-Up Animation (Enhanced) --- */
+        .animate-item {
             opacity: 0;
-            transform: translateY(30px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(30px); /* Default slide up */
         }
-
         .is-visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Full-screen menu overlay */
-        #full-screen-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            z-index: 1000;
-            display: none;
-            overflow-y: auto;
-            transition: opacity 0.3s ease-in-out;
+        /* --- New: Slide-In from Right Animation for Form --- */
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
-
-        .menu-link {
-            font-weight: 900;
-            font-size: 2.25rem;
-            line-height: 2.5rem;
-            color: #333;
-            padding: 1rem 0;
-            display: block;
-            transition: color 0.2s, transform 0.2s;
+        .fade-in-right {
+             opacity: 0;
+             transition: opacity 1s ease-out, transform 1s ease-out;
+             transform: translateX(50px);
         }
-
-        .menu-link:hover {
-            color: var(--accent-red);
-            transform: translateX(10px);
-        }
-        
-        .menu-secondary-link {
-            font-weight: 700;
-            font-size: 1.5rem;
-            line-height: 2rem;
-            color: #666;
-            padding: 0.75rem 0;
-            display: block;
-            transition: color 0.2s, transform 0.2s;
-        }
-
-        .menu-secondary-link:hover {
-            color: #f87171;
-            transform: translateX(5px);
-        }
-
-        .menu-title {
-            color: var(--accent-red);
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-top: 2rem;
-            margin-bottom: 0.5rem;
-            border-bottom: 2px solid #fecaca;
-            padding-bottom: 0.25rem;
-        }
-
-        /* Animated hero background */
-        .hero-gradient {
-            background: radial-gradient(circle at top left, rgba(248, 113, 113, 0.25), transparent 55%),
-                        radial-gradient(circle at bottom right, rgba(248, 250, 252, 0.12), transparent 55%),
-                        linear-gradient(to bottom right, #020617, #111827);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-blob {
-            position: absolute;
-            border-radius: 9999px;
-            filter: blur(70px);
-            opacity: 0.55;
-            pointer-events: none;
-        }
-
-        .hero-blob-1 {
-            width: 260px;
-            height: 260px;
-            background: rgba(248, 113, 113, 0.9);
-            top: -60px;
-            left: -40px;
-            animation: float-blob-1 18s ease-in-out infinite alternate;
-        }
-
-        .hero-blob-2 {
-            width: 280px;
-            height: 280px;
-            background: rgba(239, 68, 68, 0.7);
-            bottom: -80px;
-            right: -40px;
-            animation: float-blob-2 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes float-blob-1 {
-            0% { transform: translate3d(0, 0, 0); }
-            50% { transform: translate3d(40px, 30px, 0); }
-            100% { transform: translate3d(10px, -20px, 0); }
-        }
-
-        @keyframes float-blob-2 {
-            0% { transform: translate3d(0, 0, 0); }
-            50% { transform: translate3d(-30px, -20px, 0); }
-            100% { transform: translate3d(-10px, 25px, 0); }
-        }
-
-        .hero-inner-card {
-            background: linear-gradient(to bottom right, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.6));
-            border-radius: 1.75rem;
-            border: 1px solid rgba(248, 250, 252, 0.12);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
-        }
-
-        .hero-subtitle-pill {
-            letter-spacing: .35em;
-        }
-
-        /* Job Card Hover + Active Effect */
-        .job-card {
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(4px);
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
-        }
-
-        .job-card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            background: radial-gradient(circle at top left, rgba(248, 113, 113, 0.1), transparent 55%);
-            transition: opacity 0.3s ease-in-out;
-            pointer-events: none;
-        }
-
-        .job-card:hover::before {
+        .fade-in-right.is-visible {
             opacity: 1;
+            transform: translateX(0);
         }
 
-        .job-card:hover {
-            box-shadow: 0 18px 30px rgba(220, 38, 38, 0.15), 0 4px 6px rgba(15, 23, 42, 0.25);
-            transform: translateY(-6px);
-            border-color: var(--accent-red);
+        /* --- New: Button Pulse Animation --- */
+        @keyframes pulse-shadow {
+            0% { box-shadow: 0 0 0 0 rgba(204, 51, 51, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(204, 51, 51, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(204, 51, 51, 0); }
+        }
+        .btn-pulse {
+            animation: pulse-shadow 2s infinite cubic-bezier(0.66, 0, 0, 1);
         }
 
-        .job-card-active {
-            border-color: var(--accent-red) !important;
-            background: linear-gradient(to bottom right, #fef2f2, #ffffff);
+        /* --- Card Hover Effect (Existing) --- */
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        /* Form container styling */
-        .application-card {
-            background: radial-gradient(circle at top left, rgba(248, 113, 113, 0.09), transparent 60%),
-                        radial-gradient(circle at bottom right, rgba(148, 163, 184, 0.12), transparent 65%),
-                        #ffffff;
-            border-radius: 1.75rem;
-            box-shadow:
-                0 20px 45px rgba(15, 23, 42, 0.22),
-                0 0 0 1px rgba(148, 163, 184, 0.18);
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
         }
+        /* ================================
+   MOBILE RESPONSIVE FIXES (100% UI SAME)
+   ================================ */
 
-        .input-field,
-        .select-field,
-        .textarea-field {
-            transition: box-shadow 0.2s ease, transform 0.15s ease, border-color 0.2s ease, background 0.2s ease;
-        }
-
-        .input-field:focus,
-        .select-field:focus,
-        .textarea-field:focus {
-            box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.35), 0 12px 25px rgba(15, 23, 42, 0.18);
-            transform: translateY(-1px);
-            background: #fef2f2;
-        }
-
-        /* Submit button microinteraction */
-        .btn-submit {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-submit::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(120deg, transparent, rgba(248, 250, 252, 0.8), transparent);
-            transform: translateX(-120%);
-            transition: transform 0.5s ease;
-            pointer-events: none;
-        }
-
-        .btn-submit:hover::after {
-            transform: translateX(120%);
-        }
-
-        /* Footer subtle top border glow */
-        .footer-top-glow {
-            box-shadow: 0 -12px 30px rgba(15, 23, 42, 0.8);
-        }
-        /* ===============================
-   GLOBAL MOBILE RESPONSIVE FIXES
-   (Keeps Desktop UI 100% same)
-   =============================== */
-
-/* Remove horizontal scroll on phones */
+/* Stop unwanted horizontal scroll */
 @media (max-width: 640px) {
     html, body {
         overflow-x: hidden !important;
     }
 }
 
-/* HERO SECTION RESPONSIVE FIX */
+/* HEADER FIXES */
 @media (max-width: 640px) {
-    .hero-inner-card {
-        padding: 20px 16px !important;
-    }
-    .hero-inner-card h1 {
-        font-size: 1.9rem !important;
-        line-height: 2.2rem !important;
-    }
-    .hero-inner-card p {
-        font-size: 0.95rem !important;
-    }
-}
-
-/* JOB LISTINGS RESPONSIVE FIX */
-@media (max-width: 640px) {
-    .job-card {
-        padding: 16px !important;
-    }
-    .job-card h4 {
-        font-size: 1.15rem !important;
-    }
-    .job-card p {
-        font-size: 0.85rem !important;
-    }
-    .job-card span {
-        font-size: 0.75rem !important;
-    }
-}
-
-/* FORM RESPONSIVE FIX */
-@media (max-width: 640px) {
-    .application-card {
-        padding: 18px !important;
-        border-radius: 1.25rem !important;
-    }
-
-    .application-card input,
-    .application-card select,
-    .application-card textarea {
-        padding: 10px 14px !important;
-        font-size: 0.9rem !important;
-    }
-}
-
-/* FOOTER RESPONSIVE FIX */
-@media (max-width: 640px) {
-    footer .grid {
-        grid-template-columns: 1fr !important; /* stack vertically */
-        text-align: left !important;
-        gap: 20px !important;
-    }
-    footer h3 {
-        font-size: 1.1rem !important;
-    }
-    footer p, footer li, footer a {
-        font-size: 0.9rem !important;
-    }
-}
-
-/* SPACING FIXES FOR ALL SECTIONS */
-@media (max-width: 640px) {
-    section {
+    header .container {
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }
+    header img {
+        height: 38px !important;
+    }
+    header span {
+        font-size: 0.9rem !important;
+        max-width: 160px;
+        line-height: 1.15rem !important;
+        display: block;
+    }
+    header nav {
+        display: none !important; /* mobile menu hidden */
+    }
 }
 
-/* PREVENT BUTTON TEXT WRAP & ALIGN PROPERLY */
+/* HERO SECTION */
 @media (max-width: 640px) {
-    button, .btn-submit {
-        white-space: nowrap !important;
+    section.bg-black h1 {
+        font-size: 2rem !important;
+        line-height: 2.3rem !important;
+        padding: 0 0.5rem;
+    }
+    section.bg-black p {
+        font-size: 1rem !important;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* CONTACT GRID FIX */
+@media (max-width: 640px) {
+    .container .grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+}
+
+/* LEFT SIDE CONTACT ICONS */
+@media (max-width: 640px) {
+    .flex.items-start svg {
+        width: 22px !important;
+        height: 22px !important;
+    }
+    .flex.items-start h4 {
+        font-size: 1rem !important;
+    }
+    .flex.items-start p {
+        font-size: 0.95rem !important;
+    }
+}
+
+/* FORM SECTION */
+@media (max-width: 640px) {
+    .bg-light-bg {
+        padding: 1.25rem !important;
+        border-radius: 1rem !important;
+    }
+    .bg-light-bg h2 {
+        font-size: 1.6rem !important;
+    }
+    input, textarea {
         font-size: 0.95rem !important;
         padding: 10px 14px !important;
     }
 }
 
-/* MENU OVERLAY FIX ON SMALL DEVICES */
+/* BUTTON FIX */
+@media (max-width: 640px) {
+    button[type="submit"] {
+        font-size: 1rem !important;
+        padding: 0.9rem !important;
+    }
+}
 
+/* FOOTER FIX */
+@media (max-width: 640px) {
+    footer .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        text-align: left !important;
+    }
+    footer h3 {
+        font-size: 1.2rem !important;
+    }
+}
 
+/* CHAT BOT FIX */
+@media (max-width: 640px) {
+    #chat-float-button {
+        bottom: 1.5rem !important;
+        right: 1.2rem !important;
+        padding: 0.9rem !important;
+    }
+    #chat-window {
+        width: 92% !important;
+        right: 4% !important;
+        bottom: 6rem !important;
+        height: 70% !important;
+    }
+}
 
     </style>
 </head>
+<body class="antialiased min-h-screen flex flex-col">
 
-<body>
-    
-    <div id="custom-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-[2000] opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white rounded-xl shadow-2xl max-w-sm w-full p-6 mx-4 transform transition-all duration-300 scale-100">
-            <h3 class="text-xl font-bold text-red-600 mb-4">Application Status</h3>
-            <p id="modal-message" class="text-gray-700 mb-6"></p>
-            <button onclick="closeModal()" class="w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition duration-150">
-                Close
-            </button>
-        </div>
-    </div>
-
-    <div id="full-screen-menu" style="opacity: 0;">
-        <div class="max-w-7xl mx-auto px-6 py-8 h-full flex flex-col">
-            <div class="flex justify-between items-center mb-8">
-                <a class="text-3xl font-extrabold text-red-600 tracking-tight" href="index.html">
-                    Shreyas Fire Protection Engineers
-                </a>
-                <button id="menu-close-button" class="p-4 text-gray-700 hover:text-red-600 transition duration-150 rounded-full bg-gray-100 hover:bg-gray-200" aria-label="Close Menu">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
+    <header class="bg-white shadow-lg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             
-            <div class="flex-grow overflow-y-auto">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <div>
-                        <a href="index.html" class="menu-link" onclick="closeMenu()">Home</a>
-                        <a href="about.html" class="menu-link" onclick="closeMenu()">About Us</a>
-                        <a href="service.html" class="menu-link" onclick="closeMenu()">Services</a>
-                        <a href="system.html" class="menu-link" onclick="closeMenu()">System</a>
-                        <a href="projects.html" class="menu-link" onclick="closeMenu()">Projects</a>
-                        <a href="contact.html" class="menu-link" onclick="closeMenu()">Contact</a>
-                    </div>
+            <a href="index.html" class="flex items-center space-x-2 group transform transition duration-300 hover:scale-[1.02]">
+                <img src="ShreyasLogoUpd.png" 
+                alt="Shreyas Fire Protection Engineers LLP Logo" 
+                class="h-10 w-auto"> 
+                <span class="text-xl font-bold text-gray-900 group-hover:text-accent-red transition duration-300">Shreyas Fire Protection Engineers</span>
+            </a>
 
-                    <div>
-                        <h4 class="menu-title">Company Information</h4>
-                        <a href="careers.html" class="menu-secondary-link !text-red-600 hover:!text-red-800" onclick="closeMenu()">Careers</a>
-                        <a href="trainings.html" class="menu-secondary-link" onclick="closeMenu()">Trainings</a>
-                        
-                        <h4 class="menu-title">Direct Contact</h4>
-                        <p class="mt-4 text-gray-700 font-semibold">
-                            Call us: <span class="text-red-600">022-40121534 / 9987439445</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <nav class="space-x-4">
+                <a href="index.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Home</a>
+                <a href="about.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">About</a>
+                <a href="service.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Services</a>
+                <a href="system.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">System</a>
+                 <a href="projects.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Projects</a>
+                <a href="contact.html" class="text-accent-red bg-gray-100 font-medium transition duration-300 rounded-lg p-2 shadow-inner">Contact Us</a>
+            </nav>
         </div>
-    </div>
-
-    <header id="top" class="sticky top-0 z-50 shadow-md bg-white/90 backdrop-blur-lg">
-        <nav class="mx-auto max-w-8xl px-5 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <a class="text-2xl font-extrabold text-red-600 tracking-tight flex items-center gap-3" href="index.html">
-                    <img src="ShreyasLogoUpd.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/f8d7da/d9534f?text=Logo';" alt="Shreyas LLP Company Logo" 
-                    class="h-14 w-auto filter drop-shadow-md">
-                    <span class="text-base sm:text-lg font-semibold tracking-tight">
-                   Shreyas Fire Protection Engineers
-                    </span>
-
-                </a>
-                
-                <button id="menu-open-button" class="p-2 text-gray-700 hover:text-red-600 transition duration-150 rounded-full bg-gray-100 hover:bg-gray-200" aria-label="Open Menu">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </button>
-                
-            </div>
-        </nav>
     </header>
 
-    <!-- HERO -->
-    <section class="hero-gradient py-20 fade-in-section">
-        <div class="hero-blob hero-blob-1"></div>
-        <div class="hero-blob hero-blob-2"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div class="hero-inner-card px-6 sm:px-10 py-12 sm:py-14 text-center shadow-2xl">
-                <p class="hero-subtitle-pill inline-flex items-center text-[0.7rem] sm:text-xs font-semibold text-red-300 bg-red-900/40 rounded-full px-4 py-1 mb-6 tracking-[0.35em]">
-                    CURRENT OPENINGS
-                </p>
-                <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-4">
-                    FIND JOBS &amp; OPPORTUNITIES
+    <main class="flex-grow">
+        <section class="bg-black py-16 sm:py-24 border-b-4 border-accent-red">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-5xl sm:text-6xl font-extrabold text-white mb-4 animated-title">
+                    We Are Here for <span class="text-accent-red">You</span>
                 </h1>
-                <p class="mt-4 text-lg sm:text-xl text-gray-200 max-w-3xl mx-auto">
-                    Join our mission to build safer communities. We are looking for passionate individuals to advance in the fire protection industry.
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    For more information on how Shreyas Fire Protection Engineers LLP can enhance the quality, safety, and efficiency of your residential or commercial development,
+                    please contact us for a consultation.
                 </p>
-
-                <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-300">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30">
-                        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                        <span>Actively hiring across multiple roles</span>
-                    </div>
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100/5 border border-slate-500/40">
-                        <svg class="w-4 h-4 text-red-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                        </svg>
-                        <span>Technical, field &amp; sales opportunities</span>
-                    </div>
-                </div>
-
-                <div class="mt-10 flex justify-center">
-                    <button onclick="document.getElementById('job-listings').scrollIntoView({ behavior: 'smooth' });"
-                            class="inline-flex items-center gap-2 text-sm text-gray-200 hover:text-white transition group">
-                        <span class="uppercase tracking-[0.25em] text-xs">View open positions</span>
-                        <svg class="w-5 h-5 transform translate-y-[1px] group-hover:translate-y-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m0 0l-4-4m4 4l4-4"></path>
-                        </svg>
-                    </button>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- JOB LISTINGS -->
-    <section id="job-listings" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <h3 class="text-3xl font-extrabold text-gray-900 mb-4 text-center reveal-on-scroll">Open Positions</h3>
-            <p class="text-center text-gray-500 mb-10 text-sm sm:text-base reveal-on-scroll">
-                Explore roles that match your skills and interests. Click a card to auto-fill the application form.
-            </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12">
                 
-                <div id="job-1" class="job-card bg-white/90 p-6 rounded-xl shadow-lg border-l-4 border-red-600 transition duration-300 cursor-pointer reveal-on-scroll"
-                    onclick="document.getElementById('job_title').value='Fire System Design Engineer'; document.getElementById('application-form-section').scrollIntoView({ behavior: 'smooth' });">
-                    <div class="flex items-start justify-between gap-3">
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-red-50 text-red-600">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 21h8M12 17V3m0 0L7 8m5-5l5 5"></path>
-                                    </svg>
-                                </span>
-                                <h4 class="text-xl font-bold text-gray-800">Design Engineer</h4>
+                <div class="lg:sticky lg:top-8 self-start">
+                    <h2 class="text-3xl font-bold text-primary-blue mb-8 border-b pb-2 border-gray-200 animate-item" data-delay="0">
+                        Headquarters & Quick Contacts
+                    </h2>
+
+                    <div class="space-y-8">
+                        <div class="flex items-start space-x-4 animate-item" data-delay="100">
+                            <svg class="w-6 h-6 text-accent-red flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Headquarters Address</h4>
+                                <p class="text-gray-600">212, Diamond Industrial Estate No.2, Co-operative premises society Ltd, Ketkipada road, Dahisar (E), Mumbai - 400068</p>
                             </div>
-                            <p class="text-gray-500 mt-2">Location: Mumbai, India</p>
                         </div>
-                        <span class="text-xs sm:text-sm font-semibold text-red-600 bg-red-100 px-3 py-1 rounded-full whitespace-nowrap">Full-Time</span>
-                    </div>
-                    <p class="text-gray-700 mt-4 text-sm">
-                        Design and engineer complex fire suppression systems (Sprinkler, Hydrant, Gas) for commercial projects, ensuring compliance with NFPA and local standards.
-                    </p>
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        <span class="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-md">5+ Years Exp</span>
-                        <span class="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-md">B.E. Mechanical/Fire</span>
+
+                        <div class="flex items-start space-x-4 animate-item" data-delay="200">
+                            <svg class="w-6 h-6 text-accent-red flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Contact Numbers</h4>
+                                <p class="text-gray-600">022-40121534 / 9987439445 </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4 animate-item" data-delay="300">
+                            <svg class="w-6 h-6 text-accent-red flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2 10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h10a2 2 0 012 2v11z"></path></svg>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Email Address</h4>
+                                <p class="text-gray-600">shreyasfirellp@gmail.com</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div id="job-2" class="job-card bg-white/90 p-6 rounded-xl shadow-lg border-l-4 border-red-600 transition duration-300 cursor-pointer reveal-on-scroll"
-                    onclick="document.getElementById('job_title').value='Site Installation Supervisor'; document.getElementById('application-form-section').scrollIntoView({ behavior: 'smooth' });">
-                    <div class="flex items-start justify-between gap-3">
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-red-50 text-red-600">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M5 11h14M7 15h10M9 19h6"></path>
-                                    </svg>
-                                </span>
-                                <h4 class="text-xl font-bold text-gray-800">Site Supervisor</h4>
+                <div class="bg-light-bg p-8 rounded-xl shadow-xl fade-in-right">
+                    <h2 class="text-3xl font-bold text-primary-blue mb-6">
+                        Send Us A Message
+                    </h2>
+                    <form id="contact-form" action="#" method="POST" class="space-y-6">
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="first-name" class="block text-sm font-medium text-gray-700">First Name</label>
+                                <input type="text" name="first-name" id="first-name" autocomplete="given-name" required
+                                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-accent-red focus:border-accent-red transition duration-300">
                             </div>
-                            <p class="text-gray-500 mt-2">Location: Multiple Project Sites</p>
+                            
+                            <div>
+                                <label for="surname" class="block text-sm font-medium text-gray-700">Surname</label>
+                                <input type="text" name="surname" id="surname" autocomplete="family-name" required
+                                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-accent-red focus:border-accent-red transition duration-300">
+                            </div>
                         </div>
-                        <span class="text-xs sm:text-sm font-semibold text-red-600 bg-red-100 px-3 py-1 rounded-full whitespace-nowrap">On-Site</span>
-                    </div>
-                    <p class="text-gray-700 mt-4 text-sm">
-                        Manage on-site installation, labor, and commissioning activities for fire alarm and protection systems. Ensure quality and timeline adherence.
-                    </p>
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        <span class="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-md">8+ Years Exp</span>
-                        <span class="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-md">Diploma/ITI</span>
-                    </div>
-                </div>
 
-                <div id="job-3" class="job-card bg-white/90 p-6 rounded-xl shadow-lg border-l-4 border-red-600 transition duration-300 cursor-pointer reveal-on-scroll"
-                    onclick="document.getElementById('job_title').value='AMC Sales Executive'; document.getElementById('application-form-section').scrollIntoView({ behavior: 'smooth' });">
-                    <div class="flex items-start justify-between gap-3">
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-red-50 text-red-600">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.5-1.5-4-1.5-5.5 0S5 12 6.5 13.5L12 19l5.5-5.5C19 12 19 9.5 17.5 8S13.5 6.5 12 8z"></path>
-                                    </svg>
-                                </span>
-                                <h4 class="text-xl font-bold text-gray-800">Maintenance Manager</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="phone-no" class="block text-sm font-medium text-gray-700">Phone No</label>
+                                <input type="tel" name="phone-no" id="phone-no" autocomplete="tel" required
+                                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-accent-red focus:border-accent-red transition duration-300">
                             </div>
-                            <p class="text-gray-500 mt-2">Location: Mumbai, Work-from-Site</p>
-                        </div>
-                        <span class="text-xs sm:text-sm font-semibold text-red-600 bg-red-100 px-3 py-1 rounded-full whitespace-nowrap">Full-Time</span>
-                    </div>
-                    <p class="text-gray-700 mt-4 text-sm">
-                        Maintenance Manager for Annual Maintenance Contracts (AMC). Maintain client relationships and ensure recurring business for maintenance services.
-                    </p>
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        <span class="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-md">3+ Years Exp</span>
-                        <span class="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-md">Any Degree</span>
-                    </div>
-                </div>
 
-                <div id="job-4" class="job-card bg-white/90 p-6 rounded-xl shadow-lg border-l-4 border-red-600 transition duration-300 cursor-pointer reveal-on-scroll"
-                    onclick="document.getElementById('job_title').value='Fire Safety Technician'; document.getElementById('application-form-section').scrollIntoView({ behavior: 'smooth' });">
-                    <div class="flex items-start justify-between gap-3">
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-red-50 text-red-600">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 11h16M4 15h10M4 19h6"></path>
-                                    </svg>
-                                </span>
-                                <h4 class="text-xl font-bold text-gray-800">Fire Safety Technician</h4>
+                            <div>
+                                <label for="company-name" class="block text-sm font-medium text-gray-700">Company Name</label>
+                                <input type="text" name="company-name" id="company-name" autocomplete="organization"
+                                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-accent-red focus:border-accent-red transition duration-300">
                             </div>
-                            <p class="text-gray-500 mt-2">Location: Local Service Areas</p>
                         </div>
-                        <span class="text-xs sm:text-sm font-semibold text-red-600 bg-red-100 px-3 py-1 rounded-full whitespace-nowrap">Field Service</span>
-                    </div>
-                    <p class="text-gray-700 mt-4 text-sm">
-                        Perform inspection, maintenance, and repair of various fire fighting equipment and systems on client sites.
-                    </p>
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        <span class="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-md">2+ Years Exp</span>
-                        <span class="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-md">Technical Certification</span>
-                    </div>
+
+                        <div>
+                            <label for="inquiry" class="block text-sm font-medium text-gray-700">Inquiry (if any)</label>
+                            <input type="text" name="inquiry" id="inquiry" required
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-accent-red focus:border-accent-red transition duration-300">
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700">Your Message</label>
+                            <textarea id="message" name="message" rows="4" required
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-accent-red focus:border-accent-red transition duration-300"></textarea>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-accent-red hover:bg-red-700 transition duration-300 transform hover:scale-[1.01] btn-pulse">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            
-            <p class="text-center text-gray-500 mt-12 reveal-on-scroll">
-                Click on any job title above to automatically select it in the application form below.
-            </p>
-        </div>
-    </section>
-    
-    <!-- APPLICATION FORM -->
-    <section id="application-form-section" class="py-16 bg-gray-100 fade-in-section">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="application-card p-8 md:p-10 border-t-8 border-red-600">
-                <h3 class="text-3xl font-extrabold text-gray-900 text-center mb-2">Submit Your Application</h3>
-                <p class="text-center text-gray-600 mb-8 text-sm sm:text-base">
-                    Fill out the form below to apply for your desired role. All fields marked with * are required.
-                </p>
+        </section>
 
-                <div class="flex items-center justify-center gap-2 mb-6 text-xs text-gray-500">
-                    <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-red-500"></span>
-                        <span>Secure &amp; confidential submission</span>
-                    </div>
-                </div>
-                
-                <form id="job-application-form" onsubmit="saveApplication(event)" class="space-y-6">
-                    
-                    <div>
-                        <label for="job_title" class="block text-sm font-medium text-gray-700">Applying For *</label>
-                        <select id="job_title" name="job_title" required
-                                class="select-field mt-1 block w-full px-4 py-3 border border-gray-300 bg-white rounded-lg shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 transition duration-150">
-                            <option value="">-- Select a Job from the list above --</option>
-                            <option value="Fire System Design Engineer">Fire System Design Engineer</option>
-                            <option value="Site Installation Supervisor">Site Installation Supervisor</option>
-                            <option value="AMC Sales Executive">AMC Sales Executive</option>
-                            <option value="Fire Safety Technician">Fire Safety Technician</option>
-                            <option value="Other / General Application">Other / General Application</option>
-                        </select>
-                    </div>
+    </main>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="full_name" class="block text-sm font-medium text-gray-700">Full Name *</label>
-                            <input type="text" id="full_name" name="full_name" required
-                                   class="input-field mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500 transition duration-150">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700">Email Address *</label>
-                            <input type="email" id="email" name="email" required
-                                   class="input-field mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500 transition duration-150">
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number *</label>
-                            <input type="tel" id="phone" name="phone"
-                                   class="input-field mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500 transition duration-150">
-                        </div>
-                        <div>
-                            <label for="experience" class="block text-sm font-medium text-gray-700">Years of Experience</label>
-                            <input type="number" id="experience" name="experience" min="0" max="50" value="0"
-                                   class="input-field mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500 transition duration-150">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="cover_letter" class="block text-sm font-medium text-gray-700"> Message to the Hiring Manager</label>
-                        <textarea id="cover_letter" name="cover_letter" rows="5"
-                                  class="textarea-field mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500 transition duration-150"></textarea>
-                        <p class="mt-2 text-xs text-gray-500">Note: Please do not attach CVs here. Our team will contact you for documentation.</p>
-                    </div>
-                    
-                    <div>
-                        <button type="submit"
-                                class="btn-submit w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-lg text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-300 transform hover:scale-[1.01]">
-                            Submit Application
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-gray-900 text-white pt-10 pb-6 footer-top-glow">
+    <footer class="bg-gray-900 text-white pt-10 pb-6">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-6">
                 
                 <div class="col-span-2 md:col-span-1">
                     <h3 class="text-xl font-bold mb-4 text-accent-red">SHREYAS FIRE PROTECTION ENGINEERS</h3>
                     <p class="text-sm text-gray-400 mb-2">ISO 9001:2015 Certified</p>
-                    <p class="text-sm text-gray-400">20+ Years in Fire Protection &amp; Safety.</p>
+                    <p class="text-sm text-gray-400">35+ Years in Fire Protection & Safety.</p>
                 </div>
 
                 <div>
                     <h3 class="text-lg font-semibold mb-4 text-white">Explore</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="index.html" class="text-gray-400 hover:text-accent-red transition duration-300">Home</a></li>
-                        <li><a href="about.html" class="text-gray-400 hover:text-accent-red transition duration-300">About Us</a></li>
-                        <li><a href="service.html" class="text-gray-400 hover:text-accent-red transition duration-300">Our Services</a></li>
+                       <li><a href="index.html" class="text-gray-400 hover:text-accent-red transition duration-300">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-accent-red transition duration-300">About</a></li>
+                        <li><a href="service.html" class="text-gray-400 hover:text-accent-red transition duration-300">Services</a></li>
                         <li><a href="system.html" class="text-gray-400 hover:text-accent-red transition duration-300">System</a></li>
                         <li><a href="projects.html" class="text-gray-400 hover:text-accent-red transition duration-300">Projects</a></li>
                         <li><a href="contact.html" class="text-gray-400 hover:text-accent-red transition duration-300">Contact</a></li>
-                       </ul>
+                        </ul>
                 </div>
 
                 <div class="col-span-2 md:col-span-1">
                     <h3 class="text-lg font-semibold mb-4 text-white">Get in Touch</h3>
                     <p class="text-sm text-gray-400 mb-2">
                         <span class="font-bold text-accent-red">Phone:</span> 022-40121534 / 9987439445
-                    </p>
                     <p class="text-sm text-gray-400 mb-2">
                         <span class="font-bold text-accent-red">Email:</span> shreyasfirellp@gmail.com
                     </p>
@@ -807,69 +389,238 @@
             </div>
         </div>
     </footer>
+    
+    <button id="chat-float-button" class="fixed bottom-8 right-8 bg-red-600 p-4 rounded-full shadow-2xl hover:bg-red-700 transition duration-300 transform hover:scale-110" aria-label="Open chat assistant">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 4v-4z"></path></svg>
+    </button>
 
-
+    <div id="chat-window" class="fixed bottom-24 right-8 bg-white flex flex-col rounded-xl overflow-hidden shadow-2xl w-80 h-96" style="display: none;">
+        <div class="bg-red-600 text-white p-4 font-bold flex justify-between items-center flex-shrink-0">
+            <span>Shreyas Fire Assistant</span>
+            <button id="close-chat-button" class="text-white hover:text-red-200 transition duration-300" aria-label="Close chat window">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div id="chat-messages" class="flex-grow overflow-y-auto p-4 space-y-4 flex flex-col">
+            <div class="max-w-[80%] p-3 text-sm rounded-xl bg-gray-200 text-gray-800 self-start">
+                Welcome! I'm your Fire Safety Assistant. How can I help you with your fire protection needs today?
+            </div>
+        </div>
+        <form id="chat-form" class="p-4 border-t border-gray-200 flex-shrink-0">
+            <div class="flex space-x-2">
+                <input type="text" id="chat-input" placeholder="Type your message..." class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-300" required>
+                <button type="submit" class="bg-red-600 text-white p-3 rounded-lg hover:bg-red-700 transition duration-300" aria-label="Send message">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                </button>
+            </div>
+        </form>
+    </div>
+    
     <script>
-        // Get the current year for the copyright
+        // Update the current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // --- Full-Screen Menu Toggle Logic ---
-        const menuOpenButton = document.getElementById('menu-open-button');
-        const menuCloseButton = document.getElementById('menu-close-button');
-        const fullScreenMenu = document.getElementById('full-screen-menu');
-        const body = document.body;
+        // Custom alert function (Copied from source)
+        function alert(message) {
+            const modalId = 'customAlertModal';
+            let modal = document.getElementById(modalId);
 
-        const openMenu = () => {
-            fullScreenMenu.style.display = 'flex';
+            if (!modal) {
+                // Create modal structure if it doesn't exist
+                modal = document.createElement('div');
+                modal.id = modalId;
+                modal.className = 'fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-300 opacity-0 pointer-events-none';
+                modal.innerHTML = `
+                    <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full transform scale-90 transition-transform duration-300">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">Information</h3>
+                        <p class="text-gray-700 mb-4">${message}</p>
+                        <button id="closeAlert" class="w-full bg-accent-red text-white py-2 rounded-lg hover:bg-red-700 transition duration-300">
+                            Close
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+
+                document.getElementById('closeAlert').addEventListener('click', () => {
+                    modal.classList.add('opacity-0', 'pointer-events-none');
+                    modal.classList.remove('opacity-100');
+                });
+            } else {
+                // Update message if modal already exists
+                modal.querySelector('p').textContent = message;
+            }
+
+            // Show the modal
             setTimeout(() => {
-                fullScreenMenu.style.opacity = '1';
-                body.style.overflow = 'hidden'; 
-            }, 10); 
-        };
-
-        const closeMenu = () => {
-            fullScreenMenu.style.opacity = '0';
-            body.style.overflow = 'auto';
-            setTimeout(() => {
-                fullScreenMenu.style.display = 'none';
-            }, 300);
-        };
-
-        menuOpenButton.addEventListener('click', openMenu);
-        menuCloseButton.addEventListener('click', closeMenu);
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modal.classList.add('opacity-100');
+                modal.querySelector('div').classList.remove('scale-90');
+                modal.querySelector('div').classList.add('scale-100');
+            }, 50);
+        }
         
-        // --- Scroll-Based Fade-In Animation Logic ---
+        // --- Enhanced Scroll-Based Fade-In Animation Logic ---
+        
         const observerOptions = {
-            root: null,
+            root: null, // relative to the viewport
             rootMargin: '0px',
-            threshold: 0.1
+            threshold: 0.1 // Trigger when 10% of the item is visible
         };
 
-        const scrollObserver = new IntersectionObserver((entries, observer) => {
+        const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
+                    const target = entry.target;
+                    const delay = parseInt(target.getAttribute('data-delay') || '0');
+                    
+                    // Apply delay for staggered effect
+                    setTimeout(() => {
+                        target.classList.add('is-visible');
+                    }, delay);
+                    
+                    // Stop observing once visible
+                    observer.unobserve(target); 
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in-section, .reveal-on-scroll').forEach(section => {
-            scrollObserver.observe(section);
+        // Target all elements for animation
+        document.querySelectorAll('.animate-item, .fade-in-right').forEach(element => {
+            observer.observe(element);
         });
 
-        // Highlight selected job card on click
-        const jobCards = document.querySelectorAll('.job-card');
-        jobCards.forEach(card => {
-            card.addEventListener('click', () => {
-                jobCards.forEach(c => c.classList.remove('job-card-active'));
-                card.classList.add('job-card-active');
+
+        // --- Floating Chat Window Logic (Existing) ---
+        const chatFloatButton = document.getElementById('chat-float-button');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChatButton = document.getElementById('close-chat-button');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+
+        // Toggle chat window visibility
+        if (chatFloatButton) {
+            chatFloatButton.addEventListener('click', () => {
+                chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+                // Scroll to bottom when opening
+                if (chatWindow.style.display === 'flex') {
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
             });
-        });
+        }
+
+        if (closeChatButton) {
+            closeChatButton.addEventListener('click', () => {
+                chatWindow.style.display = 'none';
+            });
+        }
+
+        // Helper function to create a message element
+        const createMessageElement = (text, type) => {
+            const div = document.createElement('div');
+            let classes = "max-w-[80%] p-3 text-sm rounded-xl shadow-sm";
+            if (type === 'sent') {
+                classes += " ml-auto bg-accent-red text-white";
+            } else {
+                classes += " mr-auto bg-gray-200 text-gray-800";
+            }
+            
+            div.className = classes;
+            div.textContent = text;
+            return div;
+        };
+
+        // Simulate a response from the "AI"
+        const sendAutoResponse = () => {
+            const responses = [
+                "Thank you for your inquiry! Can you tell me more about your location and the type of building?",
+                "We specialize in that. Would you like to schedule a free site assessment?",
+                "I've noted your question. A human expert will follow up with you shortly!"
+            ];
+            const response = responses[Math.floor(Math.random() * responses.length)];
+
+            setTimeout(() => {
+                const responseElement = createMessageElement(response, 'received');
+                chatMessages.appendChild(responseElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000); // 1 second delay for simulation
+        };
+
+        // Handle form submission (sending a message)
+        if (chatForm) {
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const messageText = chatInput.value.trim();
+
+                if (messageText !== "") {
+                    // 1. Save user response & display (Frontend Simulation)
+                    const messageElement = createMessageElement(messageText, 'sent');
+                    chatMessages.appendChild(messageElement);
+
+                    // 2. Clear input
+                    chatInput.value = '';
+                    chatInput.focus();
+
+                    // 3. Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                    // 4. Provide a response from our side (Frontend Simulation)
+                    sendAutoResponse();
+                }
+            });
+        }
+
+        // Handle the contact form submission (Existing)
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // In a real application, you would collect the form data here and send it to a backend service.
+                alert('Thank you for contacting Shreyas Fire Protection Engineers LLP! Your message has been sent, and we will get back to you shortly.');
+                contactForm.reset();
+            });
+        }
+
     </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
 </body>
+
 </html>
-
-
-
 
