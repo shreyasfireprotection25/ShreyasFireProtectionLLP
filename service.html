@@ -470,21 +470,14 @@
 
     <!-- CHAT BUTTON + WINDOW -->
     <button id="chat-float-button" class="fixed bottom-8 right-8 bg-red-600 p-4 rounded-full shadow-2xl hover:bg-red-700 transition duration-300 transform hover:scale-110" aria-label="Open chat assistant">
-        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 4v-4z">
-            </path>
-        </svg>
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 4v-4z"></path></svg>
     </button>
 
     <div id="chat-window" class="fixed bottom-24 right-8 bg-white flex flex-col rounded-xl overflow-hidden shadow-2xl w-80 h-96" style="display: none;">
-        <div class="bg-red-600 text-white p-4 font-bold flex justify_between items-center flex-shrink-0">
+        <div class="bg-red-600 text-white p-4 font-bold flex justify-between items-center flex-shrink-0">
             <span>Shreyas Fire Assistant</span>
             <button id="close-chat-button" class="text-white hover:text-red-200 transition duration-300" aria-label="Close chat window">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
         <div id="chat-messages" class="flex-grow overflow-y-auto p-4 space-y-4 flex flex-col">
@@ -496,10 +489,7 @@
             <div class="flex space-x-2">
                 <input type="text" id="chat-input" placeholder="Type your message..." class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 transition duration-300" required>
                 <button type="submit" class="bg-red-600 text-white p-3 rounded-lg hover:bg-red-700 transition duration-300" aria-label="Send message">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-                    </svg>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
                 </button>
             </div>
         </form>
@@ -637,7 +627,7 @@
                 const responseElement = createMessageElement(response, 'received');
                 chatMessages.appendChild(responseElement);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 1000);
+            }, 1000); 
         };
 
         if (chatForm) {
@@ -658,7 +648,3 @@
     </script>
 </body>
 </html>
-
-
-
-
