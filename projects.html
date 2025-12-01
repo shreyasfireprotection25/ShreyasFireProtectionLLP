@@ -57,6 +57,117 @@
             text-align: center;
             padding: 12px;
         }
+        /* ==========================================================
+   MOBILE RESPONSIVE FIX — NO UI CHANGE
+   ========================================================== */
+
+/* Prevent horizontal scroll */
+@media (max-width: 640px) {
+    html, body {
+        overflow-x: hidden !important;
+    }
+}
+
+/* HEADER */
+@media (max-width: 640px) {
+    header .container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    
+    header img {
+        height: 42px !important;
+    }
+
+    header span {
+        font-size: 1rem !important;
+        display: block !important;
+        max-width: 180px;
+        line-height: 1.1rem !important;
+    }
+
+    header nav {
+        display: none !important;   /* hide desktop nav on mobile */
+    }
+}
+
+/* HERO SECTION */
+@media (max-width: 640px) {
+    section.bg-black h1 {
+        font-size: 2.2rem !important;
+        line-height: 2.6rem !important;
+    }
+
+    section.bg-black p {
+        font-size: 1rem !important;
+        padding: 0 1rem;
+    }
+}
+
+/* PROJECT GRID */
+@media (max-width: 640px) {
+    .grid.md\:grid-cols-3 {
+        grid-template-columns: 1fr !important;
+        gap: 1.8rem !important;
+    }
+
+    .project-image {
+        height: 180px !important;
+    }
+
+    .project-title {
+        font-size: 1rem !important;
+    }
+}
+
+/* FOOTER */
+@media (max-width: 640px) {
+    footer .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    footer h3 {
+        font-size: 1.2rem !important;
+    }
+
+    footer p,
+    footer li {
+        font-size: 0.95rem !important;
+    }
+
+    footer {
+        text-align: left !important;
+    }
+}
+
+/* CHAT BUTTON */
+@media (max-width: 640px) {
+    #chat-float-button {
+        bottom: 1.4rem !important;
+        right: 1.2rem !important;
+        padding: 0.9rem !important;
+    }
+}
+
+/* CHAT WINDOW */
+@media (max-width: 640px) {
+    #chat-window {
+        width: 92% !important;
+        right: 4% !important;
+        bottom: 5.5rem !important;
+        height: 65% !important;
+    }
+    
+    #chat-window .p-4 {
+        padding: 0.8rem !important;
+    }
+
+    #chat-input {
+        font-size: 0.9rem !important;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -374,7 +485,6 @@
 
 </body>
 </html>
-
 
 
 
