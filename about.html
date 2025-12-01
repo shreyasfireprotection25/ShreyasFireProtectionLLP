@@ -29,6 +29,27 @@
             background-color: #f7f7f7;
             color: #46576e;
         }
+        
+        #projects .grid > div {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 350px;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+#mobile-menu {
+    transition: all 0.3s ease-in-out;
+}
+
+#mobile-menu a {
+    display: block;
+}
 
         /* --- Animation for Scroll-Based Fade-In --- */
         .fade-in-section {
@@ -105,14 +126,43 @@
         }
 
         .client-logo-item {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            /* Ensure each logo takes up the correct space */
-            width: 200px; 
-            padding: 0 1.5rem;
-            flex-shrink: 0;
-        }
+    width: 120px;
+    padding: 0 1rem;
+}
+
+.client-logo-item {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Bigger logos on desktop */
+    width: 260px;
+
+    /* More space so they don't look tiny */
+    padding: 0 2rem;
+
+    flex-shrink: 0;
+}
+
+/* Mobile: prevent logos from becoming tiny */
+@media (max-width: 768px) {
+    .client-logo-item {
+        width: 180px;   /* Larger than before */
+        padding: 0 1.5rem;
+    }
+
+    .client-logo-item img {
+        height: 70px;   /* Increase size on mobile */
+        width: auto;
+    }
+}
+
+/* Desktop: restore the normal height */
+.client-logo-item img {
+    height: 80px;     /* Restore bigger size */
+    width: auto;
+}
+
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col">
@@ -153,7 +203,8 @@
     </header>
 
     <!-- Hero Section (Carousel) -->
-    <section id="hero" class="relative h-[60vh] md:h-[70vh] overflow-hidden">
+    <section id="hero" class="relative h-[50vh] sm:h-[55vh] md:h-[70vh] overflow-hidden">
+
         <div id="carousel-container" class="absolute inset-0">
             <!-- Slide 1 -->
             <div id="slide-1" class="slide absolute inset-0 bg-cover bg-center" style="background-image: url('images.jpg'); opacity: 1;"></div>
@@ -215,19 +266,16 @@
             </div>
 
             <!-- RIGHT SECTION — IMAGE + NAME -->
-            <div class="flex flex-col items-center">
+            
+<div class="flex flex-col items-center">
     <img src="WhatsApp Image 2025-11-29 at 2.24.36 PM.jpeg"
-         alt="Mr. Shashidhara Bangera"
-         class="rounded-xl shadow-lg w-48 h-auto object-cover transform hover:scale-[1.02] transition duration-500">
+        alt="Mr. Shashidhara Bangera"
+        class="rounded-xl shadow-lg w-40 sm:w-48 h-auto object-cover transform hover:scale-[1.02] transition duration-500">
 
     <p class="mt-4 text-xl font-semibold text-gray-800">
         Mr. Shashidhara Bangera
     </p>
 </div>
-
-
-        </div>
-    </div>
 </section>
 
      <!-- Projects Section -->
@@ -605,7 +653,6 @@
 </body>
 
 </html>
-
 
 
 
