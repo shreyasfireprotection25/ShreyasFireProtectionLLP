@@ -124,6 +124,155 @@
             transform: scale(1.03);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
+        /* =======================================================
+   FULL MOBILE RESPONSIVE FIX — UI UNCHANGED
+   ======================================================= */
+
+/* Prevent overflow on mobile */
+@media (max-width: 640px) {
+    html, body {
+        overflow-x: hidden !important;
+    }
+}
+
+/* HEADER FIX */
+@media (max-width: 640px) {
+    header .container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    header img {
+        height: 42px !important;
+    }
+
+    header span {
+        font-size: 1rem !important;
+        line-height: 1.2rem !important;
+        max-width: 180px;
+        display: block;
+    }
+
+    header nav {
+        display: none !important; /* hide desktop navbar */
+    }
+}
+
+/* HERO HEADING + SUBTEXT */
+@media (max-width: 640px) {
+    section.bg-black h1 {
+        font-size: 2.2rem !important;
+        line-height: 2.5rem !important;
+    }
+    section.bg-black p {
+        font-size: 1rem !important;
+        padding: 0 1rem;
+    }
+    .inline-flex {
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+}
+
+/* TURNKEY SERVICES GRID */
+@media (max-width: 640px) {
+    #turnkey-services .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+}
+
+/* SPECIALIZED SYSTEMS GRID */
+@media (max-width: 640px) {
+    .grid.lg\:grid-cols-3 {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+}
+
+/* PRODUCT CARDS GRID */
+@media (max-width: 640px) {
+    .grid.lg\:grid-cols-4 {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    .h-40 {
+        height: 160px !important;
+    }
+
+    .product-card img {
+        object-fit: contain !important;
+    }
+}
+
+/* AUXILIARY & EVACUATION SECTION */
+@media (max-width: 640px) {
+    #auxiliary-systems .grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+
+    #auxiliary-systems .h-72 {
+        height: 200px !important;
+    }
+}
+
+/* SIGNBOARD SECTION */
+@media (max-width: 640px) {
+    #signboards .grid.md\:grid-cols-3 {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    #signboards img {
+        object-fit: contain !important;
+    }
+}
+
+/* FOOTER */
+@media (max-width: 640px) {
+    footer .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    footer h3 {
+        font-size: 1.2rem !important;
+    }
+
+    footer p, footer li {
+        font-size: 0.95rem !important;
+    }
+}
+
+/* CHAT BUTTON */
+@media (max-width: 640px) {
+    #chat-float-button {
+        bottom: 1.4rem !important;
+        right: 1.2rem !important;
+        padding: 0.9rem !important;
+    }
+}
+
+/* CHAT WINDOW */
+@media (max-width: 640px) {
+    #chat-window {
+        width: 92% !important;
+        right: 4% !important;
+        bottom: 5.5rem !important;
+        height: 65% !important;
+    }
+
+    #chat-window .p-4 {
+        padding: 0.8rem !important;
+    }
+
+    #chat-input {
+        font-size: 0.9rem !important;
+    }
+}
+
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col">
