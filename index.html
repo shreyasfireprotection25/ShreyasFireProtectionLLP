@@ -30,39 +30,37 @@
 
         /* Ensure the logos container handles the overflow and positioning */
        .logo-container {
-        display: flex;
-        align-items: center;       /* keeps all logos aligned perfectly */
-        gap: 50px;                 /* increased spacing for clarity */
-        padding: 10px 20px;        /* extra breathing room */
-        width: max-content;
-        transition: transform 0.6s ease-in-out;
-        }
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 10px;
+    width: max-content;
+    transition: transform 0.6s ease-in-out;
+}
 
-    .client-logo-item {
-        flex: 0 0 auto;
-        padding: 10px;             /* adds internal spacing around each logo */
-    }
+.client-logo-item {
+    flex: 0 0 calc(100% / 4); /* always show exactly 4 logos */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
 
-    .client-logo-item img {
-    max-height: 5rem;          /* slightly bigger & clearer */
+
+.client-logo-item img {
+    max-height: 60px;
     width: auto;
-    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
-    }
+}
 
-    .client-logo-item img:hover {
-    transform: scale(1.12);
-    opacity: 1;
-    filter: brightness(1.25) grayscale(0);
-    }
 
         /* Adjust for smaller screens */
+
         @media (max-width: 1024px) {
-            .client-logo-item {
-                 /* FIX: Calculate width based on 3 logos per view */
-                min-width: calc(100% / 3); 
-                width: calc(100% / 3);
-            }
+        nav.space-x-3 {
+        display: none; /* hide desktop menu on mobile */
         }
+    }
+
         @media (max-width: 768px) {
             .client-logo-item {
                  /* FIX: Calculate width based on 2 logos per view */
@@ -333,86 +331,69 @@
         </nav>
     </header>
 
-   <section id="hero" class="relative overflow-hidden h-[600px] bg-gray-900">
+   <section id="hero" class="relative overflow-hidden h-[450px] sm:h-[550px] md:h-[650px] bg-gray-900">
     <div id="slides-container" class="relative h-full">
 
-       <!-- SLIDE 1 (Image or can be video if you want later) -->
-<div id="slide-2" class="slide absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-700">
+        <!-- SLIDE 1 -->
+        <div class="slide absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-700">
+            <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline>
+                <source src="medium-vecteezy_semanggi-jakarta-2023-aerial-drone-view-ofjakarta-night_41054358_medium.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-black/50"></div>
 
-    <!-- Background Video -->
-    <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline>
-        <source src="medium-vecteezy_semanggi-jakarta-2023-aerial-drone-view-ofjakarta-night_41054358_medium.mp4" type="video/mp4">
-    </video>
-
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-black opacity-50"></div>
-
-    <!-- TEXT -->
-    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center h-full flex flex-col justify-center">
-        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-6">
-            Engineered for Safety
-        </h1>
-        <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-300">
-            Your reliable partner in comprehensive fire safety engineering, installation, and compliance.
-        </p>
-        <div class="mt-10 flex justify-center space-x-4">
-            <a href="service.html" class="px-8 py-3 bg-red-600 text-white text-lg font-semibold rounded-xl shadow-xl hover:bg-red-700 transition duration-300 transform hover:scale-105">
-                Explore Our Services
-            </a>
+            <div class="relative z-20 max-w-7xl mx-auto px-4 text-center h-full flex flex-col justify-center">
+                <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-white mb-4">
+                    Engineered for Safety
+                </h1>
+                <p class="mt-2 max-w-3xl mx-auto text-lg sm:text-xl text-gray-300">
+                    Your reliable partner in comprehensive fire safety engineering.
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <a href="service.html" class="px-6 sm:px-8 py-3 bg-red-600 text-white text-lg font-semibold rounded-xl shadow-xl hover:bg-red-700 transition duration-300 hover:scale-105">
+                        Explore Our Services
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-
-       <!-- SLIDE 2 (VIDEO WORKING) -->
-        <div id="slide-2" class="slide absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-700">
-
-            <!-- Background Video -->
+        <!-- SLIDE 2 -->
+        <div class="slide absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-700">
             <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline>
                 <source src="safety.mp4" type="video/mp4">
             </video>
+            <div class="absolute inset-0 bg-black/50"></div>
 
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-black opacity-50"></div>
-
-    <!-- TEXT -->
-    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center h-full flex flex-col justify-center">
-        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-6">
-            Achieve 100% Fire Safety Compliance
-        </h1>
-        <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-200">
-            We handle all approvals, inspections, and documentation to keep your property compliant.
-        </p>
-        <div class="mt-10 flex justify-center">
-            <a href="service.html" class="px-8 py-3 bg-white text-red-600 text-lg font-semibold rounded-xl shadow-xl hover:bg-gray-100 transition duration-300 transform hover:scale-105">
-                View Compliance Services
-            </a>
+            <div class="relative z-20 max-w-7xl mx-auto px-4 text-center h-full flex flex-col justify-center">
+                <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-white mb-4">
+                    Achieve 100% Safety Compliance
+                </h1>
+                <p class="mt-2 max-w-3xl mx-auto text-lg sm:text-xl text-gray-300">
+                    We handle all approvals, inspections and documentation.
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <a href="service.html" class="px-6 sm:px-8 py-3 bg-white text-red-600 text-lg font-semibold rounded-xl shadow-xl hover:bg-gray-100 transition duration-300 hover:scale-105">
+                        View Compliance Services
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-
-        <!-- SLIDE 3 (Image or Optional Video) -->
-        <div id="slide-2" class="slide absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-700">
-
-            <!-- Background Video -->
+        <!-- SLIDE 3 -->
+        <div class="slide absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-700">
             <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline>
                 <source src="engineers.mp4" type="video/mp4">
             </video>
+            <div class="absolute inset-0 bg-black/50"></div>
 
-            <!-- Overlay -->
-            <div class="absolute inset-0 bg-black opacity-50"></div>
-
-            <!-- TEXT -->
-            <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center h-full flex flex-col justify-center">
-                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-6">
-                    Cutting-Edge Fire Protection Systems
+            <div class="relative z-20 max-w-7xl mx-auto px-4 text-center h-full flex flex-col justify-center">
+                <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-white mb-4">
+                    Cutting-Edge Protection Systems
                 </h1>
-                <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-300">
-                    We engineer, install, and maintain advanced fire protection infrastructure.
+                <p class="mt-2 max-w-3xl mx-auto text-lg sm:text-xl text-gray-300">
+                    We engineer, install, and maintain advanced safety solutions.
                 </p>
-                <div class="mt-10 flex justify-center">
-                    <a href="contact.html" class="px-8 py-3 bg-red-600 text-white text-lg font-semibold rounded-xl shadow-xl hover:bg-red-700 transition duration-300 transform hover:scale-105">
+                <div class="mt-8 flex justify-center">
+                    <a href="contact.html" class="px-6 sm:px-8 py-3 bg-red-600 text-white text-lg font-semibold rounded-xl shadow-xl hover:bg-red-700 transition duration-300 hover:scale-105">
                         Contact Us
                     </a>
                 </div>
@@ -604,298 +585,233 @@
 
 
     <script>
-        // Get the current year for the copyright
-        document.getElementById('year').textContent = new Date().getFullYear();
+        // --- COPYRIGHT YEAR ---
+document.getElementById('year').textContent = new Date().getFullYear();
 
-        // --- NEW: Full-Screen Menu Toggle Logic ---
-        const menuOpenButton = document.getElementById('menu-open-button');
-        const menuCloseButton = document.getElementById('menu-close-button');
-        const fullScreenMenu = document.getElementById('full-screen-menu');
-        const body = document.body;
 
-        const openMenu = () => {
-            fullScreenMenu.style.display = 'flex';
-            // Use setTimeout to allow the display:flex change to register before starting the opacity transition
-            setTimeout(() => {
-                fullScreenMenu.style.opacity = '1';
-                // Prevent scrolling the background content
-                body.style.overflow = 'hidden'; 
-            }, 10); 
-        };
+// --- FULL-SCREEN MENU LOGIC ---
+const menuOpenButton = document.getElementById('menu-open-button');
+const menuCloseButton = document.getElementById('menu-close-button');
+const fullScreenMenu = document.getElementById('full-screen-menu');
+const body = document.body;
 
-        const closeMenu = () => {
-            fullScreenMenu.style.opacity = '0';
-            body.style.overflow = 'auto'; // Restore scrolling
-            // Wait for the opacity transition to finish before hiding
-            setTimeout(() => {
-                fullScreenMenu.style.display = 'none';
-            }, 300); // Match CSS transition duration (0.3s)
-        };
+const openMenu = () => {
+    fullScreenMenu.style.display = 'flex';
+    setTimeout(() => {
+        fullScreenMenu.style.opacity = '1';
+        body.style.overflow = 'hidden';
+    }, 10);
+};
 
-        menuOpenButton.addEventListener('click', openMenu);
-        menuCloseButton.addEventListener('click', closeMenu);
-        
-        // --- Hero Carousel Logic (Modified for Staggered Animation) ---
-        const slides = document.querySelectorAll('.slide');
-        const indicators = document.querySelectorAll('.indicator');
-        const prevButton = document.getElementById('prev-slide');
-        const nextButton = document.getElementById('next-slide');
-        let currentSlide = 0;
-        let slideInterval;
-        const intervalTime = 5000; // 5 seconds
+const closeMenu = () => {
+    fullScreenMenu.style.opacity = '0';
+    body.style.overflow = 'auto';
+    setTimeout(() => {
+        fullScreenMenu.style.display = 'none';
+    }, 300);
+};
 
-        const updateSlide = () => {
-            slides.forEach((slide, index) => {
-                // 1. Reset/Remove animation on all slides
-                slide.querySelectorAll('.stagger-item').forEach(item => {
-                    item.style.animation = ''; // Reset animation
-                });
+menuOpenButton.addEventListener('click', openMenu);
+menuCloseButton.addEventListener('click', closeMenu);
 
-                // Remove visibility classes and reset pointer events
-                slide.classList.remove('opacity-100', 'pointer-events-auto');
-                slide.classList.add('opacity-0', 'pointer-events-none');
-                
-                // Update indicator class
-                indicators[index].classList.remove('bg-white');
-                indicators[index].classList.add('bg-white/50');
 
-                if (index === currentSlide) {
-                    // Set current slide to visible and interactive
-                    slide.classList.add('opacity-100', 'pointer-events-auto');
-                    slide.classList.remove('opacity-0', 'pointer-events-none');
-                    // Set current indicator to solid white
-                    indicators[index].classList.add('bg-white');
-                    indicators[index].classList.remove('bg-white/50');
-                    
-                    // 2. Animate content on the current slide with a stagger effect
-                    const staggerItems = slide.querySelectorAll('.stagger-item');
-                    staggerItems.forEach((item, idx) => {
-                        // Start animation after the slide transition (0.7s) is mostly complete.
-                        // Base delay of 300ms + 150ms stagger per item.
-                        const delay = 300 + (idx * 150); 
-                        item.style.animation = `popInFromBottom 0.6s ease-out ${delay}ms forwards`;
-                    });
-                }
+// --- HERO SLIDER LOGIC ---
+const slides = document.querySelectorAll('.slide');
+const indicators = document.querySelectorAll('.indicator');
+const prevButton = document.getElementById('prev-slide');
+const nextButton = document.getElementById('next-slide');
+
+let currentSlide = 0;
+let slideInterval;
+const intervalTime = 5000;
+
+const updateSlide = () => {
+    slides.forEach((slide, index) => {
+        slide.classList.remove('opacity-100', 'pointer-events-auto');
+        slide.classList.add('opacity-0', 'pointer-events-none');
+
+        indicators[index].classList.remove('bg-white');
+        indicators[index].classList.add('bg-white/50');
+
+        if (index === currentSlide) {
+            slide.classList.add('opacity-100', 'pointer-events-auto');
+            slide.classList.remove('opacity-0', 'pointer-events-none');
+
+            indicators[index].classList.add('bg-white');
+            indicators[index].classList.remove('bg-white/50');
+        }
+    });
+};
+
+const nextSlideFunc = () => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateSlide();
+    resetSlideInterval();
+};
+
+const prevSlideFunc = () => {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    updateSlide();
+    resetSlideInterval();
+};
+
+const resetSlideInterval = () => {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(nextSlideFunc, intervalTime);
+};
+
+prevButton.addEventListener('click', prevSlideFunc);
+nextButton.addEventListener('click', nextSlideFunc);
+
+indicators.forEach(btn => {
+    btn.addEventListener('click', e => {
+        currentSlide = parseInt(e.target.dataset.slide) - 1;
+        updateSlide();
+        resetSlideInterval();
+    });
+});
+
+
+// --- CLIENT LOGO CAROUSEL LOGIC ---
+const logoContainer = document.getElementById('logo-container');
+const logoItems = document.querySelectorAll('.client-logo-item');
+const prevClientButton = document.getElementById('prev-client-slide');
+const nextClientButton = document.getElementById('next-client-slide');
+
+const totalLogos = logoItems.length;
+let currentLogoSlide = 0;
+let logoSlideInterval;
+const logoIntervalTime = 3000;
+
+const getLogosPerView = () => 4;  // always show 4 logos
+
+const updateLogoCarousel = () => {
+    const lpv = getLogosPerView();
+    const maxSlides = totalLogos - lpv;
+
+    if (currentLogoSlide > maxSlides) currentLogoSlide = 0;
+    if (currentLogoSlide < 0) currentLogoSlide = maxSlides;
+
+    const translatePercentage = -(currentLogoSlide * (100 / lpv));
+    const itemWidth = logoItems[0].offsetWidth;
+    logoContainer.style.transform = `translateX(-${currentLogoSlide * itemWidth}px)`;
+
+};
+
+const nextLogoSlide = () => {
+    currentLogoSlide++;
+    updateLogoCarousel();
+    resetLogoInterval();
+};
+
+const prevLogoSlide = () => {
+    currentLogoSlide--;
+    updateLogoCarousel();
+    resetLogoInterval();
+};
+
+const resetLogoInterval = () => {
+    clearInterval(logoSlideInterval);
+    logoSlideInterval = setInterval(nextLogoSlide, logoIntervalTime);
+};
+
+prevClientButton.addEventListener('click', prevLogoSlide);
+nextClientButton.addEventListener('click', nextLogoSlide);
+
+window.addEventListener('resize', () => {
+    currentLogoSlide = 0;
+    updateLogoCarousel();
+});
+
+
+// --- SCROLL ANIMATION ---
+const observerOptions = { threshold: 0.1 };
+
+const scrollObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+
+            const items = entry.target.querySelectorAll('.stagger-item');
+            items.forEach((item, i) => {
+                item.style.animation = `popInFromBottom 0.6s ease-out ${i * 100}ms forwards`;
             });
-        };
 
-        const nextSlide = () => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            updateSlide();
-            resetInterval();
-        };
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
 
-        const prevSlide = () => {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            updateSlide();
-            resetInterval();
-        };
-
-        const resetInterval = () => {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, intervalTime);
-        };
-
-        // Event listeners for controls
-        nextButton.addEventListener('click', nextSlide);
-        prevButton.addEventListener('click', prevSlide);
-
-        // Event listeners for indicators
-        indicators.forEach(indicator => {
-            indicator.addEventListener('click', (e) => {
-                const slideIndex = parseInt(e.target.dataset.slide) - 1;
-                currentSlide = slideIndex;
-                updateSlide();
-                resetInterval();
-            });
-        });
-
-        // --- Client Logo Carousel Logic ---
-        const logoContainer = document.getElementById('logo-container');
-        const logoItems = document.querySelectorAll('.client-logo-item');
-        const prevClientButton = document.getElementById('prev-client-slide');
-        const nextClientButton = document.getElementById('next-client-slide');
-        
-        const totalLogos = logoItems.length; // Total number of logos in the HTML (14)
-        let currentLogoSlide = 0;
-        let logoSlideInterval;
-        const logoIntervalTime = 3000; // 3 seconds for faster logo slide
-
-        const getLogosPerView = () => {
-            // Determine how many logos are visible based on screen width
-            if (window.innerWidth >= 1024) return 5;
-            if (window.innerWidth >= 768) return 3;
-            return 2;
-        };
-
-        // FIX: Corrected the logic for continuous scrolling carousel
-        const updateLogoCarousel = () => {
-            const lpv = getLogosPerView();
-            // maxSlides is the number of individual logo steps we can take before reaching the last visible element
-            const maxSlides = totalLogos - lpv; 
-
-            // Handle looping logic
-            if (currentLogoSlide > maxSlides) {
-                currentLogoSlide = 0; // Loop back to the start
-            } else if (currentLogoSlide < 0) {
-                 currentLogoSlide = maxSlides; // Loop to the end
-            }
-            
-            // Calculate the width of one logo item as a percentage of the viewport width (100%)
-            const itemWidthPercentage = 100 / lpv; 
-            
-            // Calculate the total translation needed. (e.g., if lpv=5, itemWidthPercentage=20%. 
-            // If currentLogoSlide=1, translate by -20%)
-            const translatePercentage = -(currentLogoSlide * itemWidthPercentage); 
-
-            // Apply the transform
-            logoContainer.style.transform = `translateX(${translatePercentage}%)`;
-        };
-
-        const nextLogoSlide = () => {
-            currentLogoSlide++;
-            updateLogoCarousel();
-            resetLogoInterval();
-        };
-
-        const prevLogoSlide = () => {
-            currentLogoSlide--;
-            updateLogoCarousel();
-            resetLogoInterval();
-        };
-
-        const resetLogoInterval = () => {
-            clearInterval(logoSlideInterval);
-            logoSlideInterval = setInterval(nextLogoSlide, logoIntervalTime);
-        };
-
-        // Event listeners for client controls
-        nextClientButton.addEventListener('click', nextLogoSlide);
-        prevClientButton.addEventListener('click', prevLogoSlide);
-        
-        // Recalculate and update carousel on resize (for responsiveness)
-        window.addEventListener('resize', () => {
-            // Reset slide to 0 and re-calculate on resize
-            currentLogoSlide = 0; 
-            updateLogoCarousel();
-        });
-
-        // --- Scroll-Based Staggered Animation Logic ---
-        const observerOptions = {
-            root: null, // relative to the viewport
-            rootMargin: '0px',
-            threshold: 0.1 // Trigger when 10% of the item is visible
-        };
-
-        const scrollObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    
-                    // --- STAGGERED ANIMATION LOGIC ---
-                    const staggerItems = entry.target.querySelectorAll('.stagger-item');
-                    staggerItems.forEach((item, index) => {
-                        const delay = index * 100; // 100ms stagger
-                        
-                        // Apply the animation style directly to trigger the popInFromBottom effect
-                        item.style.animation = `popInFromBottom 0.6s ease-out ${delay}ms forwards`;
-                    });
-                    // --- END STAGGERED LOGIC ---
-
-                    observer.unobserve(entry.target); 
-                }
-            });
-        }, observerOptions);
-
-        // Target all sections that should fade in
-        document.querySelectorAll('.fade-in-section').forEach(section => {
-            scrollObserver.observe(section);
-        });
-        
-        // --- New Chat Widget Logic ---
-        const chatToggleButton = document.getElementById('chat-toggle-button');
-        const chatCloseButton = document.getElementById('chat-close-button');
-        const chatWindow = document.getElementById('chat-window');
-        const chatForm = document.getElementById('chat-form');
-        const chatInput = document.getElementById('chat-input');
-        const chatMessages = document.getElementById('chat-messages');
-
-        // Toggle chat window visibility
-        const toggleChat = () => {
-            chatWindow.classList.toggle('hidden');
-            // Toggle visibility of the button itself as well
-            chatToggleButton.classList.toggle('hidden'); 
-            if (!chatWindow.classList.contains('hidden')) {
-                chatInput.focus();
-                // Scroll to bottom on open
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-        };
-
-        chatToggleButton.addEventListener('click', toggleChat);
-        chatCloseButton.addEventListener('click', toggleChat);
-
-        // Function to create a message bubble element
-        const createMessageElement = (message, type) => {
-            const messageWrapper = document.createElement('div');
-            // 'sent' type is right-aligned, 'received' is left-aligned
-            messageWrapper.className = type === 'sent' ? 'flex justify-end' : 'flex justify-start';
-
-            const messageBubble = document.createElement('div');
-            messageBubble.className = type === 'sent' ? 'sent-message shadow-md' : 'received-message shadow-sm';
-            messageBubble.textContent = message;
-
-            messageWrapper.appendChild(messageBubble);
-            return messageWrapper;
-        };
-
-        // Function to simulate a received response
-        const sendAutoResponse = () => {
-            setTimeout(() => {
-                const response = "Thank you for reaching out! A specialist will connect with you shortly. For immediate assistance, please call us at 022-28978809.";
-                const responseElement = createMessageElement(response, 'received');
-                chatMessages.appendChild(responseElement);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 1000); // 1 second delay for simulation
-        };
-
-        // Handle form submission (sending a message)
-        chatForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const messageText = chatInput.value.trim();
-
-            if (messageText !== "") {
-                // 1. Save user response & display (Frontend Simulation)
-                const messageElement = createMessageElement(messageText, 'sent');
-                chatMessages.appendChild(messageElement);
-                
-                // 2. Clear input
-                chatInput.value = '';
-                chatInput.focus();
-
-                // 3. Scroll to bottom
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-
-                // 4. Provide a response from our side (Frontend Simulation)
-                sendAutoResponse();
-            }
-        });
+document.querySelectorAll('.fade-in-section').forEach(section =>
+    scrollObserver.observe(section)
+);
 
 
-        // Initialize both carousels and start auto-advance
-        window.onload = () => {
-            updateSlide();
-            slideInterval = setInterval(nextSlide, intervalTime);
-            
-            // Initialize Client Carousel
-            updateLogoCarousel();
-            logoSlideInterval = setInterval(nextLogoSlide, logoIntervalTime);
-        };
-        
+// --- CHAT WIDGET ---
+const chatToggleButton = document.getElementById('chat-toggle-button');
+const chatCloseButton = document.getElementById('chat-close-button');
+const chatWindow = document.getElementById('chat-window');
+const chatForm = document.getElementById('chat-form');
+const chatInput = document.getElementById('chat-input');
+const chatMessages = document.getElementById('chat-messages');
+
+const toggleChat = () => {
+    chatWindow.classList.toggle('hidden');
+    chatToggleButton.classList.toggle('hidden');
+
+    if (!chatWindow.classList.contains('hidden')) {
+        chatInput.focus();
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+};
+
+chatToggleButton.addEventListener('click', toggleChat);
+chatCloseButton.addEventListener('click', toggleChat);
+
+const createMessageElement = (message, type) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = type === 'sent' ? 'flex justify-end' : 'flex justify-start';
+
+    const bubble = document.createElement('div');
+    bubble.className = type === 'sent' ? 'sent-message' : 'received-message';
+    bubble.textContent = message;
+
+    wrapper.appendChild(bubble);
+    return wrapper;
+};
+
+const sendAutoResponse = () => {
+    setTimeout(() => {
+        const reply = "Thank you! Our team will get back to you shortly.";
+        chatMessages.appendChild(createMessageElement(reply, 'received'));
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 900);
+};
+
+chatForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const msg = chatInput.value.trim();
+    if (!msg) return;
+
+    chatMessages.appendChild(createMessageElement(msg, 'sent'));
+    chatInput.value = "";
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    sendAutoResponse();
+});
+
+
+// --- INITIALIZE ---
+window.onload = () => {
+    updateSlide();
+    slideInterval = setInterval(nextSlideFunc, intervalTime);
+
+    updateLogoCarousel();
+    logoSlideInterval = setInterval(nextLogoSlide, logoIntervalTime);
+};
     </script>
 </body>
 </html>
-
 
 
 
