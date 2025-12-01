@@ -197,6 +197,145 @@
         .footer-top-glow {
             box-shadow: 0 -12px 30px rgba(15, 23, 42, 0.8);
         }
+        /* ==========================================================
+   MOBILE RESPONSIVE FIX — UI REMAINS EXACTLY SAME
+   ========================================================== */
+
+/* Prevent horizontal scrolling */
+@media (max-width: 640px) {
+    html, body {
+        overflow-x: hidden !important;
+    }
+}
+
+/* ---------- HEADER & LOGO ---------- */
+@media (max-width: 640px) {
+    header .h-20 {
+        height: 64px !important;
+    }
+
+    header img {
+        height: 48px !important;
+        width: auto !important;
+    }
+
+    header a span {
+        font-size: 1rem !important;
+        max-width: 180px;
+        line-height: 1.2;
+    }
+}
+
+/* ---------- HERO SECTION ---------- */
+@media (max-width: 640px) {
+    .hero-inner-card {
+        padding: 1.5rem !important;
+    }
+
+    .hero-inner-card h1 {
+        font-size: 1.9rem !important;
+        line-height: 2.3rem !important;
+    }
+
+    .hero-inner-card p {
+        font-size: 1rem !important;
+    }
+
+    .training-image-wrapper {
+        margin-top: 1.5rem !important;
+    }
+}
+
+/* ---------- GRID FIX (2-column → 1-column on mobile) ---------- */
+@media (max-width: 640px) {
+    .grid.lg\:grid-cols-2,
+    .grid.md\:grid-cols-2 {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+}
+
+/* ---------- TRAINING IMAGES ---------- */
+@media (max-width: 640px) {
+    .training-image-wrapper {
+        max-height: 15rem !important;
+    }
+
+    .training-image {
+        max-height: 15rem !important;
+        object-fit: cover !important;
+    }
+}
+
+/* ---------- STEPS CARDS ---------- */
+@media (max-width: 640px) {
+    .step-card {
+        padding: 1.25rem !important;
+    }
+
+    .step-card h3 {
+        font-size: 1.1rem !important;
+    }
+
+    .step-card p {
+        font-size: 0.9rem !important;
+    }
+}
+
+/* ---------- TYPOGRAPHY FIX ---------- */
+@media (max-width: 640px) {
+    h2.text-3xl,
+    h2.text-4xl {
+        font-size: 1.7rem !important;
+        line-height: 2.1rem !important;
+    }
+
+    p {
+        font-size: 0.95rem !important;
+    }
+
+    ul li {
+        font-size: 0.9rem !important;
+    }
+}
+
+/* ---------- FOOTER RESPONSIVE ---------- */
+@media (max-width: 640px) {
+    footer .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+        text-align: left !important;
+    }
+
+    footer h3 {
+        font-size: 1.1rem !important;
+    }
+
+    footer p,
+    footer li {
+        font-size: 0.93rem !important;
+    }
+}
+
+/* ---------- FULL SCREEN MENU FOR MOBILE ---------- */
+@media (max-width: 640px) {
+    .menu-link {
+        font-size: 1.7rem !important;
+    }
+
+    .menu-secondary-link {
+        font-size: 1.2rem !important;
+    }
+}
+
+/* ---------- SPACING FIXES ---------- */
+@media (max-width: 640px) {
+    section {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -247,7 +386,10 @@
                          onerror="this.onerror=null; this.src='https://placehold.co/100x48/f8d7da/d9534f?text=Logo';"
                          alt="Shreyas LLP Company Logo" 
                          class="h-14 w-auto filter drop-shadow-md">
-                    <span class="hidden sm:inline">Shreyas Fire Protection Engineers </span>
+                    <span class="inline text-sm sm:text-base md:text-lg font-bold text-gray-900">
+                    Shreyas Fire Protection Engineers
+                    </span>
+
                 </a>
                 
                 <button id="menu-open-button" class="p-2 text-gray-700 hover:text-red-600 transition duration-150 rounded-full bg-gray-100 hover:bg-gray-200" aria-label="Open Menu">
@@ -554,7 +696,6 @@
     </script>
 </body>
 </html>
-
 
 
 
