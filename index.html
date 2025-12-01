@@ -29,27 +29,39 @@
         }
 
         /* Ensure the logos container handles the overflow and positioning */
-       .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 0 10px;
-    width: max-content;
-    transition: transform 0.6s ease-in-out;
+      /* VIEWPORT to clip overflow */
+.client-carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
 }
 
+/* logo-container stays a flex row we translate */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;              /* we will include this gap when translating */
+  padding: 0 10px;
+  transition: transform 0.45s cubic-bezier(.2,.9,.2,1);
+  will-change: transform;
+}
+
+/* fixed visual width for each logo box so three fit comfortably */
 .client-logo-item {
-    flex: 0 0 calc(100% / 4); /* always show exactly 4 logos */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
+  flex: 0 0 calc(100% / 3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 6px;
+  box-sizing: border-box;
 }
 
 
+/* keep images constrained */
 .client-logo-item img {
-    max-height: 60px;
-    width: auto;
+  max-height: 60px;
+  width: auto;
+  display:block;
 }
 
 
@@ -60,14 +72,6 @@
         display: none; /* hide desktop menu on mobile */
         }
     }
-
-        @media (max-width: 768px) {
-            .client-logo-item {
-                 /* FIX: Calculate width based on 2 logos per view */
-                min-width: calc(100% / 2); 
-                width: calc(100% / 2);
-            }
-        }
 
         /* --- New Chat Widget Styles --- */
         /* Optional: Custom scrollbar for chat messages */
@@ -312,7 +316,7 @@
                 class="h-14 w-auto filter drop-shadow-md">
                   Shreyas Fire Protection Engineers
                 </a>
-                
+
                 <nav class="space-x-3">
                 <a href="index.html" class="text-red-600 bg-gray-100 p-2 rounded-lg shadow-inner">Home</a>
                 <a href="about.html" class="text-gray-600 hover:text-red-600 p-2">About Us</a>
@@ -458,8 +462,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Trusted by Leading Developers & Corporates</h2>
             
-            <div id="client-carousel" class="relative client-carousel-viewport">
-                <div id="logo-container" class="logo-container">
+          <div id="client-carousel" class="relative client-carousel-viewport">
+            <div id="logo-container" class="logo-container">
+
                     
                     <div class="client-logo-item">
                         <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://www.ssll.in/downloads/96206110Logo-Kalpataru-1-1-1.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+A';" alt="Client Logo Kalpataru">
@@ -673,56 +678,104 @@ indicators.forEach(btn => {
 
 
 // --- CLIENT LOGO CAROUSEL LOGIC ---
+// --- CLIENT LOGO CAROUSEL (fixed visible count) ---
 const logoContainer = document.getElementById('logo-container');
-const logoItems = document.querySelectorAll('.client-logo-item');
+let logoItems = document.querySelectorAll('.client-logo-item');
 const prevClientButton = document.getElementById('prev-client-slide');
 const nextClientButton = document.getElementById('next-client-slide');
 
-const totalLogos = logoItems.length;
 let currentLogoSlide = 0;
 let logoSlideInterval;
 const logoIntervalTime = 3000;
+const visibleCount = 3; // <-- show 3 logos at a time
 
-const getLogosPerView = () => 4;  // always show 4 logos
+function recalcSizes() {
+  // Refresh NodeList (in case DOM changed)
+  logoItems = document.querySelectorAll('.client-logo-item');
 
-const updateLogoCarousel = () => {
-    const lpv = getLogosPerView();
-    const maxSlides = totalLogos - lpv;
+  // compute full item width including gap
+  const itemRect = logoItems[0].getBoundingClientRect();
+  const itemWidth = itemRect.width;
 
-    if (currentLogoSlide > maxSlides) currentLogoSlide = 0;
-    if (currentLogoSlide < 0) currentLogoSlide = maxSlides;
+  // compute gap (fallback to 20 if undefined)
+  const style = getComputedStyle(logoContainer);
+  const gap = parseFloat(style.gap || style.columnGap || 20);
 
-    const translatePercentage = -(currentLogoSlide * (100 / lpv));
-    const itemWidth = logoItems[0].offsetWidth;
-    logoContainer.style.transform = `translateX(-${currentLogoSlide * itemWidth}px)`;
+  return {
+    itemWidth,
+    gap,
+    fullItemWidth: itemWidth + gap
+  };
+}
 
-};
+function updateLogoCarousel() {
+  if (!logoItems || logoItems.length === 0) return;
 
-const nextLogoSlide = () => {
-    currentLogoSlide++;
-    updateLogoCarousel();
-    resetLogoInterval();
-};
+  const totalLogos = logoItems.length;
+  const { fullItemWidth } = recalcSizes();
 
-const prevLogoSlide = () => {
-    currentLogoSlide--;
-    updateLogoCarousel();
-    resetLogoInterval();
-};
+  // maximum starting index so that visibleCount logos remain in viewport
+  const maxIndex = Math.max(0, totalLogos - visibleCount);
 
-const resetLogoInterval = () => {
-    clearInterval(logoSlideInterval);
-    logoSlideInterval = setInterval(nextLogoSlide, logoIntervalTime);
-};
+  // clamp currentLogoSlide
+  if (currentLogoSlide > maxIndex) currentLogoSlide = 0; // wrap to start
+  if (currentLogoSlide < 0) currentLogoSlide = maxIndex;
+
+  const translatePx = currentLogoSlide * fullItemWidth;
+
+  logoContainer.style.transform = `translateX(-${translatePx}px)`;
+}
+
+// Prev / Next handlers
+function nextLogoSlide() {
+  const totalLogos = document.querySelectorAll('.client-logo-item').length;
+  const maxIndex = Math.max(0, totalLogos - visibleCount);
+
+  currentLogoSlide = (currentLogoSlide + 1) > maxIndex ? 0 : currentLogoSlide + 1;
+  updateLogoCarousel();
+  resetLogoInterval();
+}
+
+function prevLogoSlide() {
+  const totalLogos = document.querySelectorAll('.client-logo-item').length;
+  const maxIndex = Math.max(0, totalLogos - visibleCount);
+
+  currentLogoSlide = (currentLogoSlide - 1) < 0 ? maxIndex : currentLogoSlide - 1;
+  updateLogoCarousel();
+  resetLogoInterval();
+}
+
+function resetLogoInterval() {
+  clearInterval(logoSlideInterval);
+  logoSlideInterval = setInterval(nextLogoSlide, logoIntervalTime);
+}
 
 prevClientButton.addEventListener('click', prevLogoSlide);
 nextClientButton.addEventListener('click', nextLogoSlide);
 
+// Reset and recalc on resize
 window.addEventListener('resize', () => {
-    currentLogoSlide = 0;
-    updateLogoCarousel();
+  // preserve current slide but ensure clamped
+  const totalLogos = document.querySelectorAll('.client-logo-item').length;
+  const maxIndex = Math.max(0, totalLogos - visibleCount);
+  if (currentLogoSlide > maxIndex) currentLogoSlide = 0;
+  updateLogoCarousel();
 });
 
+// initialize
+function initLogoCarousel() {
+  // ensure we have items
+  if (!logoItems || logoItems.length === 0) return;
+  updateLogoCarousel();
+  logoSlideInterval = setInterval(nextLogoSlide, logoIntervalTime);
+}
+
+// run after DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLogoCarousel);
+} else {
+  initLogoCarousel();
+}
 
 // --- SCROLL ANIMATION ---
 const observerOptions = { threshold: 0.1 };
