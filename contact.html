@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,6 +96,258 @@
             transform: translateY(-5px);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
         }
+        /* ================================
+   MOBILE RESPONSIVE FIXES (100% UI SAME)
+   ================================ */
+
+/* Stop unwanted horizontal scroll */
+@media (max-width: 640px) {
+    html, body {
+        overflow-x: hidden !important;
+    }
+}
+
+/* HEADER FIXES */
+@media (max-width: 640px) {
+    header .container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    header img {
+        height: 38px !important;
+    }
+    header span {
+        font-size: 0.9rem !important;
+        max-width: 160px;
+        line-height: 1.15rem !important;
+        display: block;
+    }
+    header nav {
+        display: none !important; /* mobile menu hidden */
+    }
+}
+
+/* HERO SECTION */
+@media (max-width: 640px) {
+    section.bg-black h1 {
+        font-size: 2rem !important;
+        line-height: 2.3rem !important;
+        padding: 0 0.5rem;
+    }
+    section.bg-black p {
+        font-size: 1rem !important;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* CONTACT GRID FIX */
+@media (max-width: 640px) {
+    .container .grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+}
+
+/* LEFT SIDE CONTACT ICONS */
+@media (max-width: 640px) {
+    .flex.items-start svg {
+        width: 22px !important;
+        height: 22px !important;
+    }
+    .flex.items-start h4 {
+        font-size: 1rem !important;
+    }
+    .flex.items-start p {
+        font-size: 0.95rem !important;
+    }
+}
+
+/* FORM SECTION */
+@media (max-width: 640px) {
+    .bg-light-bg {
+        padding: 1.25rem !important;
+        border-radius: 1rem !important;
+    }
+    .bg-light-bg h2 {
+        font-size: 1.6rem !important;
+    }
+    input, textarea {
+        font-size: 0.95rem !important;
+        padding: 10px 14px !important;
+    }
+}
+
+/* BUTTON FIX */
+@media (max-width: 640px) {
+    button[type="submit"] {
+        font-size: 1rem !important;
+        padding: 0.9rem !important;
+    }
+}
+
+/* FOOTER FIX */
+@media (max-width: 640px) {
+    footer .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        text-align: left !important;
+    }
+    footer h3 {
+        font-size: 1.2rem !important;
+    }
+}
+
+/* CHAT BOT FIX */
+@media (max-width: 640px) {
+    #chat-float-button {
+        bottom: 1.5rem !important;
+        right: 1.2rem !important;
+        padding: 0.9rem !important;
+    }
+    #chat-window {
+        width: 92% !important;
+        right: 4% !important;
+        bottom: 6rem !important;
+        height: 70% !important;
+    }
+}
+/* ===========================================
+   FULL MOBILE RESPONSIVE FIX (UI UNTOUCHED)
+   =========================================== */
+
+/* Prevent horizontal scrolling */
+@media (max-width: 640px) {
+    html, body {
+        overflow-x: hidden !important;
+    }
+}
+
+/* HEADER */
+@media (max-width: 640px) {
+    header .container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    header img {
+        height: 42px !important;
+    }
+    header span {
+        font-size: 0.95rem !important;
+        line-height: 1.15rem !important;
+        max-width: 170px;
+        display: block;
+    }
+    header nav {
+        display: none !important; /* Hide desktop nav */
+    }
+}
+
+/* HERO SECTION */
+@media (max-width: 640px) {
+    section.bg-black h1 {
+        font-size: 2.1rem !important;
+        line-height: 2.4rem !important;
+        padding: 0 0.5rem;
+    }
+    section.bg-black p {
+        font-size: 1rem !important;
+        padding: 0 1rem;
+    }
+}
+
+/* CONTACT SECTION GRID */
+@media (max-width: 640px) {
+    .container .grid {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+    }
+}
+
+/* CONTACT ICONS + TEXT */
+@media (max-width: 640px) {
+    .flex.items-start svg {
+        width: 24px !important;
+        height: 24px !important;
+    }
+    .flex.items-start h4 {
+        font-size: 1rem !important;
+    }
+    .flex.items-start p {
+        font-size: 0.95rem !important;
+    }
+}
+
+/* FORM CARD */
+@media (max-width: 640px) {
+    .bg-light-bg {
+        padding: 1.3rem !important;
+        border-radius: 1rem !important;
+    }
+    .bg-light-bg h2 {
+        font-size: 1.6rem !important;
+    }
+}
+
+/* FORM FIELDS */
+@media (max-width: 640px) {
+    input, textarea {
+        font-size: 0.95rem !important;
+        padding: 10px 14px !important;
+    }
+    .grid.sm\:grid-cols-2 {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+}
+
+/* SUBMIT BUTTON */
+@media (max-width: 640px) {
+    button[type="submit"] {
+        padding: 0.9rem !important;
+        font-size: 1rem !important;
+    }
+}
+
+/* FOOTER */
+@media (max-width: 640px) {
+    footer .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+    footer h3 {
+        font-size: 1.25rem !important;
+    }
+    footer p, footer li {
+        font-size: 0.95rem !important;
+    }
+}
+
+/* CHAT FLOAT BUTTON */
+@media (max-width: 640px) {
+    #chat-float-button {
+        bottom: 1.4rem !important;
+        right: 1.2rem !important;
+        padding: 0.9rem !important;
+    }
+}
+
+/* CHAT WINDOW */
+@media (max-width: 640px) {
+    #chat-window {
+        width: 92% !important;
+        right: 4% !important;
+        bottom: 6rem !important;
+        height: 70% !important;
+    }
+    #chat-window .p-4 {
+        padding: 0.8rem !important;
+    }
+    #chat-input {
+        font-size: 0.9rem !important;
+    }
+}
+
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col">
@@ -111,7 +364,7 @@
 
             <nav class="space-x-4">
                 <a href="index.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Home</a>
-                <a href="about.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">About Us</a>
+                <a href="about.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">About</a>
                 <a href="service.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Services</a>
                 <a href="system.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">System</a>
                  <a href="projects.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Projects</a>
@@ -233,14 +486,14 @@
                 <div class="col-span-2 md:col-span-1">
                     <h3 class="text-xl font-bold mb-4 text-accent-red">SHREYAS FIRE PROTECTION ENGINEERS</h3>
                     <p class="text-sm text-gray-400 mb-2">ISO 9001:2015 Certified</p>
-                    <p class="text-sm text-gray-400">20+ Years in Fire Protection & Safety.</p>
+                    <p class="text-sm text-gray-400">35+ Years in Fire Protection & Safety.</p>
                 </div>
 
                 <div>
                     <h3 class="text-lg font-semibold mb-4 text-white">Explore</h3>
                     <ul class="space-y-2 text-sm">
                        <li><a href="index.html" class="text-gray-400 hover:text-accent-red transition duration-300">Home</a></li>
-                        <li><a href="about.html" class="text-gray-400 hover:text-accent-red transition duration-300">About Us</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-accent-red transition duration-300">About</a></li>
                         <li><a href="service.html" class="text-gray-400 hover:text-accent-red transition duration-300">Services</a></li>
                         <li><a href="system.html" class="text-gray-400 hover:text-accent-red transition duration-300">System</a></li>
                         <li><a href="projects.html" class="text-gray-400 hover:text-accent-red transition duration-300">Projects</a></li>
@@ -464,10 +717,45 @@
         }
 
     </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
 </body>
 
 </html>
-
-
-
 
