@@ -17,12 +17,19 @@
             background-color: #f7f7f7;
             color: #46576e;
         }
-        html, body {
-        overflow-x: hidden;
-        }
+        /* ================================
+   GLOBAL RESPONSIVE FIXES
+   — Keeps UI identical on desktop
+   — Fixes overflow, spacing, scaling on mobile
+   ================================ */
+
+/* Prevent horizontal scrolling on mobile */
+html, body {
+    overflow-x: hidden;
+}
 
 /* Make navigation wrap instead of overflowing */
-    @media (max-width: 768px) {
+@media (max-width: 768px) {
     nav.space-x-3 {
         display: none !important; /* hide desktop menu on mobile */
     }
@@ -30,10 +37,10 @@
     #menu-open-button {
         display: block !important;
     }
-    }
+}
 
-    /* Hero text responsive */
-    @media (max-width: 640px) {
+/* Hero text responsive */
+@media (max-width: 640px) {
     #hero h1 {
         font-size: 1.9rem !important;
         line-height: 2.2rem !important;
@@ -87,6 +94,20 @@
         font-size: 0.9rem;
     }
 }
+/* Make footer left-aligned on mobile */
+@media (max-width: 640px) {
+    footer .grid {
+        text-align: left !important;
+    }
+    footer .grid div,
+    footer .grid ul,
+    footer .grid p,
+    footer .grid li,
+    footer .grid h3 {
+        text-align: left !important;
+    }
+}
+
 
         /* Custom CSS for Carousel Slide Transition */
         .slide {
@@ -142,6 +163,7 @@
         display: none; /* hide desktop menu on mobile */
         }
     }
+    
 
         /* --- New Chat Widget Styles --- */
         /* Optional: Custom scrollbar for chat messages */
@@ -155,6 +177,13 @@
         .custom-scrollbar::-webkit-scrollbar-track {
             background: #f7f7f7;
         }
+            
+     @media (max-width: 480px) {
+    #chat-window {
+        width: 92% !important;
+        right: 4% !important;
+    }   
+}
 
         /* Styling for the received message bubble */
         .received-message {
@@ -540,7 +569,7 @@
                         <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://www.ssll.in/downloads/96206110Logo-Kalpataru-1-1-1.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+A';" alt="Client Logo Kalpataru">
                     </div>
                     <div class="client-logo-item">
-                        <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://e7.pngegg.com/pngimages/358/865/png-clipart-runwal-group-kanjurmarg-business-runwal-mycity-runwal-omkar-esquare-runwal-forests-business-text-rectangle.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+B';" alt="Client Logo Rupa">
+                        <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://app.chatgen.ai/assets/chatgen-static-files/bot-images/blob624ee0f6-1d0a-4d57-a063-52f1ef0e53bf" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+B';" alt="Client Logo Rupa">
                     </div>
                     <div class="client-logo-item">
                         <img class="max-h-24 w-full object-contain filter grayscale hover:grayscale-0 transition duration-300" src="https://i0.wp.com/rupagroup.co.in/wp-content/uploads/2023/09/Rupa-Logo.png?fit=5600%2C2800&ssl=1" onerror="this.onerror=null; this.src='https://placehold.co/100x48/cccccc/666666?text=LOGO+C';" alt="Client Logo C">
@@ -935,10 +964,6 @@ window.onload = () => {
     </script>
 </body>
 </html>
-
-
-
-
 
 
 
