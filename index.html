@@ -354,6 +354,58 @@ html, body {
             border-bottom: 2px solid #fecaca; /* red-200 */
             padding-bottom: 0.25rem;
         }
+        /* ===== MOBILE RESPONSIVE FIX FOR FULL-SCREEN MENU ===== */
+@media (max-width: 640px) {
+
+    /* Reduce top title size and spacing */
+    #full-screen-menu a.text-3xl {
+        font-size: 1.25rem !important; /* text-xl */
+    }
+
+    #full-screen-menu .mb-8 {
+        margin-bottom: 1.25rem !important; /* reduce spacing */
+    }
+
+    /* Shrink primary menu links */
+    .menu-link {
+        font-size: 1.25rem !important; /* text-xl */
+        padding: 0.75rem 0 !important;
+    }
+
+    /* Shrink secondary section titles */
+    .menu-title {
+        font-size: 1rem !important; /* text-base */
+        margin-top: 1.5rem !important;
+    }
+
+    /* Shrink secondary links */
+    .menu-secondary-link {
+        font-size: 1.1rem !important; /* smaller */
+        padding: 0.5rem 0 !important;
+    }
+
+    /* Reduce padding inside menu */
+    #full-screen-menu > div {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+
+    /* Reduce grid spacing */
+    #full-screen-menu .grid {
+        gap: 1.5rem !important;
+    }
+
+    /* Reduce close button & icon sizes */
+    #menu-close-button {
+        padding: 0.5rem !important;
+    }
+
+    #menu-close-button svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+}
+
 
     </style>
 </head>
@@ -410,12 +462,16 @@ html, body {
     <header id="top" class="sticky top-0 z-50 shadow-md bg-white">
         <nav class="mx-auto max-w-8xl px-5 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <a class="text-2xl font-extrabold text-red-600 tracking-tight flex items-center" href="#">
-                 <img src="ShreyasLogoUpd.png" onerror="this.onerror=null; this.src='https: //placehold.co/100x48/f8d7da/d9534f?text=Logo';" alt="Shreyas LLP Company Logo" 
-                class="h-14 w-auto filter drop-shadow-md">
-                  Shreyas Fire Protection Engineers
-                </a>
+                <a class="flex items-center gap-2 font-extrabold text-red-600 tracking-tight" href="#">
+    <img src="ShreyasLogoUpd.png"
+         onerror="this.onerror=null; this.src='https://placehold.co/100x48/f8d7da/d9534f?text=Logo';"
+         alt="Shreyas LLP Company Logo"
+         class="h-10 w-auto filter drop-shadow-md">
 
+    <span class="text-base sm:text-lg md:text-xl lg:text-2xl">
+        Shreyas Fire Protection Engineers
+    </span>
+</a>
                 <nav class="space-x-3">
                 <a href="index.html" class="text-red-600 bg-gray-100 p-2 rounded-lg shadow-inner">Home</a>
                 <a href="about.html" class="text-gray-600 hover:text-red-600 p-2">About Us</a>
@@ -434,7 +490,7 @@ html, body {
         </nav>
     </header>
 
-    <section id="hero" class="relative overflow-hidden h-[450px] sm:h-[550px] md:h-[650px] bg-gray-900">
+  <section id="hero" class="relative overflow-hidden h-[450px] sm:h-[550px] md:h-[650px] bg-gray-900">
     <div id="slides-container" class="relative h-full">
 
         <!-- SLIDE 1 -->
@@ -510,6 +566,11 @@ html, body {
 
     </div>
 </section>
+
+
+    </div>
+</section>
+
 
         <button id="prev-slide" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white p-3 rounded-full shadow-lg transition duration-300 z-10 hidden sm:block" aria-label="Previous slide">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
@@ -968,7 +1029,6 @@ window.onload = () => {
     </script>
 </body>
 </html>
-
 
 
 
