@@ -335,6 +335,57 @@
         padding-right: 1rem !important;
     }
 }
+/* ===== MOBILE RESPONSIVE FIX FOR FULL-SCREEN MENU ===== */
+@media (max-width: 640px) {
+
+    /* Reduce top title size and spacing */
+    #full-screen-menu a.text-3xl {
+        font-size: 1.25rem !important; /* text-xl */
+    }
+
+    #full-screen-menu .mb-8 {
+        margin-bottom: 1.25rem !important; /* reduce spacing */
+    }
+
+    /* Shrink primary menu links */
+    .menu-link {
+        font-size: 1.25rem !important; /* text-xl */
+        padding: 0.75rem 0 !important;
+    }
+
+    /* Shrink secondary section titles */
+    .menu-title {
+        font-size: 1rem !important; /* text-base */
+        margin-top: 1.5rem !important;
+    }
+
+    /* Shrink secondary links */
+    .menu-secondary-link {
+        font-size: 1.1rem !important; /* smaller */
+        padding: 0.5rem 0 !important;
+    }
+
+    /* Reduce padding inside menu */
+    #full-screen-menu > div {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+
+    /* Reduce grid spacing */
+    #full-screen-menu .grid {
+        gap: 1.5rem !important;
+    }
+
+    /* Reduce close button & icon sizes */
+    #menu-close-button {
+        padding: 0.5rem !important;
+    }
+
+    #menu-close-button svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+}
 
     </style>
 </head>
@@ -696,7 +747,6 @@
     </script>
 </body>
 </html>
-
 
 
 
