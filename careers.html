@@ -447,10 +447,57 @@
         padding: 10px 14px !important;
     }
 }
+/* ===== MOBILE RESPONSIVE FIX FOR FULL-SCREEN MENU ===== */
+@media (max-width: 640px) {
 
-/* MENU OVERLAY FIX ON SMALL DEVICES */
+    /* Reduce top title size and spacing */
+    #full-screen-menu a.text-3xl {
+        font-size: 1.25rem !important; /* text-xl */
+    }
 
+    #full-screen-menu .mb-8 {
+        margin-bottom: 1.25rem !important; /* reduce spacing */
+    }
 
+    /* Shrink primary menu links */
+    .menu-link {
+        font-size: 1.25rem !important; /* text-xl */
+        padding: 0.75rem 0 !important;
+    }
+
+    /* Shrink secondary section titles */
+    .menu-title {
+        font-size: 1rem !important; /* text-base */
+        margin-top: 1.5rem !important;
+    }
+
+    /* Shrink secondary links */
+    .menu-secondary-link {
+        font-size: 1.1rem !important; /* smaller */
+        padding: 0.5rem 0 !important;
+    }
+
+    /* Reduce padding inside menu */
+    #full-screen-menu > div {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+
+    /* Reduce grid spacing */
+    #full-screen-menu .grid {
+        gap: 1.5rem !important;
+    }
+
+    /* Reduce close button & icon sizes */
+    #menu-close-button {
+        padding: 0.5rem !important;
+    }
+
+    #menu-close-button svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+}
 
     </style>
 </head>
@@ -467,7 +514,7 @@
         </div>
     </div>
 
-    <div id="full-screen-menu" style="opacity: 0;">
+   <div id="full-screen-menu" style="opacity: 0;">
         <div class="max-w-7xl mx-auto px-6 py-8 h-full flex flex-col">
             <div class="flex justify-between items-center mb-8">
                 <a class="text-3xl font-extrabold text-red-600 tracking-tight" href="index.html">
@@ -508,10 +555,12 @@
         <nav class="mx-auto max-w-8xl px-5 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <a class="text-2xl font-extrabold text-red-600 tracking-tight flex items-center gap-3" href="index.html">
-                    <img src="ShreyasLogoUpd.png" onerror="this.onerror=null; this.src='https://placehold.co/100x48/f8d7da/d9534f?text=Logo';" alt="Shreyas LLP Company Logo" 
-                    class="h-14 w-auto filter drop-shadow-md">
-                    <span class="text-base sm:text-lg font-semibold tracking-tight">
-                   Shreyas Fire Protection Engineers
+                    <img src="ShreyasLogoUpd.png" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/100x48/f8d7da/d9534f?text=Logo';"
+                         alt="Shreyas LLP Company Logo" 
+                         class="h-14 w-auto filter drop-shadow-md">
+                    <span class="inline text-sm sm:text-base md:text-lg font-bold text-gray-900">
+                    Shreyas Fire Protection Engineers
                     </span>
 
                 </a>
@@ -519,7 +568,6 @@
                 <button id="menu-open-button" class="p-2 text-gray-700 hover:text-red-600 transition duration-150 rounded-full bg-gray-100 hover:bg-gray-200" aria-label="Open Menu">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
-                
             </div>
         </nav>
     </header>
