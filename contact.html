@@ -96,218 +96,58 @@
             transform: translateY(-5px);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
         }
-        /* ================================
-   MOBILE RESPONSIVE FIXES (100% UI SAME)
-   ================================ */
+           
+/* =======================================================
+   FULL MOBILE RESPONSIVE 
+   ======================================================= */
 
-/* Stop unwanted horizontal scroll */
+/* Prevent overflow on mobile */
 @media (max-width: 640px) {
     html, body {
         overflow-x: hidden !important;
     }
 }
 
-/* HEADER FIXES */
+/* HEADER FIX */
 @media (max-width: 640px) {
     header .container {
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }
-    header img {
-        height: 38px !important;
-    }
-    header span {
-        font-size: 0.9rem !important;
-        max-width: 160px;
-        line-height: 1.15rem !important;
-        display: block;
-    }
-    header nav {
-        display: none !important; /* mobile menu hidden */
-    }
-}
 
-/* HERO SECTION */
-@media (max-width: 640px) {
-    section.bg-black h1 {
-        font-size: 2rem !important;
-        line-height: 2.3rem !important;
-        padding: 0 0.5rem;
-    }
-    section.bg-black p {
-        font-size: 1rem !important;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-}
-
-/* CONTACT GRID FIX */
-@media (max-width: 640px) {
-    .container .grid {
-        grid-template-columns: 1fr !important;
-        gap: 2rem !important;
-    }
-}
-
-/* LEFT SIDE CONTACT ICONS */
-@media (max-width: 640px) {
-    .flex.items-start svg {
-        width: 22px !important;
-        height: 22px !important;
-    }
-    .flex.items-start h4 {
-        font-size: 1rem !important;
-    }
-    .flex.items-start p {
-        font-size: 0.95rem !important;
-    }
-}
-
-/* FORM SECTION */
-@media (max-width: 640px) {
-    .bg-light-bg {
-        padding: 1.25rem !important;
-        border-radius: 1rem !important;
-    }
-    .bg-light-bg h2 {
-        font-size: 1.6rem !important;
-    }
-    input, textarea {
-        font-size: 0.95rem !important;
-        padding: 10px 14px !important;
-    }
-}
-
-/* BUTTON FIX */
-@media (max-width: 640px) {
-    button[type="submit"] {
-        font-size: 1rem !important;
-        padding: 0.9rem !important;
-    }
-}
-
-/* FOOTER FIX */
-@media (max-width: 640px) {
-    footer .grid {
-        grid-template-columns: 1fr !important;
-        gap: 1.5rem !important;
-        text-align: left !important;
-    }
-    footer h3 {
-        font-size: 1.2rem !important;
-    }
-}
-
-/* CHAT BOT FIX */
-@media (max-width: 640px) {
-    #chat-float-button {
-        bottom: 1.5rem !important;
-        right: 1.2rem !important;
-        padding: 0.9rem !important;
-    }
-    #chat-window {
-        width: 92% !important;
-        right: 4% !important;
-        bottom: 6rem !important;
-        height: 70% !important;
-    }
-}
-/* ===========================================
-   FULL MOBILE RESPONSIVE FIX (UI UNTOUCHED)
-   =========================================== */
-
-/* Prevent horizontal scrolling */
-@media (max-width: 640px) {
-    html, body {
-        overflow-x: hidden !important;
-    }
-}
-
-/* HEADER */
-@media (max-width: 640px) {
-    header .container {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-    }
     header img {
         height: 42px !important;
     }
+
     header span {
-        font-size: 0.95rem !important;
-        line-height: 1.15rem !important;
-        max-width: 170px;
+        font-size: 1rem !important;
+        line-height: 1.2rem !important;
+        max-width: 180px;
         display: block;
     }
-    header nav {
-        display: none !important; /* Hide desktop nav */
+/* Hide desktop navbar only on mobile */
+@media (max-width: 768px) {
+    nav.md\:flex {
+        display: none !important;
     }
 }
-
-/* HERO SECTION */
+}
+/* HERO HEADING + SUBTEXT */
 @media (max-width: 640px) {
     section.bg-black h1 {
-        font-size: 2.1rem !important;
-        line-height: 2.4rem !important;
-        padding: 0 0.5rem;
+        font-size: 2.2rem !important;
+        line-height: 2.5rem !important;
     }
     section.bg-black p {
         font-size: 1rem !important;
         padding: 0 1rem;
     }
-}
-
-/* CONTACT SECTION GRID */
-@media (max-width: 640px) {
-    .container .grid {
-        grid-template-columns: 1fr !important;
-        gap: 2.5rem !important;
-    }
-}
-
-/* CONTACT ICONS + TEXT */
-@media (max-width: 640px) {
-    .flex.items-start svg {
-        width: 24px !important;
-        height: 24px !important;
-    }
-    .flex.items-start h4 {
-        font-size: 1rem !important;
-    }
-    .flex.items-start p {
-        font-size: 0.95rem !important;
-    }
-}
-
-/* FORM CARD */
-@media (max-width: 640px) {
-    .bg-light-bg {
-        padding: 1.3rem !important;
-        border-radius: 1rem !important;
-    }
-    .bg-light-bg h2 {
-        font-size: 1.6rem !important;
-    }
-}
-
-/* FORM FIELDS */
-@media (max-width: 640px) {
-    input, textarea {
-        font-size: 0.95rem !important;
-        padding: 10px 14px !important;
-    }
-    .grid.sm\:grid-cols-2 {
-        grid-template-columns: 1fr !important;
+    .inline-flex {
+        flex-direction: column !important;
         gap: 1rem !important;
     }
 }
 
-/* SUBMIT BUTTON */
-@media (max-width: 640px) {
-    button[type="submit"] {
-        padding: 0.9rem !important;
-        font-size: 1rem !important;
-    }
-}
 
 /* FOOTER */
 @media (max-width: 640px) {
@@ -315,15 +155,17 @@
         grid-template-columns: 1fr !important;
         gap: 1.5rem !important;
     }
+
     footer h3 {
-        font-size: 1.25rem !important;
+        font-size: 1.2rem !important;
     }
+
     footer p, footer li {
         font-size: 0.95rem !important;
     }
 }
 
-/* CHAT FLOAT BUTTON */
+/* CHAT BUTTON */
 @media (max-width: 640px) {
     #chat-float-button {
         bottom: 1.4rem !important;
@@ -337,40 +179,58 @@
     #chat-window {
         width: 92% !important;
         right: 4% !important;
-        bottom: 6rem !important;
-        height: 70% !important;
+        bottom: 5.5rem !important;
+        height: 65% !important;
     }
+
     #chat-window .p-4 {
         padding: 0.8rem !important;
     }
+
     #chat-input {
         font-size: 0.9rem !important;
     }
 }
 
+
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col">
 
-    <header class="bg-white shadow-lg">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            
-            <a href="index.html" class="flex items-center space-x-2 group transform transition duration-300 hover:scale-[1.02]">
-                <img src="ShreyasLogoUpd.png" 
-                alt="Shreyas Fire Protection Engineers LLP Logo" 
-                class="h-10 w-auto"> 
-                <span class="text-xl font-bold text-gray-900 group-hover:text-accent-red transition duration-300">Shreyas Fire Protection Engineers</span>
-            </a>
+   <header class="bg-white shadow-lg">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+    <a href="index.html" class="flex items-center space-x-2 group transform transition duration-300 hover:scale-[1.02]">
+      <img src="ShreyasLogoUpd.png" alt="Shreyas Fire Protection Engineers LLP Logo" class="h-10 w-auto bg-accent-white">
+      <span class="text-xl font-bold text-gray-900 group-hover:text-accent-red transition duration-300">Shreyas Fire Protection Engineers</span>
+    </a>
 
-            <nav class="space-x-4">
-                <a href="index.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Home</a>
-                <a href="about.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">About</a>
-                <a href="service.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Services</a>
-                <a href="system.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">System</a>
-                 <a href="projects.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Projects</a>
-                <a href="contact.html" class="text-accent-red bg-gray-100 font-medium transition duration-300 rounded-lg p-2 shadow-inner">Contact Us</a>
-            </nav>
-        </div>
+    <nav class="hidden md:flex space-x-4">
+      <a href="index.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Home</a>
+      <a href="about.html" class="text-accent-red bg-gray-100 font-medium transition duration-300 rounded-lg p-2 shadow-inner">About Us</a>
+      <a href="service.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Services</a>
+      <a href="system.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">System</a>
+      <a href="projects.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Projects</a>
+      <a href="contact.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Contact</a>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition duration-300" aria-label="Toggle navigation menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+           xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+           d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+    </button>
+  </div>
+
+ <!-- Mobile Menu (initially hidden) -->
+<nav id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2 bg-gray-50 border-t border-gray-200">
+  <a href="index.html" class="block text-accent-red bg-gray-100 font-medium rounded-lg p-3">Home</a>
+  <a href="about.html" class="block text-gray-600 hover:bg-gray-100 font-medium rounded-lg p-3">About Us</a>
+  <a href="service.html" class="block text-gray-600 hover:bg-gray-100 font-medium rounded-lg p-3">Service</a>
+  <a href="system.html" class="block text-gray-600 hover:bg-gray-100 font-medium rounded-lg p-3">System</a>
+  <a href="projects.html" class="block text-gray-600 hover:bg-gray-100 font-medium rounded-lg p-3">Projects</a>
+  <a href="contact.html" class="block text-gray-600 hover:bg-gray-100 font-medium rounded-lg p-3">Contact Us</a>
+</nav>
+
     </header>
 
     <main class="flex-grow">
@@ -754,8 +614,57 @@
 		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
 	}
 	// ]]>
+    // MOBILE MENU (same as service.html)
+const mobileMenuBtn = document.getElementById("mobile-menu-button");
+const mobileMenu = document.getElementById("mobile-menu");
+
+mobileMenuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+});
+
+// Auto close when clicking link
+mobileMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+    });
+});
+
+// Auto close when clicking link
+mobileMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+    });
+});
+
+// Ensure menu is hidden initially
+mobileMenu.style.maxHeight = "0px";
+mobileMenu.style.overflow = "hidden";
+mobileMenu.style.transition = "max-height 0.35s ease";
+
+// Toggle Dropdown
+mobileMenuBtn.addEventListener("click", () => {
+    if (mobileMenu.style.maxHeight === "0px") {
+        mobileMenu.classList.remove("hidden");
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px"; // expand
+    } else {
+        mobileMenu.style.maxHeight = "0px"; // collapse
+
+        setTimeout(() => {
+            mobileMenu.classList.add("hidden");
+        }, 350);
+    }
+});
+
+// Auto-close when clicking a link
+mobileMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+        mobileMenu.style.maxHeight = "0px";
+        setTimeout(() => {
+            mobileMenu.classList.add("hidden");
+        }, 350);
+    });
+});
 </script>
 </body>
 
 </html>
-
