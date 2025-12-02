@@ -25,12 +25,24 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7f7f7;
-            color: #46576e;
-        }
-        
-        #projects .grid > div {
+        font-family: 'Inter', sans-serif;
+        background-color: #f7f7f7;
+        color: #46576e;
+}
+
+        /* REMOVE ALL HORIZONTAL OVERFLOW GLOBALLY */
+html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+}
+
+/* Ensure no child causes horizontal scroll */
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+    #projects .grid > div {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
@@ -115,7 +127,7 @@ header {
         /* Container that moves (set to accommodate two sets of logos) */
         .scrolling-logos {
             display: inline-flex;
-            animation: scrollLogos 35s linear infinite; /* Adjust time for speed */
+            animation: scrollLogos 20s linear infinite; /* Adjust time for speed */
             padding-right: 2rem; /* Visual separation for the loop transition */
         }
 
@@ -125,23 +137,15 @@ header {
             to { transform: translateX(-50%); } 
         }
 
-        .client-logo-item {
-    width: 120px;
-    padding: 0 1rem;
+       .client-logo-item {
+    width: auto;
+    flex: 0 0 auto;
+    padding: 0 1.5rem;
 }
 
-.client-logo-item {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-
-    /* Bigger logos on desktop */
-    width: 260px;
-
-    /* More space so they don't look tiny */
-    padding: 0 2rem;
-
-    flex-shrink: 0;
+.client-logo-item img {
+    height: 70px;
+    width: auto;
 }
 
 /* Mobile: prevent logos from becoming tiny */
@@ -162,45 +166,50 @@ header {
     height: 80px;     /* Restore bigger size */
     width: auto;
 }
-
+/* Make logo carousel faster on mobile */
+@media (max-width: 768px) {
+    .scrolling-logos {
+        animation: scrollLogos 20s linear infinite !important; /* Faster */
+    }
+}
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col">
 
-    <header class="bg-white shadow-lg">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2 group transform transition duration-300 hover:scale-[1.02]">
-                <!-- Logo Placeholder FIX -->
-                <img src="ShreyasLogoUpd.png" 
-                     alt="Shreyas Fire Protection Engineers LLP Logo" 
-                     class="h-10 w-auto bg-accent-white">
-                <span class="text-xl font-bold text-gray-900 group-hover:text-accent-red transition duration-300">Shreyas Fire Protection Engineers </span>
-            </a>
+   
+<header class="bg-white shadow-lg">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+    <a href="index.html" class="flex items-center space-x-2 group transform transition duration-300 hover:scale-[1.02]">
+      <img src="ShreyasLogoUpd.png" alt="Shreyas Fire Protection Engineers LLP Logo" class="h-10 w-auto bg-accent-white">
+      <span class="text-xl font-bold text-gray-900 group-hover:text-accent-red transition duration-300">Shreyas Fire Protection Engineers</span>
+    </a>
 
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex space-x-4">
-                <a href="index.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Home</a>
-                <a href="about.html" class="text-accent-red bg-gray-100 font-medium transition duration-300 rounded-lg p-2 shadow-inner">About Us</a>
-                <a href="service.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Services</a>
-                <a href="system.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">System</a>
-                <a href="projects.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Projects</a>
-                <a href="contact.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Contact</a>
-            </nav>
-            </nav>
+    <nav class="hidden md:flex space-x-4">
+      <a href="index.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Home</a>
+      <a href="about.html" class="text-accent-red bg-gray-100 font-medium transition duration-300 rounded-lg p-2 shadow-inner">About Us</a>
+      <a href="service.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Services</a>
+      <a href="system.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">System</a>
+      <a href="projects.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Projects</a>
+      <a href="contact.html" class="text-gray-600 hover:text-accent-red font-medium transition duration-300 rounded-lg p-2">Contact</a>
+    </nav>
 
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition duration-300" aria-label="Toggle navigation menu">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-        </div>
-        
-        <!-- Mobile Menu (initially hidden) -->
-        <nav id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2 bg-gray-50 border-t border-gray-200">
-            <a href="index.html" class="block text-accent-red bg-gray-100 font-medium rounded-lg p-3">Home</a>
-            <a href="service.html" class="block text-gray-600 hover:bg-gray-100 font-medium rounded-lg p-3">Services</a>
-            <a href="about.html" class="block text-gray-600 hover:bg-gray-100 font-medium rounded-lg p-3">About</a>
-        </nav>
-    </header>
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition duration-300" aria-label="Toggle navigation menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+           xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+           d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu-->
+  <nav id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2 bg-gray-50 border-t border-gray-200">
+    <a href="index.html" class="block text-accent-red bg-gray-100 font-medium rounded-lg p-3">Home</a>
+    <a href="service.html" class="block text-gray-600 hover:bg-gray-100 font-medium rounded-lg p-3">Services</a>
+    <a href="about.html" class="block text-gray-600 hover:bg-gray-100 font-medium rounded-lg p-3">About Us</a>
+    <a href="projects.html" class="block text-gray-600 hover:bg-gray-100 font-medium rounded-lg p-3">Projects</a>
+    <a href="contact.html" class="block text-gray-600 hover:bg-gray-100 font-medium rounded-lg p-3">Contact</a>
+  </nav>
+</header>
 
     <!-- Hero Section (Carousel) -->
     <section id="hero" class="relative h-[50vh] sm:h-[55vh] md:h-[70vh] overflow-hidden">
@@ -366,7 +375,6 @@ header {
                     <img src="https://www.rustomjee.com/assets/front/img/logo.png" alt="Client J"
                          class="h-20 w-auto opacity-80 hover:opacity-100 transition duration-300 object-contain">
                 </div>
-
             </div>
 
         </div>
@@ -651,13 +659,5 @@ header {
 
     </script>
 </body>
-
 </html>
-
-
-
-
-
-
-
 
