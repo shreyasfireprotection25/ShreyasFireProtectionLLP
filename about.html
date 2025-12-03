@@ -78,6 +78,7 @@ header {
     }
 }
 
+
         /* --- Animation for Scroll-Based Fade-In --- */
         .fade-in-section {
             opacity: 0;
@@ -131,62 +132,70 @@ header {
         .slide {
             transition: opacity 0.7s ease-in-out;
         }
+/* Do NOT clip logos on sides */
+.client-carousel-viewport {
+    overflow: hidden;
+    width: 100%;
+}
 
-        /* --- Infinite Logo Scroll (New) --- */
-        .scrolling-logos-container {
-            /* Create a fade effect on the sides */
-            mask: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        }
+/* Very soft mask so nothing gets hidden */
+.scrolling-logos-container {
+    mask: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+    -webkit-mask: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+}
 
-        /* Container that moves (set to accommodate two sets of logos) */
-        .scrolling-logos {
-            display: inline-flex;
-            animation: scrollLogos 20s linear infinite; /* Adjust time for speed */
-            padding-right: 2rem; /* Visual separation for the loop transition */
-        }
+/* Main scroll container */
+.scrolling-logos {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    width: max-content;   /* ← THIS FIXES THE ISSUE */
+    animation: scrollLogos 25s linear infinite;
+    will-change: transform;
+}
 
-        @keyframes scrollLogos {
-            from { transform: translateX(0); }
-            /* Translate by 50% since we duplicated the content (2 sets of logos) */
-            to { transform: translateX(-50%); } 
-        }
 
-       .client-logo-item {
-    width: auto;
+/* INDIVIDUAL LOGOS — FIX TOO BIG LOGOS */
+.client-logo-item {
     flex: 0 0 auto;
-    padding: 0 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* UNIVERSAL LOGO SCALING — RUNWAL FIXED HERE */
 .client-logo-item img {
-    height: 70px;
-    width: auto;
+    height: 65px;          /* same height for all logos */
+    max-height: 65px;      /* prevents Runwal from becoming too big */
+    width: auto;           /* maintain original proportions */
+    object-fit: contain;
+    display: block;
 }
 
-/* Mobile: prevent logos from becoming tiny */
-@media (max-width: 768px) {
-    .client-logo-item {
-        width: 180px;   /* Larger than before */
-        padding: 0 1.5rem;
+/* MOBILE FIX — SHOW ALL 10 LOGOS + NICE SIZE */
+@media (max-width: 640px) {
+    .scrolling-logos-container {
+        mask: none !important;
+        -webkit-mask: none !important;
     }
-
-    .client-logo-item img {
-        height: 70px;   /* Increase size on mobile */
-        width: auto;
-    }
-}
-
-/* Desktop: restore the normal height */
-.client-logo-item img {
-    height: 80px;     /* Restore bigger size */
-    width: auto;
-}
-/* Make logo carousel faster on mobile */
-@media (max-width: 768px) {
     .scrolling-logos {
-        animation: scrollLogos 20s linear infinite !important; /* Faster */
+        gap: 1.6rem !important;
+        width: max-content !important;  /* ← REQUIRED ON MOBILE */
+        animation: scrollLogos 25s linear infinite !important;
+    }
+    .client-logo-item img {
+        height: 52px !important;      /* perfect size */
+        max-height: 52px !important;
     }
 }
+
+
+/* Animation keyframes */
+@keyframes scrollLogos {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col">
@@ -340,7 +349,7 @@ header {
 
         <div class="client-carousel-viewport relative mx-auto max-w-9xl scrolling-logos-container fade-in-section">
 
-            <div id="logo-container" class="scrolling-logos flex items-center space-x-12">
+           <div id="logo-container" class="scrolling-logos flex items-center">
 
                 <div class="client-logo-item">
                     <img src="https://www.propmart.co/wp-content/uploads/2019/07/runwal-logo.png" alt="Client A"
@@ -522,7 +531,6 @@ header {
                 mobileMenu.classList.toggle('hidden');
             });
         }
-
         // --- Hero Carousel Logic ---
         const slides = [
             document.getElementById('slide-1'),
@@ -571,7 +579,6 @@ header {
                 resetInterval();
             });
         }
-
 
         // --- Section Fade-In Animation Logic ---
         const faders = document.querySelectorAll(".fade-in-section");
@@ -673,14 +680,32 @@ header {
             // NOTE: Client Logo Carousel is now purely CSS, no JS initialization needed here.
         };
 
+  // Auto-duplicate the logos so animation has two consecutive sets
+  (function ensureLogoDuplication() {
+    const logoContainer = document.getElementById('logo-container');
+    if (!logoContainer) return;
+
+    // Already duplicated? stop
+    if (logoContainer.dataset.duplicated === 'true') return;
+
+    // Take snapshot of current children and clone them
+    const items = Array.from(logoContainer.children);
+    if (items.length === 0) return;
+
+    // Clone nodes and append — this creates the second set needed for infinite scroll
+    items.forEach(node => {
+      const clone = node.cloneNode(true);
+      logoContainer.appendChild(clone);
+    });
+
+    // Mark duplicated to avoid repeating if script runs twice
+    logoContainer.dataset.duplicated = 'true';
+
+    // Force reflow to ensure animation uses updated width
+    // (useful if animation started earlier)
+    void logoContainer.offsetWidth;
+  })();
+
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
