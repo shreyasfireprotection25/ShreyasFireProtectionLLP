@@ -208,15 +208,14 @@
 
 /* AUXILIARY & EVACUATION SECTION */
 @media (max-width: 640px) {
-    #auxiliary-systems .grid {
-        grid-template-columns: 1fr !important;
-        gap: 2rem !important;
+    #auxiliary-systems .pa-text {
+        order: 1 !important;
     }
-
-    #auxiliary-systems .h-72 {
-        height: 200px !important;
+    #auxiliary-systems .pa-image {
+        order: 2 !important;
     }
 }
+
 
 /* SIGNBOARD SECTION */
 @media (max-width: 640px) {
@@ -515,22 +514,24 @@
                         <img src="https://cdn.cpdonline.co.uk/wp-content/uploads/2019/07/28163846/Types-of-fire-extinguishers.jpg" alt="A rack of portable fire extinguishers for different fire classes" class="w-full h-full object-contain">
                     </div>
 
-                    <div class="rounded-xl shadow-2xl overflow-hidden lg:order-last animate-item h-72 flex items-center justify-center hover-grow" data-delay="300">
-                        <img src="https://5.imimg.com/data5/OO/VD/RM/SELLER-4763945/public-address-system.jpg" alt="Public Address and Voice Alarm System Control Panel" class="w-full h-full object-contain">
-                    </div>
-                    <div class="space-y-4 lg:order-first animate-item" data-delay="400">
-                        <h3 class="text-3xl font-bold text-accent-red mb-2">Public Address & Voice Alarm</h3>
-                        <p class="text-gray-700 text-lg">
-                            Critical for mass evacuation. Our integrated Public Address (PA) and Voice Alarm (VA) systems ensure clear, timely, and unambiguous communication during emergencies.
-                        </p>
-                        <ul class="list-disc list-inside space-y-2 text-gray-600 text-sm pl-4">
-                            <li>Automatic and manual message broadcasting</li>
-                            <li>Zoning and clear intelligibility standards</li>
-                            <li>Battery backup for continuous operation</li>
-                        </ul>
-                    </div>
+        <div class="rounded-xl shadow-2xl overflow-hidden animate-item h-72 flex items-center justify-center hover-grow pa-image" data-delay="300">
+         <img src="https://5.imimg.com/data5/OO/VD/RM/SELLER-4763945/public-address-system.jpg"
+         alt="Public Address and Voice Alarm System Control Panel"
+         class="w-full h-full object-contain">
+        </div>
 
-                </div>
+        <div class="space-y-4 animate-item pa-text" data-delay="400">
+          <h3 class="text-3xl font-bold text-accent-red mb-2">Public Address & Voice Alarm</h3>
+          <p class="text-gray-700 text-lg">
+           Critical for mass evacuation...
+         </p>
+        <ul class="list-disc list-inside space-y-2 text-gray-600 text-sm pl-4">
+            <li>Automatic and manual message broadcasting</li>
+            <li>Zoning and clear intelligibility standards</li>
+            <li>Battery backup for continuous operation</li>
+        </ul>
+        </div>
+
             </div>
         </section>
 
@@ -842,4 +843,3 @@ mobileMenu.querySelectorAll("a").forEach(link => {
     </script>
 </body>
 </html>
-
