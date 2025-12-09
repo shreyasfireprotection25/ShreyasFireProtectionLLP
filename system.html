@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -646,10 +647,34 @@ mobileMenu.querySelectorAll("a").forEach(link => {
         }, 350);
     });
 });
+
+chatForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const msg = chatInput.value.trim();
+    if (!msg) return;
+
+    chatMessages.appendChild(createMessageElement(msg, "sent"));
+    chatInput.value = "";
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    sendAutoResponse();
+
+    // SAVE TO DATABASE
+    saveChatToLocal(msg);
+});
+
+// === ADD THIS AFTER THE SUBMIT CODE ===
+function saveChatToLocal(message) {
+    let messages = JSON.parse(localStorage.getItem("chat_messages")) || [];
+
+    messages.push({
+        sender: "user",
+        text: message,
+        time: new Date().toLocaleString()
+    });
+
+    localStorage.setItem("chat_messages", JSON.stringify(messages));
+}
     </script>
 </body>
 </html>
-
-
-
-
