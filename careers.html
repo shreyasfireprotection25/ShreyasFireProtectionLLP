@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,131 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Careers | Shreyas Fire Protection Engineers LLP</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        
-        // Enable logging for debugging
-        setLogLevel('debug'); 
-
-        // --- GLOBAL FIREBASE VARIABLES ---
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-        
-        // --- FIREBASE INITIALIZATION ---
-        let db;
-        let auth;
-        let userId = null;
-        
-        const initFirebase = async () => {
-            try {
-                const app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-                
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
-                
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        userId = user.uid;
-                        console.log("Firebase Auth Ready. User ID:", userId);
-                    } else {
-                        userId = crypto.randomUUID(); // Fallback to a temporary ID
-                        console.log("Signed in anonymously or using fallback ID:", userId);
-                    }
-                });
-
-            } catch (error) {
-                console.error("Error initializing Firebase:", error);
-                // Removed showModal for initialization error
-            }
-        };
-
-        // Function to save job application data
-        window.saveApplication = async (event) => {
-            event.preventDefault();
-            
-            const form = event.target;
-            const submitButton = form.querySelector('button[type="submit"]');
-
-            // Simple validation
-            if (!userId) {
-                console.error('Application service not ready. Please wait a moment and try again.');
-                return;
-            }
-            if (form.job_title.value.trim() === "") {
-                 console.error('Please select a job title.');
-                 return;
-            }
-            if (form.full_name.value.trim() === "" || form.email.value.trim() === "") {
-                 console.error('Please fill in your name and email.');
-                 return;
-            }
-
-            // Disable button and show loading state
-            submitButton.disabled = true;
-            submitButton.innerHTML = `
-                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Submitting...
-            `;
-            
-            try {
-                // Public collection for applications
-                const applicationsCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'job_applications');
-
-                const applicationData = {
-                    applicant_id: userId,
-                    job_title: form.job_title.value,
-                    full_name: form.full_name.value,
-                    email: form.email.value,
-                    phone: form.phone.value,
-                    experience_years: parseInt(form.experience.value) || 0,
-                    cover_letter: form.cover_letter.value,
-                    submitted_at: new Date().toISOString()
-                };
-
-                await addDoc(applicationsCollectionRef, applicationData);
-                
-                showModal('Thank you! Your application has been successfully submitted. We will be in touch soon.');
-                form.reset();
-
-            } catch (error) {
-                console.error("Error saving job application:", error);
-                showModal('An error occurred during submission. Please check the console for details and try again.');
-            } finally {
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Submit Application';
-            }
-        };
-
-        // --- MODAL (ALERT REPLACEMENT) LOGIC ---
-        window.showModal = (message) => {
-            const modal = document.getElementById('custom-modal');
-            const modalMessage = document.getElementById('modal-message');
-            modalMessage.textContent = message;
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.classList.add('opacity-100');
-        };
-
-        window.closeModal = () => {
-            const modal = document.getElementById('custom-modal');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            modal.classList.remove('opacity-100');
-        };
-
-        // --- INITIALIZATION CALL ---
-        document.addEventListener('DOMContentLoaded', initFirebase);
-    </script>
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
@@ -858,6 +734,89 @@
 
 
     <script>
+        // Backend API URL
+        const API_URL = 'https://shreyas-llp-backend.onrender.com/api/careers';
+
+        // Function to save job application data
+        window.saveApplication = async (event) => {
+            event.preventDefault();
+            
+            const form = event.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+
+            // Simple validation
+            if (form.job_title.value.trim() === "") {
+                 console.error('Please select a job title.');
+                 alert('Please select a job title.');
+                 return;
+            }
+            if (form.full_name.value.trim() === "" || form.email.value.trim() === "") {
+                 console.error('Please fill in your name and email.');
+                 alert('Please fill in your name and email.');
+                 return;
+            }
+
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Submitting...
+            `;
+            
+            try {
+                const applicationData = {
+                    job_title: form.job_title.value,
+                    full_name: form.full_name.value,
+                    email: form.email.value,
+                    phone: form.phone.value,
+                    experience_years: parseInt(form.experience.value) || 0,
+                    cover_letter: form.cover_letter.value
+                };
+
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(applicationData)
+                });
+                
+                const result = await response.json();
+
+                if (result.success) {
+                    showModal('Thank you! Your application has been successfully submitted. We will be in touch soon.');
+                    form.reset();
+                } else {
+                    throw new Error(result.error || 'Submission failed');
+                }
+
+            } catch (error) {
+                console.error("Error saving job application:", error);
+                showModal('An error occurred during submission. Please check the console for details and try again.');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Submit Application';
+            }
+        };
+
+        // --- MODAL (ALERT REPLACEMENT) LOGIC ---
+        window.showModal = (message) => {
+            const modal = document.getElementById('custom-modal');
+            const modalMessage = document.getElementById('modal-message');
+            modalMessage.textContent = message;
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+        };
+
+        window.closeModal = () => {
+            const modal = document.getElementById('custom-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+        };
+    </script>
+
+    <script>
         // Get the current year for the copyright
         document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -917,7 +876,3 @@
     </script>
 </body>
 </html>
-
-
-
-
